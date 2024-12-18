@@ -17,6 +17,13 @@ services:
     ports:
       - "${NGINX_PORT}:80"
   mysql:
-    image: mysql:8.4
+    image: "mysql:8.4"
+    volumes:
+      - "./mysql/var/log/mysql:/var/lib/mysql:delegated"
     ports:
       - "${MYSQL_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tastingNote
+      MYSQL_USER: tastingNote
+      MYSQL_PASSWORD: tastingNote
