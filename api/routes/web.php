@@ -13,6 +13,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/health', function () {
+    return "test";
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
