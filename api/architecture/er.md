@@ -8,7 +8,13 @@ erDiagram
     wines {
         int id PK
         varchar name
+        int wine_type_id FK
         int producer_id FK
+    }
+    
+    wine_types {
+        int id PK
+        varchar name
     }
     
     wine_details {
@@ -44,4 +50,5 @@ erDiagram
     wine_details ||--|| countries : ""
     wine_details ||--|{ wine_varieties : ""
     grape_varieties ||--|{ wine_varieties : ""
+    wines ||--|| wine_types : ""
 ```
