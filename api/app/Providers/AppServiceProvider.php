@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\usecase\gateways\repository\ProducerRepository;
+use App\usecase\gateways\repository\ProducerRepositoryInterface;
+use App\usecase\producer\CreateProducerUsaCase;
+use App\usecase\producer\CreateProducerUseCaseInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(CreateProducerUseCaseInterface::class, CreateProducerUsaCase::class);
+        $this->app->bind(ProducerRepositoryInterface::class, ProducerRepository::class);
+
     }
 
     /**
