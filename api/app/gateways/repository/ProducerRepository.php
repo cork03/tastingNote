@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\gateways\repository;
+namespace App\gateways\repository;
 
 use App\domain\Producer;
 use App\Models\Producer as ProducerModel;

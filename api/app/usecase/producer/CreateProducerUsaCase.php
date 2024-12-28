@@ -2,7 +2,7 @@
 
 namespace App\usecase\producer;
 
-use App\usecase\gateways\repository\ProducerRepositoryInterface;
+use App\gateways\repository\ProducerRepositoryInterface;
 
 class CreateProducerUsaCase implements CreateProducerUseCaseInterface
 {

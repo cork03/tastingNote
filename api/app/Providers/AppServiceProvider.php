@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\usecase\gateways\repository\ProducerRepository;
-use App\usecase\gateways\repository\ProducerRepositoryInterface;
+use App\gateways\repository\ProducerRepository;
+use App\gateways\repository\ProducerRepositoryInterface;
 use App\usecase\producer\CreateProducerUsaCase;
 use App\usecase\producer\CreateProducerUseCaseInterface;
 use Illuminate\Support\ServiceProvider;
