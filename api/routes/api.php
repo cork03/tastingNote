@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/producer', [ProducerController::class, 'create']);
+Route::get('/producers', [ProducerController::class, 'getAll']);

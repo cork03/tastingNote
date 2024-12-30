@@ -26,6 +26,27 @@ class ProducerRepository implements ProducerRepositoryInterface
             Log::info($e->getMessage());
             throw $e;
         }
+    }
 
+    /**
+     * @return Producer[]
+     * @throws Exception
+     */
+    public function getAll(): array
+    {
+        try {
+            $producerEntities =  $this->producerModel->get();
+            $producers = [];
+            foreach ($producerEntities as $producerEntity) {
+                $producers[] = new Producer(
+                    $producerEntity->id,
+                    $producerEntity->name
+                );
+            }
+            return $producers;
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            throw $e;
+        }
     }
 }
