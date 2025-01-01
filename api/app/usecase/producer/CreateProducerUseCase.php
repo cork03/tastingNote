@@ -4,13 +4,13 @@ namespace App\usecase\producer;
 
 use App\gateways\repository\ProducerRepositoryInterface;
 
-class CreateProducerUsaCase implements CreateProducerUseCaseInterface
+class CreateProducerUseCase implements CreateProducerUseCaseInterface
 {
     public function __construct(private readonly ProducerRepositoryInterface $producerRepository)
     {
     }
 
-    public function handle(CreateProducerUsaCaseInput $input): void
+    public function handle(CreateProducerUseCaseInput $input): void
     {
         $this->producerRepository->create($input->getProducer());
     }

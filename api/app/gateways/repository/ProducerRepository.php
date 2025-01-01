@@ -3,6 +3,8 @@
 namespace App\gateways\repository;
 
 use App\domain\Producer;
+use App\domain\Wine;
+use App\domain\WineType;
 use App\Models\Producer as ProducerModel;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -48,5 +50,25 @@ class ProducerRepository implements ProducerRepositoryInterface
             Log::info($e->getMessage());
             throw $e;
         }
+    }
+
+    /**
+     * @return Wine[]
+     * @throws Exception
+     */
+    public function getWines(int $producerId): array
+    {
+        $wineEntities = $this->producerModel->where('id', $producerId)->find(1)->wines;
+        $wines = [];
+        foreach ($wineEntities as $wineEntity) {
+            $wines[] = new Wine(
+                $wineEntity->id,
+                $wineEntity->name,
+                $wineEntity->producer_id,
+                WineType::create($wineEntity->wine_type_id)
+            );
+        }
+
+        return $wines;
     }
 }

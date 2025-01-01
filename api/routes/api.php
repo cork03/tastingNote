@@ -12,3 +12,4 @@ Route::get('/user', function (Request $request) {
 Route::post('/producer', [ProducerController::class, 'create']);
 Route::get('/producers', [ProducerController::class, 'getAll']);
 Route::get('/grape_varieties', [GrapeVarietyController::class, 'getAll']);
+Route::get('producer/{id}/wines', [ProducerController::class, 'getWines']);

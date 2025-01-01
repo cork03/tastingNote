@@ -4,5 +4,5 @@ namespace App\usecase\producer;
 
 interface CreateProducerUseCaseInterface
 {
-    public function handle(CreateProducerUsaCaseInput $input): void;
+    public function handle(CreateProducerUseCaseInput $input): void;
 }

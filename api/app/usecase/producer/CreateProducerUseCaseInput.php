@@ -4,7 +4,7 @@ namespace App\usecase\producer;
 
 use App\domain\Producer;
 
-class CreateProducerUsaCaseInput
+class CreateProducerUseCaseInput
 {
     public function __construct(private readonly Producer $producer)
     {
