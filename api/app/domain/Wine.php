@@ -6,9 +6,9 @@ namespace App\domain;
 class Wine
 {
     public function __construct(
-        private readonly int $id,
+        private readonly ?int $id,
         private readonly string $name,
-        private readonly int $producer_id,
+        private readonly int $producerId,
         private readonly WineType $wineType
     )
     {
@@ -26,7 +26,7 @@ class Wine
 
     public function getProducerId(): int
     {
-        return $this->producer_id;
+        return $this->producerId;
     }
 
     public function getWineType(): WineType

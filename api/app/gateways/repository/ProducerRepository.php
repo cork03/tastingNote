@@ -58,14 +58,17 @@ class ProducerRepository implements ProducerRepositoryInterface
      */
     public function getWines(int $producerId): array
     {
-        $wineEntities = $this->producerModel->where('id', $producerId)->find(1)->wines;
+        $wineEntities = $this->producerModel->find($producerId)?->wines;
+        if (!isset($wineEntities)) {
+            return [];
+        }
         $wines = [];
         foreach ($wineEntities as $wineEntity) {
             $wines[] = new Wine(
-                $wineEntity->id,
-                $wineEntity->name,
-                $wineEntity->producer_id,
-                WineType::create($wineEntity->wine_type_id)
+                id :$wineEntity->id,
+                name: $wineEntity->name,
+                producerId: $wineEntity->producer_id,
+                wineType: WineType::create($wineEntity->wine_type_id)
             );
         }
 
