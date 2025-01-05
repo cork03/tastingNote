@@ -1,5 +1,13 @@
 version: "3"
 services:
+  front:
+    build:
+      context: .
+      dockerfile: ./front/Dockerfile
+    volumes:
+      - "./front:/app"
+    ports:
+      - "${FRONT_PORT}:3000"
   php:
     build:
       context: .
