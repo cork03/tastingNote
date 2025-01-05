@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wine_details', function (Blueprint $table) {
+        Schema::create('wine_vintages', function (Blueprint $table) {
             $table->id();
             $table->comment("ワイン詳細");
             $table->foreignId("wine_id")->comment("ワインID")->constrained();
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal("alcohol_content", 3, 1)->comment("アルコール度数");
             $table->text("technical_comment")->comment("テクニカルコメント")->nullable();
             $table->timestamp("created_at")->comment("登録日時");
+            $table->timestamp("updated_at")->comment("更新日時");
             $table->unique(["wine_id", "vintage"]);
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wine_details');
+        Schema::dropIfExists('wine_vintages');
     }
 };

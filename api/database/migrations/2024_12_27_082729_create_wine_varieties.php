@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('wine_varieties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("wine_id")->constrained();
+            $table->foreignId("wine_vintage_id")->constrained();
             $table->foreignId("grape_variety_id")->constrained();
-            $table->unique(["wine_id", "grape_variety_id"]);
+            $table->unique(["wine_vintage_id", "grape_variety_id"]);
         });
     }
 

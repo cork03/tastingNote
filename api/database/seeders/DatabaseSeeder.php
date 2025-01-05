@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        $this->call([
+            GrapeVarietySeeder::class,
+            WineTypeSeeder::class,
+            CountriesSeeder::class,
+            TestWineSeeder::class
+        ]);
     }
 }
