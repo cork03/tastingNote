@@ -7,7 +7,7 @@ type Props = {
     reGetProducers: (newProducers: Producer[]) => void;
 };
 
-const CreateProducers = ({reGetProducers}: Props) => {
+const CreateProducer = ({reGetProducers}: Props) => {
     const [producerData, setProducerData] = useState({name: ''});
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProducerData({...producerData, [e.target.name]: e.target.value});
@@ -91,4 +91,4 @@ const CreateProducers = ({reGetProducers}: Props) => {
     )
 }
 
-export default CreateProducers;
+export default CreateProducer;

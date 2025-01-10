@@ -1,11 +1,18 @@
 "use client"
 
-import {Producer} from "@/app/wine/new/page";
+import {Producer, Wine} from "@/app/wine/new/page";
 import {useState} from "react";
-import ProducerDetail from "@/components/wine/new/ProducerDetail";
-import CreateProducers from "@/components/wine/new/CreateProducers";
+import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
+import CreateProducer from "@/components/wine/new/producer/CreateProducer";
+import wines from "@/components/wine/new/wine/Wines";
 
-const Producers = ({initialProducers}: { initialProducers: Producer[] }) => {
+interface Props {
+    initialProducers: Producer[];
+    bindWines: (wines: Wine[]) => void;
+    changeViewType: (viewType: number) => void;
+}
+
+const Producers = ({initialProducers, bindWines, changeViewType}: Props) => {
     const [producers, setProducers] = useState<Producer[]>(initialProducers);
     const reGetProducers = (newProducers: Producer[]) => {
         setProducers(newProducers);
@@ -25,11 +32,12 @@ const Producers = ({initialProducers}: { initialProducers: Producer[] }) => {
             {/* 生産者一覧 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {producers.map((producer) => {
-                    return <ProducerDetail key={producer.id} producer={producer}/>
+                    return <ProducerDetail key={producer.id} producer={producer} bindWines={bindWines}
+                                           changeViewType={changeViewType}/>
                 })}
             </div>
             {/* 生産者作成フォーム */}
-            <CreateProducers reGetProducers={reGetProducers}/>
+            <CreateProducer reGetProducers={reGetProducers}/>
         </section>
     )
 }

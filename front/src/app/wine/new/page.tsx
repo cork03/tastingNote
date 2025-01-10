@@ -1,8 +1,15 @@
-import Producers from "@/components/wine/new/Producers";
+import CreateNewTasting from "@/components/wine/new/CreateNewTasting";
 
 export interface Producer {
     id: number;
     name: string;
+}
+
+export interface Wine {
+    id: number;
+    name: string;
+    producer: Producer;
+    wineTypeId: number;
 }
 
 const WineNewPage = async () => {
@@ -10,7 +17,7 @@ const WineNewPage = async () => {
     const producers: Producer[] = await data.json();
     return (
         <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
-            <Producers initialProducers={producers}/>
+            <CreateNewTasting initialProducers={producers}/>
         </main>
     );
 };
