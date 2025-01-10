@@ -1,7 +1,7 @@
 "use client"
 
 import {Producer, Wine} from "@/app/wine/new/page";
-import Producers from "@/components/wine/new/producer/Producers";
+import ChoiceProducer from "@/components/wine/new/producer/ChoiceProducer";
 import Wines from "@/components/wine/new/wine/Wines";
 import {useState} from "react";
 
@@ -22,7 +22,7 @@ const CreateNewTasting = ({initialProducers}: Props) => {
     return (
         <section>
             {viewType === 1 &&
-                <Producers initialProducers={initialProducers} bindWines={bindWines} changeViewType={changeViewType}/>}
+                <ChoiceProducer initialProducers={initialProducers} bindWines={bindWines} changeViewType={changeViewType}/>}
             {viewType === 2 && <Wines wines={wines} changeViewType={changeViewType}/>}
         </section>
     )

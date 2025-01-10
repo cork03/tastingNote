@@ -4,10 +4,11 @@ import React, {useState} from "react";
 import {Producer} from "@/app/wine/new/page";
 
 type Props = {
-    reGetProducers: (newProducers: Producer[]) => void;
+    setProducers: React.Dispatch<React.SetStateAction<Producer[]>>
+    setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const CreateProducer = ({reGetProducers}: Props) => {
+const CreateProducer = ({setProducers, setIsViewMode}: Props) => {
     const [producerData, setProducerData] = useState({name: ''});
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProducerData({...producerData, [e.target.name]: e.target.value});
@@ -32,11 +33,11 @@ const CreateProducer = ({reGetProducers}: Props) => {
         if (!producersResponse.ok) {
             throw new Error('Failed to get producers');
         }
-        reGetProducers(await producersResponse.json())
+        setProducers(await producersResponse.json())
+        setIsViewMode(true);
     }
     return (
         <section className="border-t pt-8">
-            <h3 className="text-xl font-bold text-center mb-6">新しい生産者を作成</h3>
             <form className="mx-auto space-y-4" onSubmit={handleSubmit}>
                 {/* 名前 */}
                 <div>
@@ -78,12 +79,18 @@ const CreateProducer = ({reGetProducers}: Props) => {
                 </div>
 
                 {/* ボタン */}
-                <div className="text-center">
+                <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400"
+                        className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
                     >
                         作成
+                    </button>
+                    <button
+                        className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
+                        onClick={() => setIsViewMode(true)}
+                    >
+                        戻る
                     </button>
                 </div>
             </form>
