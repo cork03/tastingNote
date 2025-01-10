@@ -1,16 +1,20 @@
 "use client"
 
 import {Producer, Wine} from "@/app/wine/new/page";
-import {useState} from "react";
+import React, {useState} from "react";
 import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
 import CreateProducer from "@/components/wine/new/producer/CreateProducer";
 import WineDetail from "@/components/wine/new/wine/WineDetail";
 
 interface Props {
     wines: Wine[]
+    changeViewType: (viewType: number) => void
 }
 
-const Wines = ({wines}: Props) => {
+const Wines = ({wines, changeViewType}: Props) => {
+    const backToProducers = () => {
+        changeViewType(1)
+    }
     return (
         <section>
             {/* タイトル */}
@@ -28,6 +32,16 @@ const Wines = ({wines}: Props) => {
                     return <WineDetail key={wine.id} wine={wine}/>
                 })}
             </div>
+            <div className="text-center mt-4">
+                <button
+                    type="submit"
+                    className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 focus:outline-none focus:ring focus:bg-gray-400"
+                    onClick={backToProducers}
+                >
+                    戻る
+                </button>
+            </div>
+
             {/*/!* 生産者作成フォーム *!/*/}
             {/*<CreateProducer reGetProducers={reGetProducers}/>*/}
         </section>

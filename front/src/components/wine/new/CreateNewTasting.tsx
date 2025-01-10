@@ -23,7 +23,7 @@ const CreateNewTasting = ({initialProducers}: Props) => {
         <section>
             {viewType === 1 &&
                 <Producers initialProducers={initialProducers} bindWines={bindWines} changeViewType={changeViewType}/>}
-            {viewType === 2 && <Wines wines={wines}/>}
+            {viewType === 2 && <Wines wines={wines} changeViewType={changeViewType}/>}
         </section>
     )
 }
