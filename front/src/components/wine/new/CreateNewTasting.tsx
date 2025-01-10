@@ -13,16 +13,10 @@ interface Props {
 const CreateNewTasting = ({initialProducers}: Props) => {
     const [wines, setWines] = useState<Wine[]>([]);
     const [viewType, setViewType] = useState<number>(1);
-    const bindWines = (wines: Wine[]) => {
-        setWines(wines);
-    }
-    const changeViewType = (viewType: number) => {
-        setViewType(viewType);
-    }
     return (
         <section>
             {viewType === 1 &&
-                <ChoiceProducer initialProducers={initialProducers} bindWines={bindWines} setViewType={setViewType}/>}
+                <ChoiceProducer initialProducers={initialProducers} setWines={setWines} setViewType={setViewType}/>}
             {viewType === 2 && <ChoiceWine wines={wines} setViewType={setViewType}/>}
         </section>
     )

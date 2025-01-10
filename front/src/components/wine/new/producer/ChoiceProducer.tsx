@@ -7,17 +7,17 @@ import Producers from "@/components/wine/new/producer/Producers";
 
 interface Props {
     initialProducers: Producer[];
-    bindWines: (wines: Wine[]) => void;
+    setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ChoiceProducer = ({initialProducers, bindWines, setViewType}: Props) => {
+const ChoiceProducer = ({initialProducers, setWines, setViewType}: Props) => {
     const [producers, setProducers] = useState<Producer[]>(initialProducers);
     const [isViewMode, setIsViewMode] = useState<boolean>(true);
     return (
         <section>
             <h2 className="text-2xl font-bold text-center mb-6">生産者</h2>
-            {isViewMode && <Producers producers={producers} bindWines={bindWines} setViewType={setViewType}
+            {isViewMode && <Producers producers={producers} setWines={setWines} setViewType={setViewType}
                                       setIsViewMode={setIsViewMode}/>}
             {!isViewMode && <CreateProducer setProducers={setProducers} setIsViewMode={setIsViewMode}/>}
         </section>
