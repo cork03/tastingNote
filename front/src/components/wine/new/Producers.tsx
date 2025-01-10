@@ -7,6 +7,9 @@ import CreateProducers from "@/components/wine/new/CreateProducers";
 
 const Producers = ({initialProducers}: { initialProducers: Producer[] }) => {
     const [producers, setProducers] = useState<Producer[]>(initialProducers);
+    const reGetProducers = (newProducers: Producer[]) => {
+        setProducers(newProducers);
+    }
     return (
         <section>
             {/* タイトル */}
@@ -26,7 +29,7 @@ const Producers = ({initialProducers}: { initialProducers: Producer[] }) => {
                 })}
             </div>
             {/* 生産者作成フォーム */}
-            <CreateProducers/>
+            <CreateProducers reGetProducers={reGetProducers}/>
         </section>
     )
 }

@@ -1,28 +1,38 @@
 "use client"
 
 import React, {useState} from "react";
+import {Producer} from "@/app/wine/new/page";
 
-const CreateProducers = () => {
+type Props = {
+    reGetProducers: (newProducers: Producer[]) => void;
+};
+
+const CreateProducers = ({reGetProducers}: Props) => {
     const [producerData, setProducerData] = useState({name: ''});
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProducerData({...producerData, [e.target.name]: e.target.value});
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producer`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(producerData)
-            })
-            if (!response.ok) {
-                throw new Error('Failed to create producer');
-            }
-        } catch (error) {
-            console.error(error);
+        const url = process.env.NEXT_PUBLIC_API_URL;
+        const response = await fetch(`${url}/producer`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(producerData)
+        })
+        if (!response.ok) {
+            throw new Error('Failed to create producer');
         }
+        // フォームをリセット
+        setProducerData({name: ''});
+        // 生産者一覧を再取得
+        const producersResponse = await fetch(`${url}/producers`);
+        if (!producersResponse.ok) {
+            throw new Error('Failed to get producers');
+        }
+        reGetProducers(await producersResponse.json())
     }
     return (
         <section className="border-t pt-8">
