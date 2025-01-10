@@ -1,9 +1,10 @@
 import {Producer, Wine} from "@/app/wine/new/page";
+import React from "react";
 
 interface Props {
     producer: Producer;
     bindWines: (wines: Wine[]) => void;
-    changeViewType: (viewType: number) => void;
+    setViewType: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface wineJson {
@@ -13,7 +14,7 @@ interface wineJson {
     wine_type_id: number;
 }
 
-const ProducerDetail = ({producer, bindWines, changeViewType}: Props) => {
+const ProducerDetail = ({producer, bindWines, setViewType}: Props) => {
     const selectProducer = async () => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producer/${producer.id}/wines`);
         if (!response.ok) {
@@ -30,7 +31,7 @@ const ProducerDetail = ({producer, bindWines, changeViewType}: Props) => {
             }
         });
         bindWines(wine);
-        changeViewType(2);
+        setViewType(2);
     }
     return (
         <div className="border rounded shadow p-4 text-center" onClick={selectProducer}>

@@ -7,11 +7,11 @@ import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
 type Props = {
     producers: Producer[];
     bindWines: (wines: Wine[]) => void;
-    changeViewType: (viewType: number) => void;
+    setViewType: React.Dispatch<React.SetStateAction<number>>;
     setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const Producers = ({producers, bindWines, changeViewType, setIsViewMode}: Props) => {
+const Producers = ({producers, bindWines, setViewType, setIsViewMode}: Props) => {
     const goToCreateProducer = () => {
         setIsViewMode(false);
     }
@@ -34,7 +34,7 @@ const Producers = ({producers, bindWines, changeViewType, setIsViewMode}: Props)
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {producers.map((producer) => {
                     return <ProducerDetail key={producer.id} producer={producer} bindWines={bindWines}
-                                           changeViewType={changeViewType}/>
+                                           setViewType={setViewType}/>
                 })}
             </div>
         </div>

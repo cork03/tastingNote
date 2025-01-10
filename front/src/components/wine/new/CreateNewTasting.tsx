@@ -2,7 +2,7 @@
 
 import {Producer, Wine} from "@/app/wine/new/page";
 import ChoiceProducer from "@/components/wine/new/producer/ChoiceProducer";
-import Wines from "@/components/wine/new/wine/Wines";
+import ChoiceWine from "@/components/wine/new/wine/ChoiceWine";
 import {useState} from "react";
 
 interface Props {
@@ -22,8 +22,8 @@ const CreateNewTasting = ({initialProducers}: Props) => {
     return (
         <section>
             {viewType === 1 &&
-                <ChoiceProducer initialProducers={initialProducers} bindWines={bindWines} changeViewType={changeViewType}/>}
-            {viewType === 2 && <Wines wines={wines} changeViewType={changeViewType}/>}
+                <ChoiceProducer initialProducers={initialProducers} bindWines={bindWines} setViewType={setViewType}/>}
+            {viewType === 2 && <ChoiceWine wines={wines} setViewType={setViewType}/>}
         </section>
     )
 }
