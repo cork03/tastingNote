@@ -4,6 +4,7 @@ namespace App\presenter;
 
 use App\domain\Producer;
 use App\domain\Wine;
+use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\WineJson;
 use App\presenter\jsonClass\WineTypeJson;
@@ -42,6 +43,10 @@ class ProducerPresenter
                 new WineTypeJson(
                     $wine->getWineType()->value,
                     $wine->getWineType()->getLabel()
+                ),
+                new CountryJson(
+                    $wine->getCountry()->getId(),
+                    $wine->getCountry()->getName()
                 )
             );
         }

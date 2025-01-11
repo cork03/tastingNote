@@ -9,7 +9,8 @@ class Wine
         private readonly ?int $id,
         private readonly string $name,
         private readonly int $producerId,
-        private readonly WineType $wineType
+        private readonly WineType $wineType,
+        private readonly Country $country
     )
     {
     }
@@ -32,5 +33,10 @@ class Wine
     public function getWineType(): WineType
     {
         return $this->wineType;
+    }
+
+    public function getCountry(): Country
+    {
+        return $this->country;
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("name")->comment("ワイン名");
             $table->foreignId("producer_id")->comment("生産者ID")->constrained();
             $table->foreignId("wine_type_id")->comment("ワイン種別ID")->constrained();
+            $table->foreignId("country_id")->comment("国ID")->constrained();
         });
     }
 

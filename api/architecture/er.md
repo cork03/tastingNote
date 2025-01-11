@@ -10,6 +10,7 @@ erDiagram
         varchar name
         int wine_type_id FK
         int producer_id FK
+        int country_id FK
     }
     
     wine_types {
@@ -21,7 +22,6 @@ erDiagram
         int id PK
         int wine_id FK,UK
         int vintage UK
-        int country_id FK
         int price
         text aging_method
         decimal alcohol_content
@@ -47,7 +47,7 @@ erDiagram
     
     producers ||--o{ wines : ""
     wines ||--|{ wine_vintages : ""
-    wine_vintages ||--|| countries : ""
+    wines ||--|| countries : ""
     wine_vintages ||--|{ wine_varieties : ""
     grape_varieties ||--|{ wine_varieties : ""
     wines ||--|| wine_types : ""

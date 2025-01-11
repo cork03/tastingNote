@@ -2,6 +2,7 @@
 
 namespace App\gateways\repository;
 
+use App\domain\Country;
 use App\domain\Producer;
 use App\domain\Wine;
 use App\domain\WineType;
@@ -58,17 +59,18 @@ class ProducerRepository implements ProducerRepositoryInterface
      */
     public function getWines(int $producerId): array
     {
-        $wineEntities = $this->producerModel->find($producerId)?->wines;
-        if (!isset($wineEntities)) {
+        $producer = $this->producerModel->with(['wines.country'])->find($producerId);
+        if (!isset($producer)) {
             return [];
         }
         $wines = [];
-        foreach ($wineEntities as $wineEntity) {
+        foreach ($producer->wines as $wineEntity) {
             $wines[] = new Wine(
                 id :$wineEntity->id,
                 name: $wineEntity->name,
                 producerId: $wineEntity->producer_id,
-                wineType: WineType::fromId($wineEntity->wine_type_id)
+                wineType: WineType::fromId($wineEntity->wine_type_id),
+                country: new Country($wineEntity->country->id, $wineEntity->country->name)
             );
         }
 

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->comment("ワイン詳細");
             $table->foreignId("wine_id")->comment("ワインID")->constrained();
             $table->integer("vintage")->comment("ヴィンテージ");
-            $table->foreignId("country_id")->comment("国ID")->constrained();
             $table->integer("price")->comment("価格");
             $table->text("aging_method")->comment("熟成方法")->nullable();
             $table->decimal("alcohol_content", 3, 1)->comment("アルコール度数");

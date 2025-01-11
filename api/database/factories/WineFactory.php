@@ -21,7 +21,8 @@ class WineFactory extends Factory
         return [
             'name' => Str::random(10),
             'producer_id' => Producer::factory(),
-            'wine_type_id' => mt_rand(1, 5)
+            'wine_type_id' => mt_rand(1, 5),
+            'country_id' => mt_rand(1, 16)
         ];
     }
 }

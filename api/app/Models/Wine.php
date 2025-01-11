@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Wine extends Model
 {
@@ -17,7 +19,8 @@ class Wine extends Model
         return [
             'name' => 'string',
             'producer_id' => 'integer',
-            'wine_type_id' => 'integer'
+            'wine_type_id' => 'integer',
+            'country_id' => 'integer'
         ];
     }
 
@@ -27,7 +30,15 @@ class Wine extends Model
     protected $fillable = [
         'name',
         'producer_id',
-        'wine_type_id'
+        'wine_type_id',
+        'country_id'
     ];
+
+
     public $timestamps = false;
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
 }
