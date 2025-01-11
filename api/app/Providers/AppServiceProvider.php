@@ -8,6 +8,8 @@ use App\gateways\repository\GrapeVarietyRepository;
 use App\gateways\repository\GrapeVarietyRepositoryInterface;
 use App\gateways\repository\ProducerRepository;
 use App\gateways\repository\ProducerRepositoryInterface;
+use App\gateways\repository\wine\wineTypes\WineTypesRepository;
+use App\gateways\repository\wine\wineTypes\WineTypesRepositoryInterface;
 use App\gateways\repository\WineRepository;
 use App\gateways\repository\WineRepositoryInterface;
 use App\gateways\repository\WineVintageRepository;
@@ -26,6 +28,8 @@ use App\usecase\wine\CreateWineUseCase;
 use App\usecase\wine\CreateWineUseCaseInterface;
 use App\usecase\wine\CreateWineVintageUseCase;
 use App\usecase\wine\CreateWineVintageUseCaseInterface;
+use App\usecase\wine\types\GetWineTypesUseCase;
+use App\usecase\wine\types\GetWineTypesUseCaseInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -47,6 +51,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
         $this->app->bind(CreateWineVintageUseCaseInterface::class, CreateWineVintageUseCase::class);
         $this->app->bind(WineVintageRepositoryInterface::class, WineVintageRepository::class);
+        $this->app->bind(GetWineTypesUseCaseInterface::class, GetWineTypesUseCase::class);
+        $this->app->bind(WineTypesRepositoryInterface::class, WineTypesRepository::class);
     }
 
     /**

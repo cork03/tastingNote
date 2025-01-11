@@ -32,7 +32,7 @@ class WineController extends Controller
                         id: null,
                         name: $wine['name'],
                         producerId: $wine['producer_id'],
-                        wineType: WineType::create($wine['wine_type_id'])
+                        wineType: WineType::fromId($wine['wine_type_id'])
                     )));
             return response()->json(status: 201);
         } catch (Exception $e) {

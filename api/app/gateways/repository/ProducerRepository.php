@@ -68,7 +68,7 @@ class ProducerRepository implements ProducerRepositoryInterface
                 id :$wineEntity->id,
                 name: $wineEntity->name,
                 producerId: $wineEntity->producer_id,
-                wineType: WineType::create($wineEntity->wine_type_id)
+                wineType: WineType::fromId($wineEntity->wine_type_id)
             );
         }
 

@@ -15,15 +15,24 @@ enum WineType: int
     /**
      * @throws Exception
      */
-    public static function create(int $id): self
+    public static function fromId(int $id): self
     {
-        return match($id) {
-            1 => WineType::Red,
-            2 => WineType::White,
-            3 => WineType::Orange,
-            4 => WineType::Rose,
-            5 => WineType::Sparkling,
-            default => throw new Exception("該当のワイン種別は存在しません。")
-        };
+        $enum = self::tryFrom($id);
+        if ($enum === null) {
+            throw new Exception('Invalid wine type id');
+        }
+        return $enum;
+    }
+
+    public function getLabel(): string
+    {
+        $labels = [
+            self::Red->value => '赤',
+            self::White->value => '白',
+            self::Orange->value => 'オレンジ',
+            self::Rose->value => 'ロゼ',
+            self::Sparkling->value => 'スパークリング'
+        ];
+        return $labels[$this->value];
     }
 }
