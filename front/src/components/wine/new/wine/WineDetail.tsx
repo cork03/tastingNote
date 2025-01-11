@@ -13,7 +13,7 @@ const WineDetail = ({wine}: Props) => {
                 className="mx-auto mb-4"
             />
             <h3 className="text-lg font-semibold mb-2">{wine.name}</h3>
-            <p className="text-sm text-gray-600">{wine.wineTypeId}ワイン</p>
+            <p className="text-sm text-gray-600">{wine.wineType.label}ワイン</p>
         </div>
     )
 }

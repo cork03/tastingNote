@@ -9,7 +9,7 @@ export interface Wine {
     id: number;
     name: string;
     producer: Producer;
-    wineTypeId: number;
+    wineType: WineType;
 }
 
 export interface WineType {
