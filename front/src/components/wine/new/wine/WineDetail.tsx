@@ -1,12 +1,17 @@
-import {Producer, Wine} from "@/app/wine/new/page";
+import {Wine} from "@/app/wine/new/page";
+import {ViewType} from "@/components/wine/new/CreateNewTasting";
 
 interface Props {
     wine: Wine;
+    setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
 }
 
-const WineDetail = ({wine}: Props) => {
+const WineDetail = ({wine, setViewType}: Props) => {
     return (
-        <div className="border rounded shadow p-4 text-center">
+        <div
+            className="border rounded shadow p-4 text-center"
+            onClick={() => {setViewType(3)}}
+        >
             <img
                 src="/images/wine.jpg"
                 alt="生産者画像"

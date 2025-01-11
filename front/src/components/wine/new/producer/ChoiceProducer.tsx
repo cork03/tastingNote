@@ -4,11 +4,12 @@ import {Producer, Wine} from "@/app/wine/new/page";
 import React, {useState} from "react";
 import CreateProducer from "@/components/wine/new/producer/CreateProducer";
 import Producers from "@/components/wine/new/producer/Producers";
+import {ViewType} from "@/components/wine/new/CreateNewTasting";
 
 interface Props {
     initialProducers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
-    setViewType: React.Dispatch<React.SetStateAction<number>>;
+    setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
 }
 

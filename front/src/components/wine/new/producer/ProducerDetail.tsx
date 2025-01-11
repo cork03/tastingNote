@@ -1,10 +1,11 @@
 import {Producer, Wine} from "@/app/wine/new/page";
 import React from "react";
+import {ViewType} from "@/components/wine/new/CreateNewTasting";
 
 interface Props {
     producer: Producer;
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
-    setViewType: React.Dispatch<React.SetStateAction<number>>;
+    setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
 }
 

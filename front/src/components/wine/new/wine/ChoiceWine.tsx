@@ -4,10 +4,11 @@ import {Producer, Wine} from "@/app/wine/new/page";
 import React, {useState} from "react";
 import Wines from "@/components/wine/new/wine/Wines";
 import CreateWine from "@/components/wine/new/wine/CreateWIne";
+import {ViewType} from "@/components/wine/new/CreateNewTasting";
 
 interface Props {
     wines: Wine[]
-    setViewType: React.Dispatch<React.SetStateAction<number>>;
+    setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     selectedProducer: Producer | null;
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
 }

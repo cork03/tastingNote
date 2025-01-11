@@ -21,7 +21,6 @@ const CreateWine = ({setIsViewMode, selectedProducer, setWines}: Props) => {
         wineTypeId: 0,
         producerId: selectedProducer ? selectedProducer.id : null
     });
-    console.log(wineData);
     const [wineTypes, setWineTypes] = useState<WineType[]>([]);
     const getWineTypes = async () => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine_types`);
@@ -44,7 +43,6 @@ const CreateWine = ({setIsViewMode, selectedProducer, setWines}: Props) => {
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(wineData);
         const url = process.env.NEXT_PUBLIC_API_URL;
         const response = await fetch(`${url}/wine`, {
             method: 'POST',
