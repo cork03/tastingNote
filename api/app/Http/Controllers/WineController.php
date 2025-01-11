@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\domain\Country;
 use App\domain\Wine;
 use App\domain\WineType;
 use App\domain\WineVintage;
@@ -33,8 +34,11 @@ class WineController extends Controller
                         id: null,
                         name: $wine['name'],
                         producerId: $wine['producerId'],
-                        wineType: WineType::fromId($wine['wineTypeId'])
-                    )));
+                        wineType: WineType::fromId($wine['wineTypeId']),
+                        country: new Country($wine['countryId'], null),
+                    )
+                )
+            );
             return response()->json(status: 201);
         } catch (Exception $e) {
             Log::info($e->getMessage());

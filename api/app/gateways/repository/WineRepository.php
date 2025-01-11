@@ -23,6 +23,7 @@ class WineRepository implements WineRepositoryInterface
                 'name' => $wine->getName(),
                 'producer_id' => $wine->getProducerId(),
                 'wine_type_id' => $wine->getWineType()->value,
+                'country_id' => $wine->getCountry()->getId(),
             ]);
         } catch (Exception $e) {
             Log::info($e->getMessage());

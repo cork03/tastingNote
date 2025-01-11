@@ -6,7 +6,7 @@ class Country
 {
     public function __construct(
         private readonly int $id,
-        private readonly string $name,
+        private readonly ?string $name,
     )
     {
     }
@@ -16,7 +16,7 @@ class Country
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
