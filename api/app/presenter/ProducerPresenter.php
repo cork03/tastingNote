@@ -6,6 +6,7 @@ use App\domain\Producer;
 use App\domain\Wine;
 use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\WineJson;
+use App\presenter\jsonClass\WineTypeJson;
 use Illuminate\Http\JsonResponse;
 use Psy\Util\Json;
 
@@ -38,7 +39,10 @@ class ProducerPresenter
                 $wine->getId(),
                 $wine->getName(),
                 $wine->getProducerId(),
-                $wine->getWineType()->value,
+                new WineTypeJson(
+                    $wine->getWineType()->value,
+                    $wine->getWineType()->getLabel()
+                )
             );
         }
         return response()->json($winesJson);
