@@ -12,6 +12,7 @@ use App\usecase\wine\CreateWineVintageUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class WineController extends Controller
 {
@@ -31,11 +32,12 @@ class WineController extends Controller
                     new Wine(
                         id: null,
                         name: $wine['name'],
-                        producerId: $wine['producer_id'],
-                        wineType: WineType::fromId($wine['wine_type_id'])
+                        producerId: $wine['producerId'],
+                        wineType: WineType::fromId($wine['wineTypeId'])
                     )));
             return response()->json(status: 201);
         } catch (Exception $e) {
+            Log::info($e->getMessage());
             return response()->json(status: 400);
         }
     }

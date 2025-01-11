@@ -2,24 +2,24 @@
 
 import {Producer, Wine} from "@/app/wine/new/page";
 import React, {useState} from "react";
-import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
-import CreateProducer from "@/components/wine/new/producer/CreateProducer";
-import WineDetail from "@/components/wine/new/wine/WineDetail";
 import Wines from "@/components/wine/new/wine/Wines";
+import CreateWine from "@/components/wine/new/wine/CreateWIne";
 
 interface Props {
     wines: Wine[]
     setViewType: React.Dispatch<React.SetStateAction<number>>;
+    selectedProducer: Producer | null;
+    setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
 }
 
-const ChoiceWine = ({wines, setViewType}: Props) => {
+const ChoiceWine = ({wines, setViewType, selectedProducer, setWines}: Props) => {
+    const [isViewMode, setIsViewMode] = useState(true);
     return (
         <section>
             {/* タイトル */}
             <h2 className="text-2xl font-bold text-center mb-6">ワイン</h2>
-            <Wines wines={wines} setViewType={setViewType}/>
-            {/*/!* 生産者作成フォーム *!/*/}
-            {/*<CreateProducer reGetProducers={reGetProducers}/>*/}
+            {isViewMode && <Wines wines={wines} setViewType={setViewType} setIsViewMode={setIsViewMode}/>}
+            {!isViewMode && <CreateWine setIsViewMode={setIsViewMode} selectedProducer={selectedProducer} setWines={setWines}/>}
         </section>
     )
 }

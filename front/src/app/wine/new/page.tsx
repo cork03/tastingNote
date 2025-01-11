@@ -12,6 +12,11 @@ export interface Wine {
     wineTypeId: number;
 }
 
+export interface WineType {
+    id: number;
+    label: string;
+}
+
 const WineNewPage = async () => {
     const data = await fetch(`${process.env.API_URL}/producers`);
     const producers: Producer[] = await data.json();

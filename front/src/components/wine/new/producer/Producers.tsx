@@ -8,10 +8,11 @@ type Props = {
     producers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<number>>;
-    setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>
+    setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>;
+    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
 };
 
-const Producers = ({producers, setWines, setViewType, setIsViewMode}: Props) => {
+const Producers = ({producers, setWines, setViewType, setIsViewMode, setSelectedProducer}: Props) => {
     const goToCreateProducer = () => {
         setIsViewMode(false);
     }
@@ -34,7 +35,7 @@ const Producers = ({producers, setWines, setViewType, setIsViewMode}: Props) => 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {producers.map((producer) => {
                     return <ProducerDetail key={producer.id} producer={producer} setWines={setWines}
-                                           setViewType={setViewType}/>
+                                           setViewType={setViewType} setSelectedProducer={setSelectedProducer}/>
                 })}
             </div>
         </div>

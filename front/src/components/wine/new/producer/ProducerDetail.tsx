@@ -5,6 +5,7 @@ interface Props {
     producer: Producer;
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<number>>;
+    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
 }
 
 interface wineJson {
@@ -14,7 +15,7 @@ interface wineJson {
     wine_type_id: number;
 }
 
-const ProducerDetail = ({producer, setWines, setViewType}: Props) => {
+const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: Props) => {
     const selectProducer = async () => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producer/${producer.id}/wines`);
         if (!response.ok) {
@@ -31,6 +32,7 @@ const ProducerDetail = ({producer, setWines, setViewType}: Props) => {
             }
         });
         setWines(wine);
+        setSelectedProducer(producer);
         setViewType(2);
     }
     return (

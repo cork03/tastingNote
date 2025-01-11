@@ -5,9 +5,10 @@ import WineDetail from "@/components/wine/new/wine/WineDetail";
 interface Props {
     wines: Wine[];
     setViewType: React.Dispatch<React.SetStateAction<number>>;
+    setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Wines = ({wines, setViewType}: Props) => {
+const Wines = ({wines, setViewType, setIsViewMode}: Props) => {
     return (
         <div>
             <div className="mb-8 flex flex-row justify-center items-center gap-x-4 mx-auto">
@@ -19,6 +20,7 @@ const Wines = ({wines, setViewType}: Props) => {
                 <button
                     type="submit"
                     className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
+                    onClick={() => setIsViewMode(false)}
                 >
                     新しいワインを登録
                 </button>
