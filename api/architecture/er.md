@@ -37,6 +37,8 @@ erDiagram
         int id PK
         int wine_id UK,FK
         int grape_variety_id UK,FK
+        tinyint percentage
+        is_about boolean
     }
     
     grape_varieties {

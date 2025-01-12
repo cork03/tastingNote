@@ -14,7 +14,7 @@ class WineVintage
         private readonly int     $price,
         private readonly string  $agingMethod,
         private readonly float   $alcoholContent,
-        private readonly array   $grapeVarieties,
+        private readonly WineBlend $wineBlend,
         private readonly ?string $technicalComment
     )
     {
@@ -50,14 +50,10 @@ class WineVintage
         return $this->alcoholContent;
     }
 
-    /**
-     * @return int[]
-     */
-    public function getGrapeVarieties(): array
+    public function getWineBlend(): WineBlend
     {
-        return $this->grapeVarieties;
+        return $this->wineBlend;
     }
-
     public function getTechnicalComment(): ?string
     {
         return $this->technicalComment;

@@ -29,7 +29,14 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                     'alcohol_content' => $wineVintage->getAlcoholContent(),
                     'technical_comment' => $wineVintage->getTechnicalComment(),
                 ]);
-                $wineVintageModel->grapeVarieties()->attach($wineVintage->getGrapeVarieties());
+                $wineVarieties = [];
+                foreach ($wineVintage->getWineBlend()->getWineVarieties() as $grapeVariety) {
+                    $wineVarieties[$grapeVariety->getGrapeVariety()->getId()] = [
+                        'percentage' => $grapeVariety->getPercent(),
+                        'is_about' => $grapeVariety->getIsAbout(),
+                    ];
+                }
+                $wineVintageModel->grapeVarieties()->attach($wineVarieties);
             });
         } catch (Exception $e) {
             Log::info($e->getMessage());

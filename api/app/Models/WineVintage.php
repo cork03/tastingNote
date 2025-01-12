@@ -36,6 +36,6 @@ class WineVintage extends Model
 
     public function grapeVarieties(): BelongsToMany
     {
-        return $this->belongsToMany(GrapeVariety::class, 'wine_varieties');
+        return $this->belongsToMany(GrapeVariety::class, 'wine_varieties')->withPivot('percentage', 'is_about');
     }
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\domain\Country;
+use App\domain\GrapeVariety;
 use App\domain\Wine;
+use App\domain\WineBlend;
 use App\domain\WineType;
+use App\domain\WineVariety;
 use App\domain\WineVintage;
 use App\usecase\wine\CreateWineUseCaseInput;
 use App\usecase\wine\CreateWineUseCaseInterface;
@@ -50,6 +53,17 @@ class WineController extends Controller
     {
         try {
             $wineVintage = $request->input('wine_vintage');
+            $wineVarieties = [];
+            foreach ($wineVintage['wineBlend'] as $wineVariety) {
+                $wineVarieties[] = new WineVariety(
+                    grapeVariety: new GrapeVariety(
+                        id: $wineVariety['grapeVarietyId'],
+                        name: null
+                    ),
+                    percent: $wineVariety['percent'],
+                    isAbout: $wineVariety['isAbout']
+                );
+            }
             $this->createWineVintageUseCase->handle(
                 new CreateWineVintageUseCaseInput(
                     new WineVintage(
@@ -59,13 +73,14 @@ class WineController extends Controller
                         price: $wineVintage['price'],
                         agingMethod: $wineVintage['agingMethod'],
                         alcoholContent: $wineVintage['alcoholContent'],
-                        grapeVarieties: $wineVintage['grapeVarieties'],
+                        wineBlend: new WineBlend($wineVarieties),
                         technicalComment: $wineVintage['technicalComment']
                     )
                 )
             );
             return response()->json(status: 201);
         } catch (Exception $e) {
+            dd($e->getMessage());
             return response()->json(status: 400);
         }
     }
