@@ -15,7 +15,6 @@ class WineVintage extends Model
         return [
             'wine_id' => 'integer',
             'vintage' => 'integer',
-            'country_id' => 'integer',
             'price' => 'integer',
             'aging_method' => 'string',
             'alcohol_content' => 'float',
@@ -29,7 +28,6 @@ class WineVintage extends Model
     protected $fillable = [
         'wine_id',
         'vintage',
-        'country_id',
         'price',
         'aging_method',
         'alcohol_content',

@@ -24,7 +24,6 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                 $wineVintageModel = $this->wineVintageModel->create([
                     'wine_id' => $wineVintage->getWineId(),
                     'vintage' => $wineVintage->getVintage(),
-                    'country_id' => $wineVintage->getCountryId(),
                     'price' => $wineVintage->getPrice(),
                     'aging_method' => $wineVintage->getAgingMethod(),
                     'alcohol_content' => $wineVintage->getAlcoholContent(),

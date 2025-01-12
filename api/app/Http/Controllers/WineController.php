@@ -56,7 +56,6 @@ class WineController extends Controller
                         id: null,
                         wineId: $wineVintage['wineId'],
                         vintage: $wineVintage['vintage'],
-                        countryId: $wineVintage['countryId'],
                         price: $wineVintage['price'],
                         agingMethod: $wineVintage['agingMethod'],
                         alcoholContent: $wineVintage['alcoholContent'],

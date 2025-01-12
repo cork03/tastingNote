@@ -11,7 +11,6 @@ class WineVintage
         private readonly ?int    $id,
         private readonly int     $wineId,
         private readonly int     $vintage,
-        private readonly int     $countryId,
         private readonly int     $price,
         private readonly string  $agingMethod,
         private readonly float   $alcoholContent,
@@ -34,11 +33,6 @@ class WineVintage
     public function getVintage(): int
     {
         return $this->vintage;
-    }
-
-    public function getCountryId(): int
-    {
-        return $this->countryId;
     }
 
     public function getPrice(): int
