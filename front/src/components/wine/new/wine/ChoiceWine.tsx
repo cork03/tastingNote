@@ -3,7 +3,7 @@
 import {Producer, Wine} from "@/app/wine/new/page";
 import React, {useState} from "react";
 import Wines from "@/components/wine/new/wine/Wines";
-import CreateWine from "@/components/wine/new/wine/CreateWIne";
+import CreateWine from "@/components/wine/new/wine/CreateWine";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 
 interface Props {
