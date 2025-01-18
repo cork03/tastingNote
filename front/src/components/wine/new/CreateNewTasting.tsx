@@ -1,10 +1,11 @@
 "use client"
 
-import {Producer, Wine} from "@/app/wine/new/page";
 import ChoiceProducer from "@/components/wine/new/producer/ChoiceProducer";
 import ChoiceWine from "@/components/wine/new/wine/ChoiceWine";
 import {useState} from "react";
 import CreateWineVintage from "@/components/wine/new/wineVintage/CreateWIneVintage";
+import {Wine} from "@/types/wine";
+import {Producer} from "@/types/producer";
 
 interface Props {
     initialProducers: Producer[];

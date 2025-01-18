@@ -1,10 +1,11 @@
 "use client"
 
-import {Producer, Wine} from "@/app/wine/new/page";
 import React, {useState} from "react";
 import Wines from "@/components/wine/new/wine/Wines";
 import CreateWine from "@/components/wine/new/wine/CreateWine";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
+import {Wine} from "@/types/wine";
+import {Producer} from "@/types/producer";
 
 interface Props {
     wines: Wine[]

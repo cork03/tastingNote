@@ -1,5 +1,5 @@
-import {Wine} from "@/app/wine/new/page";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
+import {Wine} from "@/types/wine";
 
 interface Props {
     wine: Wine;

@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from "react";
-import {Producer} from "@/app/wine/new/page";
+import {Producer} from "@/types/producer";
 
 type Props = {
     setProducers: React.Dispatch<React.SetStateAction<Producer[]>>

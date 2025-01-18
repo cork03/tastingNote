@@ -1,7 +1,8 @@
 "use client"
 
 import React, {useEffect, useState} from "react";
-import {Producer, Wine, WineType} from "@/app/wine/new/page";
+import {Wine, WineType} from "@/types/wine";
+import {Producer} from "@/types/producer";
 
 type Props = {
     setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>

@@ -1,6 +1,7 @@
-import {Producer, Wine} from "@/app/wine/new/page";
 import React from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
+import {Wine} from "@/types/wine";
+import {Producer} from "@/types/producer";
 
 interface Props {
     producer: Producer;
@@ -37,6 +38,10 @@ const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: 
                 wineType: {
                     id: wine.wineType.id,
                     label: wine.wineType.label,
+                },
+                country: {
+                    id: wine.country.id,
+                    name: wine.country.name,
                 }
             }
         });

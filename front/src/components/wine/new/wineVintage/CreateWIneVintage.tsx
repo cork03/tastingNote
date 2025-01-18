@@ -1,10 +1,8 @@
 "use client"
 
 import React, {useEffect, useState} from "react";
-import {Producer, Wine, WineType} from "@/app/wine/new/page";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
-import {compileNonPath} from "next/dist/shared/lib/router/utils/prepare-destination";
-import createWine from "@/components/wine/new/wine/CreateWine";
+import {Wine} from "@/types/wine";
 
 interface Props {
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;

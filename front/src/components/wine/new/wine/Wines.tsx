@@ -1,7 +1,7 @@
-import {Wine} from "@/app/wine/new/page";
 import React from "react";
 import WineDetail from "@/components/wine/new/wine/WineDetail";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
+import {Wine} from "@/types/wine";
 
 interface Props {
     wines: Wine[];

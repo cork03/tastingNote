@@ -1,21 +1,5 @@
 import CreateNewTasting from "@/components/wine/new/CreateNewTasting";
-
-export interface Producer {
-    id: number;
-    name: string;
-}
-
-export interface Wine {
-    id: number;
-    name: string;
-    producer: Producer;
-    wineType: WineType;
-}
-
-export interface WineType {
-    id: number;
-    label: string;
-}
+import {Producer} from "@/types/producer";
 
 const WineNewPage = async () => {
     const data = await fetch(`${process.env.API_URL}/producers`);
