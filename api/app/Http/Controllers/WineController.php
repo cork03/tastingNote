@@ -51,8 +51,9 @@ class WineController extends Controller
 
     public function createWineVintage(Request $request): JsonResponse
     {
+        Log::info($request->input('wineVintage'));
         try {
-            $wineVintage = $request->input('wine_vintage');
+            $wineVintage = $request->input('wineVintage');
             $wineVarieties = [];
             foreach ($wineVintage['wineBlend'] as $wineVariety) {
                 $wineVarieties[] = new WineVariety(
@@ -80,8 +81,8 @@ class WineController extends Controller
             );
             return response()->json(status: 201);
         } catch (Exception $e) {
-            dd($e->getMessage());
-            return response()->json(status: 400);
+            Log::info($e->getMessage());
+            return response()->json(status: 400, data: $e->getMessage());
         }
     }
 }

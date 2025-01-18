@@ -4,13 +4,16 @@ import {ViewType} from "@/components/wine/new/CreateNewTasting";
 interface Props {
     wine: Wine;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
+    setSelectedWine: React.Dispatch<React.SetStateAction<Wine | null>>;
 }
 
-const WineDetail = ({wine, setViewType}: Props) => {
+const WineDetail = ({wine, setViewType, setSelectedWine}: Props) => {
     return (
         <div
             className="border rounded shadow p-4 text-center"
-            onClick={() => {setViewType(3)}}
+            onClick={() => {
+                setViewType(3)
+                setSelectedWine(wine)}}
         >
             <img
                 src="/images/wine.jpg"

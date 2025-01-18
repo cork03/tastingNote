@@ -52,7 +52,7 @@ const CreateWine = ({setIsViewMode, selectedProducer, setWines}: Props) => {
         getCountries();
     }, [])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setWineData({...wineData, [e.target.name]: e.target.value});
     }
 
