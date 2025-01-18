@@ -55,7 +55,6 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
 
     const createWineVintage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(wineVintage);
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine_vintage`, {
             method: 'POST',
             headers: {
@@ -64,8 +63,6 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
             body: JSON.stringify({"wineVintage": wineVintage})
         });
         if (!response.ok) {
-            console.log(response.body);
-            console.log(response.text());
             throw new Error('Failed to create wine vintage');
         }
         setViewType(2);
