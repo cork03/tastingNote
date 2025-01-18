@@ -2,12 +2,14 @@
 
 namespace App\presenter\jsonClass;
 
-class WineJson
+use App\domain\Producer;
+
+class WineWithProducerJson
 {
     public function __construct(
         public readonly int $id,
         public readonly string $name,
-        public readonly int $producerId,
+        public readonly Producer $producer,
         public readonly WineTypeJson $wineType,
         public readonly CountryJson $country
     )

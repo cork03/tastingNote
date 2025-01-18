@@ -9,10 +9,12 @@ use App\domain\WineBlend;
 use App\domain\WineType;
 use App\domain\WineVariety;
 use App\domain\WineVintage;
+use App\presenter\WinePresenter;
 use App\usecase\wine\CreateWineUseCaseInput;
 use App\usecase\wine\CreateWineUseCaseInterface;
 use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wine\CreateWineVintageUseCaseInterface;
+use App\usecase\wine\GetWinesUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,7 +24,9 @@ class WineController extends Controller
 {
     public function __construct(
         private readonly CreateWineUseCaseInterface $createWineUseCase,
-        private readonly CreateWineVintageUseCaseInterface $createWineVintageUseCase
+        private readonly CreateWineVintageUseCaseInterface $createWineVintageUseCase,
+        private readonly GetWinesUseCaseInterface $getWinesUseCase,
+        private readonly WinePresenter $presenter
     )
     {
     }
@@ -83,5 +87,11 @@ class WineController extends Controller
             Log::info($e->getMessage());
             return response()->json(status: 400, data: $e->getMessage());
         }
+    }
+
+    public function getAll(): JsonResponse
+    {
+        $winesWithProducer = $this->getWinesUseCase->handle();
+        return $this->presenter->getWinesResponse($winesWithProducer);
     }
 }

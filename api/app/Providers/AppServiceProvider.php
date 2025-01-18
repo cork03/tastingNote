@@ -28,6 +28,8 @@ use App\usecase\wine\CreateWineUseCase;
 use App\usecase\wine\CreateWineUseCaseInterface;
 use App\usecase\wine\CreateWineVintageUseCase;
 use App\usecase\wine\CreateWineVintageUseCaseInterface;
+use App\usecase\wine\GetWinesUseCase;
+use App\usecase\wine\GetWinesUseCaseInterface;
 use App\usecase\wine\types\GetWineTypesUseCase;
 use App\usecase\wine\types\GetWineTypesUseCaseInterface;
 use Illuminate\Support\ServiceProvider;
@@ -53,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(WineVintageRepositoryInterface::class, WineVintageRepository::class);
         $this->app->bind(GetWineTypesUseCaseInterface::class, GetWineTypesUseCase::class);
         $this->app->bind(WineTypesRepositoryInterface::class, WineTypesRepository::class);
+        $this->app->bind(GetWinesUseCaseInterface::class, GetWinesUseCase::class);
     }
 
     /**

@@ -41,4 +41,9 @@ class Wine extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function producer(): BelongsTo
+    {
+        return $this->belongsTo(Producer::class);
+    }
 }
