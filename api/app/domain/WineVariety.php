@@ -6,7 +6,7 @@ class WineVariety
 {
     public function __construct(
         private readonly GrapeVariety $grapeVariety,
-        private readonly int $percent,
+        private readonly int          $percentage,
     )
     {
     }
@@ -15,8 +15,9 @@ class WineVariety
     {
         return $this->grapeVariety;
     }
-    public function getPercent(): int
+
+    public function getPercentage(): int
     {
-        return $this->percent;
+        return $this->percentage;
     }
 }

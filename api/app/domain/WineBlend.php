@@ -20,7 +20,7 @@ class WineBlend
         $totalPercent = 0;
         $ids = [];
         foreach ($wineVarieties as $wineVariety) {
-            $totalPercent += $wineVariety->getPercent();
+            $totalPercent += $wineVariety->getPercentage();
             $ids[] = $wineVariety->getGrapeVariety()->getId();
         }
         if (count($ids) !== count(array_unique($ids))) {

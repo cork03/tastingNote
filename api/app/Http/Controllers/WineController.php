@@ -15,6 +15,7 @@ use App\usecase\wine\CreateWineUseCaseInterface;
 use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wine\CreateWineVintageUseCaseInterface;
 use App\usecase\wine\GetWinesUseCaseInterface;
+use App\usecase\wine\GetWineWithVintagesUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class WineController extends Controller
         private readonly CreateWineUseCaseInterface $createWineUseCase,
         private readonly CreateWineVintageUseCaseInterface $createWineVintageUseCase,
         private readonly GetWinesUseCaseInterface $getWinesUseCase,
+        private readonly GetWineWithVintagesUseCaseInterface $getWineWithVintagesUseCase,
         private readonly WinePresenter $presenter
     )
     {
@@ -65,7 +67,7 @@ class WineController extends Controller
                         id: $wineVariety['grapeVarietyId'],
                         name: null
                     ),
-                    percent: $wineVariety['percent'],
+                    percentage: $wineVariety['percent'],
                 );
             }
             $this->createWineVintageUseCase->handle(
@@ -93,5 +95,11 @@ class WineController extends Controller
     {
         $winesWithProducer = $this->getWinesUseCase->handle();
         return $this->presenter->getWinesResponse($winesWithProducer);
+    }
+
+    public function getWithVintages(int $id): JsonResponse
+    {
+        $wineWithVintages = $this->getWineWithVintagesUseCase->handle($id);
+        return $this->presenter->getWineWithVintagesResponse($wineWithVintages);
     }
 }

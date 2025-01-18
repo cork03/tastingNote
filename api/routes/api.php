@@ -19,5 +19,6 @@ Route::get('/producer/{id}/wines', [ProducerController::class, 'getWines']);
 Route::get('/wine_types', [WineTypeController::class, 'getAll']);
 Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine', [WineController::class, 'create']);
+Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
 Route::post('/wine_vintage', [WineController::class, 'createWineVintage']);
 Route::get('/countries', [CountryController::class, 'getAll']);

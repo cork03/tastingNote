@@ -32,7 +32,7 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                 $wineVarieties = [];
                 foreach ($wineVintage->getWineBlend()->getWineVarieties() as $grapeVariety) {
                     $wineVarieties[$grapeVariety->getGrapeVariety()->getId()] = [
-                        'percentage' => $grapeVariety->getPercent(),
+                        'percentage' => $grapeVariety->getPercentage(),
                     ];
                 }
                 $wineVintageModel->grapeVarieties()->attach($wineVarieties);
