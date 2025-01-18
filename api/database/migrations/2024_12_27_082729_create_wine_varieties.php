@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId("wine_vintage_id")->constrained();
             $table->foreignId("grape_variety_id")->constrained();
             $table->tinyInteger("percentage")->unsigned();
-            $table->boolean("is_about")->default(false);
             $table->unique(["wine_vintage_id", "grape_variety_id"]);
         });
     }

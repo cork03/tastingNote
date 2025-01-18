@@ -14,7 +14,6 @@ interface Props {
 interface WineVariety {
     "grapeVarietyId": number,
     "percent": number,
-    "isAbout": boolean
 }
 
 interface WineVintage {
@@ -39,7 +38,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
         price: "",
         agingMethod: "",
         alcoholContent: 12,
-        wineBlend: [{"grapeVarietyId": 0, "percent": 50, "isAbout": false}],
+        wineBlend: [{"grapeVarietyId": 0, "percent": 50}],
         technicalComment: ""
     });
     const [grapeVarieties, setGrapeVarieties] = useState<GrapeVariety[]>([]);
@@ -56,6 +55,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
 
     const createWineVintage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        console.log(wineVintage);
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine_vintage`, {
             method: 'POST',
             headers: {
@@ -101,16 +101,13 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
         setWineVintage({...wineVintage, [e.target.name]: e.target.value});
     }
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        // @todo アルコール度数がparseIntで整数にキャストされてる。
-        console.log(e.target.value);
-        setWineVintage({...wineVintage, [e.target.name]: parseInt(e.target.value)});
+        setWineVintage({...wineVintage, [e.target.name]: Number(e.target.value)});
     }
     const handleWineBlendChange = (index: number, key: keyof WineVariety, value: any) => {
         const newWineBlend = wineVintage.wineBlend;
         newWineBlend[index] = {...newWineBlend[index], [key]: value};
         setWineVintage({...wineVintage, wineBlend: newWineBlend});
     }
-    console.log(wineVintage);
     return (
         <section className="border-t pt-8">
             <form className="mx-auto space-y-4" onSubmit={createWineVintage}>
@@ -239,8 +236,11 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
                     <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
                         <button
                             type="button"
-                            onClick={()=>{
-                                setWineVintage({...wineVintage, wineBlend: [...wineVintage.wineBlend, {"grapeVarietyId": 0, "percent": 50, "isAbout": false}]})
+                            onClick={() => {
+                                setWineVintage({
+                                    ...wineVintage,
+                                    wineBlend: [...wineVintage.wineBlend, {"grapeVarietyId": 0, "percent": 50}]
+                                })
                             }}
                             className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
                         >

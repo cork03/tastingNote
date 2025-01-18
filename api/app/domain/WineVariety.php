@@ -7,7 +7,6 @@ class WineVariety
     public function __construct(
         private readonly GrapeVariety $grapeVariety,
         private readonly int $percent,
-        private readonly bool $isAbout
     )
     {
     }
@@ -19,10 +18,5 @@ class WineVariety
     public function getPercent(): int
     {
         return $this->percent;
-    }
-
-    public function getIsAbout(): bool
-    {
-        return $this->isAbout;
     }
 }

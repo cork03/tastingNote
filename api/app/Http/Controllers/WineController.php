@@ -62,7 +62,6 @@ class WineController extends Controller
                         name: null
                     ),
                     percent: $wineVariety['percent'],
-                    isAbout: $wineVariety['isAbout']
                 );
             }
             $this->createWineVintageUseCase->handle(
