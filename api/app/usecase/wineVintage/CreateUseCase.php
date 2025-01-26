@@ -1,10 +1,11 @@
 <?php
 
-namespace App\usecase\wine;
+namespace App\usecase\wineVintage;
 
 use App\gateways\repository\WineVintageRepositoryInterface;
+use App\usecase\wine\CreateWineVintageUseCaseInput;
 
-class CreateWineVintageUseCase implements CreateWineVintageUseCaseInterface
+class CreateUseCase implements CreateUseCaseInterface
 {
     public function __construct(private readonly WineVintageRepositoryInterface $wineVintageRepository)
     {

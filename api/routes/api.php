@@ -22,5 +22,5 @@ Route::post('/wine', [WineController::class, 'create']);
 Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);
-Route::post('/wine_vintage', [WineController::class, 'createWineVintage']);
+Route::post('/wine_vintage', [WineVintageController::class, 'create']);
 Route::get('/countries', [CountryController::class, 'getAll']);
