@@ -31,30 +31,36 @@ const WineDetailPage = async ({params}: {params: {id: string}}) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {initialWineFullInfo.wineVintages.map((wineVintage) => {
                             return (
-                                <Link href={`/wine/${initialWineFullInfo.id}/vintage/${wineVintage.vintage}`}
-                                      key={wineVintage.id}>
-                                    <div className="border rounded shadow p-4 text-center">
+                                <Link
+                                    href={`/wine/${initialWineFullInfo.id}/vintage/${wineVintage.vintage}`}
+                                    key={wineVintage.id}
+                                >
+                                    <div
+                                        className="border rounded shadow p-4 text-center flex flex-col justify-between h-full">
                                         <h3 className="text-lg font-semibold mb-2">{wineVintage.vintage}</h3>
                                         <img
                                             src="/images/wine.jpg"
                                             alt="画像"
                                             className="mx-auto mb-4"
                                         />
-                                        <label className="text-sm">価格</label>
-                                        <p className="text-sm text-gray-600">{wineVintage.price}</p>
-                                        <label className="text-sm">熟成方法</label>
-                                        <p className="text-sm text-gray-600">{wineVintage.agingMethod}</p>
-                                        <label className="text-sm">アルコール度数</label>
-                                        <p className="text-sm text-gray-600">{wineVintage.alcoholContent}</p>
-                                        {wineVintage.technicalComment && (
-                                            <>
-                                                <label className="text-sm">技術的コメント</label>
-                                                <p className="text-sm text-gray-600">{wineVintage.technicalComment}</p>
-                                            </>
-                                        )}
+                                        <div className="mb-4">
+                                            <label className="text-sm">価格</label>
+                                            <p className="text-sm text-gray-600">{wineVintage.price}</p>
+                                            <label className="text-sm">熟成方法</label>
+                                            <p className="text-sm text-gray-600">{wineVintage.agingMethod}</p>
+                                            <label className="text-sm">アルコール度数</label>
+                                            <p className="text-sm text-gray-600">{wineVintage.alcoholContent}</p>
+                                            {wineVintage.technicalComment ? (
+                                                <>
+                                                    <label className="text-sm">技術的コメント</label>
+                                                    <p className="text-sm text-gray-600">{wineVintage.technicalComment}</p>
+                                                </>
+                                            ) : (
+                                                <div className="h-6"></div>
+                                            )}
+                                        </div>
                                     </div>
                                 </Link>
-
                             );
                         })}
                     </div>
