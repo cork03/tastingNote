@@ -24,3 +24,20 @@ export interface WineWithProducer {
     wineType: WineType;
     country: Country;
 }
+
+export interface WineVariety {
+    id: number;
+    name: string;
+    percentage: number;
+}
+
+export interface WineVintage {
+    id: number;
+    wineId: number;
+    vintage: number;
+    price: number;
+    agingMethod: string;
+    alcoholContent: number;
+    wineBlend: WineVariety[];
+    technicalComment: string | null;
+}

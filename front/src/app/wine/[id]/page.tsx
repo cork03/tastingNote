@@ -1,37 +1,57 @@
 import Link from "next/link";
 import React from "react";
+import {Producer} from "@/types/producer";
+import {Country, WineType, WineVintage} from "@/types/wine";
+
+interface WineFullInfo {
+    id: number;
+    name: string;
+    producer: Producer;
+    wineType: WineType;
+    country: Country;
+    wineVintages: WineVintage[];
+}
 
 const WineDetailPage = async ({params}: {params: {id: string}}) => {
     const data = await fetch(`${process.env.API_URL}/wine/${params.id}`);
+    const initialWineFullInfo: WineFullInfo = await data.json();
+    console.log(initialWineFullInfo);
     return (
         <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
             <section>
-                <h2 className="text-2xl font-bold text-center mb-6">ワイン</h2>
-                <div>
-                    <div className="mb-8 flex flex-row justify-center items-center gap-x-4 mx-auto">
-                        <input
-                            type="text"
-                            placeholder="ワインを検索"
-                            className="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
-                        />
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold mb-4">{initialWineFullInfo.name}</h2>
+                    <div className="space-y-2">
+                        <p className="text-sm text-gray-600">{initialWineFullInfo.country.name}</p>
+                        <p className="text-sm text-gray-600">{initialWineFullInfo.producer.name}</p>
+                        <p className="text-sm text-gray-600">{initialWineFullInfo.wineType.label}</p>
                     </div>
+                </div>
+                <div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {initialWines.map((wineWithProducer) => {
+                        {initialWineFullInfo.wineVintages.map((wineVintage) => {
                             return (
-                                <Link href={`/wine/${wineWithProducer.id}`} key={wineWithProducer.id}>
+                                <Link href={`/wine/${initialWineFullInfo.id}/vintage/${wineVintage.vintage}`}
+                                      key={wineVintage.id}>
                                     <div className="border rounded shadow p-4 text-center">
-                                        <h3 className="text-lg font-semibold mb-2">{wineWithProducer.name}</h3>
+                                        <h3 className="text-lg font-semibold mb-2">{wineVintage.vintage}</h3>
                                         <img
                                             src="/images/wine.jpg"
-                                            alt="ワイン画像"
+                                            alt="画像"
                                             className="mx-auto mb-4"
                                         />
-                                        <label className="text-sm">生産者</label>
-                                        <p className="text-sm text-gray-600">{wineWithProducer.producer.name}</p>
-                                        <label className="text-sm">国</label>
-                                        <p className="text-sm text-gray-600">{wineWithProducer.country.name}</p>
-                                        <label className="text-sm">種類</label>
-                                        <p className="text-sm text-gray-600">{wineWithProducer.wineType.label}</p>
+                                        <label className="text-sm">価格</label>
+                                        <p className="text-sm text-gray-600">{wineVintage.price}</p>
+                                        <label className="text-sm">熟成方法</label>
+                                        <p className="text-sm text-gray-600">{wineVintage.agingMethod}</p>
+                                        <label className="text-sm">アルコール度数</label>
+                                        <p className="text-sm text-gray-600">{wineVintage.alcoholContent}</p>
+                                        {wineVintage.technicalComment && (
+                                            <>
+                                                <label className="text-sm">技術的コメント</label>
+                                                <p className="text-sm text-gray-600">{wineVintage.technicalComment}</p>
+                                            </>
+                                        )}
                                     </div>
                                 </Link>
 
