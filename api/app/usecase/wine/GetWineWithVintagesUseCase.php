@@ -13,6 +13,6 @@ class GetWineWithVintagesUseCase implements GetWineWithVintagesUseCaseInterface
 
     public function handle(int $wineId): WineFullInfo
     {
-        return $this->wineRepository->getWineWithVintageById($wineId);
+        return $this->wineRepository->getWineWithVintagesById($wineId);
     }
 }

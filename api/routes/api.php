@@ -5,6 +5,7 @@ use App\Http\Controllers\GrapeVarietyController;
 use App\Http\Controllers\ProducerController;
 use App\Http\Controllers\WineController;
 use App\Http\Controllers\WineTypeController;
+use App\Http\Controllers\WineVintageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,9 @@ Route::get('/producers', [ProducerController::class, 'getAll']);
 Route::get('/grape_varieties', [GrapeVarietyController::class, 'getAll']);
 Route::get('/producer/{id}/wines', [ProducerController::class, 'getWines']);
 Route::get('/wine_types', [WineTypeController::class, 'getAll']);
-Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine', [WineController::class, 'create']);
 Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
+Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
+Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine_vintage', [WineController::class, 'createWineVintage']);
 Route::get('/countries', [CountryController::class, 'getAll']);

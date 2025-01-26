@@ -15,5 +15,5 @@ interface WineRepositoryInterface
      */
     public function getAll(): array;
 
-    public function getWineWithVintageById(int $wineId): WineFullInfo;
+    public function getWineWithVintagesById(int $wineId): WineFullInfo;
 }

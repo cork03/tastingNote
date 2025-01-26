@@ -58,9 +58,9 @@ class WinePresenter
                 alcoholContent: $wineVintage->getAlcoholContent(),
                 wineBlend: array_map(
                     fn($wineVariety) => new WineVarietyJson(
-                        id: $wineVariety->getGrapeVariety()->getId(),
                         name: $wineVariety->getGrapeVariety()->getName(),
                         percentage: $wineVariety->getPercentage(),
+                        id: $wineVariety->getGrapeVariety()->getId(),
                     ),
                     $wineVintage->getWineBlend()->getWineVarieties()
                 ),

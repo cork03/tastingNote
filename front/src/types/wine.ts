@@ -41,3 +41,12 @@ export interface WineVintage {
     wineBlend: WineVariety[];
     technicalComment: string | null;
 }
+
+export interface WineFullInfo {
+    id: number;
+    name: string;
+    producer: Producer;
+    wineType: WineType;
+    country: Country;
+    wineVintages: WineVintage[];
+}

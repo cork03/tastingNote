@@ -2,11 +2,12 @@
 
 namespace App\domain;
 
-class WineVintage
+class WineVintageFullInfo
 {
     public function __construct(
         private readonly ?int    $id,
-        private readonly int     $wineId,
+        private readonly Wine     $wine,
+        private readonly Producer $producer,
         private readonly int     $vintage,
         private readonly int     $price,
         private readonly string  $agingMethod,
@@ -22,9 +23,14 @@ class WineVintage
         return $this->id;
     }
 
-    public function getWineId(): int
+    public function getWine(): Wine
     {
-        return $this->wineId;
+        return $this->wine;
+    }
+
+    public function getProducer(): Producer
+    {
+        return $this->producer;
     }
 
     public function getVintage(): int

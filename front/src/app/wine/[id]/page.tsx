@@ -1,18 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import {Producer} from "@/types/producer";
-import {Country, WineType, WineVintage} from "@/types/wine";
+import {WineFullInfo} from "@/types/wine";
 
-interface WineFullInfo {
-    id: number;
-    name: string;
-    producer: Producer;
-    wineType: WineType;
-    country: Country;
-    wineVintages: WineVintage[];
-}
 
-const WineDetailPage = async ({params}: {params: {id: string}}) => {
+const WineDetailPage = async ({params}: {params: {id: number}}) => {
     const data = await fetch(`${process.env.API_URL}/wine/${params.id}`);
     const initialWineFullInfo: WineFullInfo = await data.json();
     console.log(initialWineFullInfo);
@@ -24,7 +15,6 @@ const WineDetailPage = async ({params}: {params: {id: string}}) => {
                     <div className="space-y-2">
                         <p className="text-sm text-gray-600">{initialWineFullInfo.country.name}</p>
                         <p className="text-sm text-gray-600">{initialWineFullInfo.producer.name}</p>
-                        <p className="text-sm text-gray-600">{initialWineFullInfo.wineType.label}</p>
                     </div>
                 </div>
                 <div>

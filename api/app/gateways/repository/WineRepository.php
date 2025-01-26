@@ -68,7 +68,7 @@ class WineRepository implements WineRepositoryInterface
     /**
      * @throws Exception
      */
-    public function getWineWithVintageById(int $wineId): WineFullInfo
+    public function getWineWithVintagesById(int $wineId): WineFullInfo
     {
         $wineWithVintagesEntity = $this->wineModel->with(['vineVintages.grapeVarieties', 'country', 'producer'])->find($wineId);
         if (!isset($wineWithVintagesEntity)) {
