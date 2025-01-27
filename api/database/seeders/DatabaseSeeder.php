@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             GrapeVarietySeeder::class,
             WineTypeSeeder::class,
             CountriesSeeder::class,
-            TestWineSeeder::class
+//            TestWineSeeder::class
         ]);
     }
 }

@@ -2,7 +2,8 @@
 
 import React, {useEffect, useState} from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
-import {Wine} from "@/types/wine";
+import {GrapeVariety, Wine} from "@/types/wine";
+import {getAlcoholContentChoices, getBlendPercentChoices, getVintageChoices} from "@/utils/utils";
 
 interface Props {
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
@@ -24,10 +25,6 @@ interface WineVintage {
     "technicalComment": string,
 }
 
-interface GrapeVariety {
-    "id": number,
-    "name": string
-}
 
 const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
     const [wineVintage, setWineVintage] = useState<WineVintage>({
@@ -65,33 +62,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
         }
         setViewType(2);
     }
-    const getAlcoholContentChoices = () => {
-        let alcoholContentChoices = [];
-        const start = 3;
-        const end = 20;
-        for (let i = start; i <= end; i += 0.5) {
-            alcoholContentChoices.push(i);
-        }
-        return alcoholContentChoices;
-    }
-    const getBlendPercentChoices = () => {
-        let blendPercentChoices = [];
-        const start = 1;
-        const end = 100;
-        for (let i = start; i <= end; i++) {
-            blendPercentChoices.push(i);
-        }
-        return blendPercentChoices;
-    }
-    const getVintageChoices = () => {
-        let vintageChoices = [];
-        const start = 1900;
-        const end = new Date().getFullYear();
-        for (let i = start; i <= end; i++) {
-            vintageChoices.push(i);
-        }
-        return vintageChoices
-    }
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setWineVintage({...wineVintage, [e.target.name]: e.target.value});
     }

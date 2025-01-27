@@ -63,3 +63,9 @@ export interface WineVintageFullInfo {
     wineBlend: WineVariety[];
     technicalComment: string | null;
 }
+
+export interface GrapeVariety {
+    "id": number,
+    "name": string
+}
+
