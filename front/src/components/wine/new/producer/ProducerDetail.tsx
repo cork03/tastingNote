@@ -10,17 +10,6 @@ interface Props {
     setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
 }
 
-interface WineJson {
-    id: number;
-    name: string;
-    producerId: number;
-    wineType: WineTypeJson;
-}
-
-interface WineTypeJson {
-    id: number;
-    label: string;
-}
 
 const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: Props) => {
     const selectProducer = async () => {
@@ -28,13 +17,13 @@ const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: 
         if (!response.ok) {
             throw new Error('Failed to get wines');
         }
-        const winesResponse: WineJson[] = await response.json();
+        const winesResponse: Wine[] = await response.json();
         // wineの型に整形して親のstateを更新
-        const wine: Wine[] = winesResponse.map((wine: any) => {
+        const wine: Wine[] = winesResponse.map((wine: Wine) => {
             return {
                 id: wine.id,
                 name: wine.name,
-                producer: producer,
+                producerId: producer.id,
                 wineType: {
                     id: wine.wineType.id,
                     label: wine.wineType.label,

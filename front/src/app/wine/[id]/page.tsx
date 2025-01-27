@@ -4,7 +4,8 @@ import {WineFullInfo} from "@/types/wine";
 
 
 const WineDetailPage = async ({params}: {params: {id: number}}) => {
-    const data = await fetch(`${process.env.API_URL}/wine/${params.id}`);
+    const { id } = await params;
+    const data = await fetch(`${process.env.API_URL}/wine/${id}`);
     const initialWineFullInfo: WineFullInfo = await data.json();
     console.log(initialWineFullInfo);
     return (

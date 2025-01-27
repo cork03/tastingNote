@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\domain\Country;
-use App\domain\GrapeVariety;
 use App\domain\Wine;
-use App\domain\WineBlend;
 use App\domain\WineType;
-use App\domain\WineVariety;
-use App\domain\WineVintage;
 use App\presenter\WinePresenter;
 use App\usecase\wine\CreateWineUseCaseInput;
 use App\usecase\wine\CreateWineUseCaseInterface;
-use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wine\GetWinesUseCaseInterface;
 use App\usecase\wine\GetWineWithVintagesUseCaseInterface;
 use Exception;

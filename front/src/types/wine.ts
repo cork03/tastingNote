@@ -13,6 +13,7 @@ export interface Country {
 export interface Wine {
     id: number;
     name: string;
+    producerId: number;
     wineType: WineType;
     country: Country;
 }
@@ -49,4 +50,16 @@ export interface WineFullInfo {
     wineType: WineType;
     country: Country;
     wineVintages: WineVintage[];
+}
+
+export interface WineVintageFullInfo {
+    id: number;
+    producer: Producer;
+    wine: Wine;
+    vintage: number;
+    price: number;
+    agingMethod: string;
+    alcoholContent: number;
+    wineBlend: WineVariety[];
+    technicalComment: string | null;
 }
