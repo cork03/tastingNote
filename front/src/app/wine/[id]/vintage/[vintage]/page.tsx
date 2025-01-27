@@ -9,62 +9,67 @@ const WineVintageDetailPage = async ({params}: { params: { id: string, vintage: 
     console.log(initialWineVintage);
     return (
         <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
-            <section>
+            <section className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200">
                 <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold mb-4">{initialWineVintage.wine.name}:{initialWineVintage.vintage}</h2>
+                    <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+                        {initialWineVintage.wine.name}:{initialWineVintage.vintage}年
+                    </h2>
                 </div>
                 <div>
                     <div className="gap-6 justify-center">
-                        <div className="border rounded shadow p-4 flex items-center">
+                        <div className="border rounded-lg shadow-lg p-6 flex items-center bg-gray-100">
                             <img
                                 src="/images/wine.jpg"
                                 alt="画像"
-                                className="w-256 h-256 object-cover rounded mr-4"
+                                className="w-64 h-64 object-cover rounded-lg border border-gray-300 shadow-md mr-6"
                             />
-                            <div className="space-y-4">
+                            <div className="space-y-6">
                                 <div className="flex items-center">
-                                    <label className="text-xl w-64">生産地</label>
-                                    <p className="text-xl text-gray-600">{initialWineVintage.wine.country.name}</p>
+                                    <label className="text-lg font-medium text-gray-800 w-40">生産地</label>
+                                    <p className="text-lg text-gray-700 font-semibold">{initialWineVintage.wine.country.name}</p>
                                 </div>
                                 <div className="flex items-center">
-                                    <label className="text-xl w-64">生産者</label>
-                                    <p className="text-xl text-gray-600">{initialWineVintage.producer.name}</p>
+                                    <label className="text-lg font-medium text-gray-800 w-40">生産者</label>
+                                    <p className="text-lg text-gray-700 font-semibold">{initialWineVintage.producer.name}</p>
+                                </div>
+                                <div className="flex items-start">
+                                    <label className="text-lg font-medium text-gray-800 w-40">葡萄品種</label>
+                                    <p className="text-lg text-gray-700 font-semibold">
+                                        {initialWineVintage.wineBlend.map((wineVariety, index) => {
+                                            if (index === initialWineVintage.wineBlend.length - 1) {
+                                                return wineVariety.name + ':' + wineVariety.percentage + '%';
+                                            }
+                                            return wineVariety.name + ':' + wineVariety.percentage + '%, ';
+                                        })}
+                                    </p>
                                 </div>
                                 <div className="flex items-center">
-                                    <label className="text-xl w-64">葡萄品種</label>
-                                    <p className="text-xl text-gray-600">{initialWineVintage.wineBlend.map((wineVariety, index) => {
-                                        if (index === initialWineVintage.wineBlend.length - 1) {
-                                            return wineVariety.name + ':' + wineVariety.percentage + '%';
-                                        }
-                                        return wineVariety.name + ':' + wineVariety.percentage + '%, ';
-                                    })}</p>
+                                    <label className="text-lg font-medium text-gray-800 w-40">アルコール度数</label>
+                                    <p className="text-lg text-gray-700 font-semibold">{initialWineVintage.alcoholContent}%</p>
                                 </div>
                                 <div className="flex items-center">
-                                    <label className="text-xl w-64">アルコール度数</label>
-                                    <p className="text-xl text-gray-600">{initialWineVintage.alcoholContent}</p>
-                                </div>
-
-                                <div className="flex items-center">
-                                    <label className="text-xl w-64">熟成方法</label>
-                                    <p className="text-xl text-gray-600">{initialWineVintage.agingMethod}</p>
+                                    <label className="text-lg font-medium text-gray-800 w-40">熟成方法</label>
+                                    <p className="text-lg text-gray-700 font-semibold">{initialWineVintage.agingMethod}</p>
                                 </div>
                                 <div className="flex items-center">
-                                    <label className="text-xl w-64">価格</label>
-                                    <p className="text-xl text-gray-600">{initialWineVintage.price}</p>
+                                    <label className="text-lg font-medium text-gray-800 w-40">価格</label>
+                                    <p className="text-lg text-gray-700 font-semibold">¥{initialWineVintage.price}</p>
                                 </div>
                                 {initialWineVintage.technicalComment && (
-                                    <div className="flex items-center">
-                                        <label className="text-xl w-64">技術的コメント</label>
-                                        <p className="text-xl text-gray-600">{initialWineVintage.technicalComment}</p>
+                                    <div className="flex items-start">
+                                        <label className="text-lg font-medium text-gray-800 w-40">技術的コメント</label>
+                                        <p className="text-lg text-gray-700 font-semibold">
+                                            {initialWineVintage.technicalComment}
+                                        </p>
                                     </div>
                                 )}
                             </div>
                         </div>
                     </div>
                 </div>
-
             </section>
         </main>
+
     );
 };
 
