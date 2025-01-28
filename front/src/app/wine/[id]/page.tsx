@@ -7,7 +7,6 @@ const WineDetailPage = async ({params}: {params: {id: number}}) => {
     const { id } = await params;
     const data = await fetch(`${process.env.API_URL}/wine/${id}`);
     const initialWineFullInfo: WineFullInfo = await data.json();
-    console.log(initialWineFullInfo);
     return (
         <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
             <section>
