@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlindTastingController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GrapeVarietyController;
 use App\Http\Controllers\ProducerController;
@@ -23,4 +24,5 @@ Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine_vintage', [WineVintageController::class, 'create']);
+Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
 Route::get('/countries', [CountryController::class, 'getAll']);

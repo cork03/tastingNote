@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\gateways\repository\blindTasting\BlindTastingRepository;
+use App\gateways\repository\blindTasting\BlindTastingRepositoryInterface;
 use App\gateways\repository\CountryRepository;
 use App\gateways\repository\CountryRepositoryInterface;
 use App\gateways\repository\GrapeVarietyRepository;
@@ -14,6 +16,8 @@ use App\gateways\repository\WineRepository;
 use App\gateways\repository\WineRepositoryInterface;
 use App\gateways\repository\WineVintageRepository;
 use App\gateways\repository\WineVintageRepositoryInterface;
+use App\usecase\blindTasting\BlindTastingCreateUsecase;
+use App\usecase\blindTasting\BlindTastingCreateUsecaseInterface;
 use App\usecase\country\GetCountriesUseCase;
 use App\usecase\country\GetCountriesUseCaseInterface;
 use App\usecase\grapeVariety\GetGrapeVarietiesUseCase;
@@ -45,23 +49,31 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(CreateProducerUseCaseInterface::class, CreateProducerUseCase::class);
-        $this->app->bind(ProducerRepositoryInterface::class, ProducerRepository::class);
-        $this->app->bind(GetProducersUseCaseInterface::class, GetProducersUseCase::class);
-        $this->app->bind(GetGrapeVarietiesUseCaseInterface::class, GetGrapeVarietiesUseCase::class);
-        $this->app->bind(GrapeVarietyRepositoryInterface::class, GrapeVarietyRepository::class);
-        $this->app->bind(GetProducerWinesUseCaseInterface::class, GetProducerWinesUseCase::class);
-        $this->app->bind(CreateWineUseCaseInterface::class, CreateWineUseCase::class);
-        $this->app->bind(WineRepositoryInterface::class, WineRepository::class);
-        $this->app->bind(GetCountriesUseCaseInterface::class, GetCountriesUseCase::class);
-        $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
-        $this->app->bind(CreateUseCaseInterface::class, CreateUseCase::class);
-        $this->app->bind(WineVintageRepositoryInterface::class, WineVintageRepository::class);
-        $this->app->bind(GetWineTypesUseCaseInterface::class, GetWineTypesUseCase::class);
-        $this->app->bind(WineTypesRepositoryInterface::class, WineTypesRepository::class);
-        $this->app->bind(GetWinesUseCaseInterface::class, GetWinesUseCase::class);
-        $this->app->bind(GetWineWithVintagesUseCaseInterface::class, GetWineWithVintagesUseCase::class);
-        $this->app->bind(GetFullInfoUseCaseInterface::class, GetFullInfoUseCase::class);
+        $bindings = [
+            CreateProducerUseCaseInterface::class => CreateProducerUseCase::class,
+            ProducerRepositoryInterface::class => ProducerRepository::class,
+            GetProducersUseCaseInterface::class => GetProducersUseCase::class,
+            GetGrapeVarietiesUseCaseInterface::class => GetGrapeVarietiesUseCase::class,
+            GrapeVarietyRepositoryInterface::class => GrapeVarietyRepository::class,
+            GetProducerWinesUseCaseInterface::class => GetProducerWinesUseCase::class,
+            CreateWineUseCaseInterface::class => CreateWineUseCase::class,
+            WineRepositoryInterface::class => WineRepository::class,
+            GetCountriesUseCaseInterface::class => GetCountriesUseCase::class,
+            CountryRepositoryInterface::class => CountryRepository::class,
+            CreateUseCaseInterface::class => CreateUseCase::class,
+            WineVintageRepositoryInterface::class => WineVintageRepository::class,
+            GetWineTypesUseCaseInterface::class => GetWineTypesUseCase::class,
+            WineTypesRepositoryInterface::class => WineTypesRepository::class,
+            GetWinesUseCaseInterface::class => GetWinesUseCase::class,
+            GetWineWithVintagesUseCaseInterface::class => GetWineWithVintagesUseCase::class,
+            GetFullInfoUseCaseInterface::class => GetFullInfoUseCase::class,
+            BlindTastingCreateUsecaseInterface::class => BlindTastingCreateUsecase::class,
+            BlindTastingRepositoryInterface::class => BlindTastingRepository::class,
+        ];
+
+        foreach ($bindings as $interface => $implementation) {
+            $this->app->bind($interface, $implementation);
+        }
     }
 
     /**

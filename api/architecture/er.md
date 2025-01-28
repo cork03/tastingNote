@@ -47,7 +47,7 @@ erDiagram
     
     wine_comments {
         int id PK
-        int wine_id FK "nullable"
+        int wine_vintage_id FK "nullable"
         text appearance
         text aroma
         text taste
@@ -58,7 +58,7 @@ erDiagram
     
     blind_tasting_answers {
         int id PK
-        int wine_comments FK
+        int wine_comment_id FK
         int coutry_id FK
         int vintage
         int price
