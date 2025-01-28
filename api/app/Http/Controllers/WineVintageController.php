@@ -12,6 +12,7 @@ use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
+use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class WineVintageController extends Controller
         private readonly CreateUseCaseInterface            $createWineVintageUseCase,
         private readonly CreateWineCommentUseCaseInterface $createWineCommentUseCase,
         private readonly GetFullInfoUseCaseInterface       $getFullInfoUseCase,
+        private readonly GetWineCommentsUseCaseInterface   $getWineCommentsUseCase,
         private readonly WineVintagePresenter              $wineVintagePresenter
     )
     {
@@ -69,12 +71,12 @@ class WineVintageController extends Controller
         try {
             $wineComment = $request->input('wineComment');
             $this->createWineCommentUseCase->handle(new WineComment(
-                id: null,
-                wineVintageId: $wineComment['wineVintageId'],
-                appearance: $wineComment['appearance'],
-                aroma: $wineComment['aroma'],
-                taste: $wineComment['taste'],
-                anotherComment: $wineComment['anotherComment'])
+                    id: null,
+                    wineVintageId: $wineComment['wineVintageId'],
+                    appearance: $wineComment['appearance'],
+                    aroma: $wineComment['aroma'],
+                    taste: $wineComment['taste'],
+                    anotherComment: $wineComment['anotherComment'])
             );
             return response()->json(status: 201);
         } catch (Exception $e) {
@@ -92,5 +94,11 @@ class WineVintageController extends Controller
             Log::info($e->getMessage());
             return response()->json(status: 404);
         }
+    }
+
+    public function getWineComments(int $id): JsonResponse
+    {
+        $comments = $this->getWineCommentsUseCase->handle($id);
+        return $this->wineVintagePresenter->getWineCommentsResponse($comments);
     }
 }

@@ -7,18 +7,25 @@ use App\domain\GrapeVariety;
 use App\domain\Producer;
 use App\domain\Wine;
 use App\domain\WineBlend;
+use App\domain\WineComment;
 use App\domain\WineType;
 use App\domain\WineVariety;
 use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
 use App\Models\WineVintage as WineVintageModel;
+use App\Models\WineComment as WineCommentModel;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use function Termwind\renderUsing;
 
 class WineVintageRepository implements WineVintageRepositoryInterface
 {
-    public function __construct(private readonly WineVintageModel $wineVintageModel)
+    public function __construct(
+        private readonly WineVintageModel $wineVintageModel,
+        private readonly WineCommentModel $wineCommentModel
+    )
     {
     }
 
@@ -101,5 +108,28 @@ class WineVintageRepository implements WineVintageRepositoryInterface
             wineBlend: new WineBlend($grapeVarieties),
             technicalComment: $wineVintageEntity->technical_comment
         );
+    }
+
+    /**
+     * @return WineComment[]
+     */
+    public function getWineCommentsByWineVintageId(int $wineVintageId): array
+    {
+        /** @var Collection $wineCommentModels */
+        $wineCommentModels = $this->wineCommentModel->where('wine_vintage_id', $wineVintageId)->get();
+
+        $wineComments = [];
+        /** @var WineCommentModel $wineCommentModel */
+        foreach ($wineCommentModels as $wineCommentModel) {
+            $wineComments[] = new WineComment(
+                id: $wineCommentModel->id,
+                wineVintageId: $wineCommentModel->wine_vintage_id,
+                appearance: $wineCommentModel->appearance,
+                aroma: $wineCommentModel->aroma,
+                taste: $wineCommentModel->taste,
+                anotherComment: $wineCommentModel->another_comment
+            );
+        }
+        return $wineComments;
     }
 }

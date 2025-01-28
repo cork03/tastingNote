@@ -4,10 +4,12 @@ namespace App\presenter;
 
 use App\domain\Producer;
 use App\domain\Wine;
+use App\domain\WineComment;
 use App\domain\WineFullInfo;
 use App\domain\WineVintageFullInfo;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
+use App\presenter\jsonClass\WineCommentsJson;
 use App\presenter\jsonClass\WineFullInfoJson;
 use App\presenter\jsonClass\WineJson;
 use App\presenter\jsonClass\WineTypeJson;
@@ -56,5 +58,23 @@ class WineVintagePresenter
             technicalComment: $wineVintageFullInfo->getTechnicalComment()
         );
         return response()->json($wineVintageFullInfoJson);
+    }
+
+    /**
+     * @param WineComment[] $wineComments
+     */
+    function getWineCommentsResponse(array $wineComments): JsonResponse
+    {
+        $wineCommentsJson = array_map(fn($wineComment) => (
+            new WineCommentsJson(
+                id: $wineComment->getId(),
+                wineVintageId: $wineComment->getWineVintageId(),
+                appearance: $wineComment->getAppearance(),
+                aroma: $wineComment->getAroma(),
+                taste: $wineComment->getTaste(),
+                anotherComment: $wineComment->getAnotherComment(),
+            )
+        ), $wineComments);
+        return response()->json($wineCommentsJson);
     }
 }
