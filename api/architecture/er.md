@@ -45,11 +45,44 @@ erDiagram
         varchar name
     }
     
+    wine_comments {
+        int id PK
+        int wine_id FK "nullable"
+        text appearance
+        text aroma
+        text taste
+        text another_comment "nullable"
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    blind_tasting_answers {
+        int id PK
+        int wine_comments FK
+        int coutry_id FK
+        int vintage
+        int price
+        int alcohol_content
+        text another_comment "nullable"
+    }
+
+    blind_tasting_wine_varieties {
+        int id PK
+        int wine_id UK,FK
+        int grape_variety_id UK,FK
+        tinyint percentage
+    }
+    
     
     producers ||--o{ wines : ""
     wines ||--|{ wine_vintages : ""
     wines ||--|| countries : ""
     wine_vintages ||--|{ wine_varieties : ""
-    grape_varieties ||--|{ wine_varieties : ""
-    wines ||--|| wine_types : ""
+    wine_varieties }|--|| grape_varieties : ""
+    wine_types ||--|| wines : ""
+    wine_vintages ||--o{ wine_comments : ""
+    countries ||--|| blind_tasting_answers : ""
+    blind_tasting_answers ||--|| wine_comments : ""
+    blind_tasting_answers ||--o{ blind_tasting_wine_varieties : ""
+    grape_varieties ||--o{ blind_tasting_wine_varieties : ""
 ```
