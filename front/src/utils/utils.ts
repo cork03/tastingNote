@@ -8,14 +8,14 @@ export const getVintageChoices = () => {
     return vintageChoices
 }
 
-export const getBlendPercentChoices = (): number[] => {
-    let blendPercentChoices = [];
+export const getBlendPercentageChoices = (): number[] => {
+    let blendPercentageChoices = [];
     const start = 1;
     const end = 100;
     for (let i = start; i <= end; i++) {
-        blendPercentChoices.push(i);
+        blendPercentageChoices.push(i);
     }
-    return blendPercentChoices;
+    return blendPercentageChoices;
 }
 
 export const getAlcoholContentChoices = () => {

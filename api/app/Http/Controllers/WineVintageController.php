@@ -37,7 +37,7 @@ class WineVintageController extends Controller
                         id: $wineVariety['grapeVarietyId'],
                         name: null
                     ),
-                    percentage: $wineVariety['percent'],
+                    percentage: $wineVariety['percentage'],
                 );
             }
             $this->createWineVintageUseCase->handle(

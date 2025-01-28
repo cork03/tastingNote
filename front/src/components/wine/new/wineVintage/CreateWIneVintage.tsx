@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {GrapeVariety, Wine} from "@/types/wine";
-import {getAlcoholContentChoices, getBlendPercentChoices, getVintageChoices} from "@/utils/utils";
+import {getAlcoholContentChoices, getBlendPercentageChoices, getVintageChoices} from "@/utils/utils";
 
 interface Props {
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
@@ -12,7 +12,7 @@ interface Props {
 
 interface WineVariety {
     "grapeVarietyId": number,
-    "percent": number,
+    "percentage": number,
 }
 
 interface WineVintage {
@@ -33,7 +33,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
         price: "",
         agingMethod: "",
         alcoholContent: 12,
-        wineBlend: [{"grapeVarietyId": 0, "percent": 50}],
+        wineBlend: [{"grapeVarietyId": 0, "percentage": 50}],
         technicalComment: ""
     });
     const [grapeVarieties, setGrapeVarieties] = useState<GrapeVariety[]>([]);
@@ -174,14 +174,14 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
                                         ))}
                                     </select>
                                     <select
-                                        name="percent"
-                                        value={wineVariety.percent}
-                                        onChange={(e) => handleWineBlendChange(index, "percent", parseInt(e.target.value))}
+                                        name="percentage"
+                                        value={wineVariety.percentage}
+                                        onChange={(e) => handleWineBlendChange(index, "percentage", parseInt(e.target.value))}
                                         className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                                     >
-                                        {getBlendPercentChoices().map((percentChoice) => (
-                                            <option key={percentChoice} value={percentChoice}>
-                                                {percentChoice}%
+                                        {getBlendPercentageChoices().map((percentageChoice) => (
+                                            <option key={percentageChoice} value={percentageChoice}>
+                                                {percentageChoice}%
                                             </option>
                                         ))}
                                     </select>
@@ -205,7 +205,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
                             onClick={() => {
                                 setWineVintage({
                                     ...wineVintage,
-                                    wineBlend: [...wineVintage.wineBlend, {"grapeVarietyId": 0, "percent": 50}]
+                                    wineBlend: [...wineVintage.wineBlend, {"grapeVarietyId": 0, "percentage": 50}]
                                 })
                             }}
                             className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
