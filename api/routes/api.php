@@ -16,13 +16,13 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/producer', [ProducerController::class, 'create']);
 Route::get('/producers', [ProducerController::class, 'getAll']);
-Route::get('/grape_varieties', [GrapeVarietyController::class, 'getAll']);
+Route::get('/grape-varieties', [GrapeVarietyController::class, 'getAll']);
 Route::get('/producer/{id}/wines', [ProducerController::class, 'getWines']);
-Route::get('/wine_types', [WineTypeController::class, 'getAll']);
+Route::get('/wine-types', [WineTypeController::class, 'getAll']);
 Route::post('/wine', [WineController::class, 'create']);
 Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);
-Route::post('/wine_vintage', [WineVintageController::class, 'create']);
+Route::post('/wine-vintage', [WineVintageController::class, 'create']);
 Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
 Route::get('/countries', [CountryController::class, 'getAll']);

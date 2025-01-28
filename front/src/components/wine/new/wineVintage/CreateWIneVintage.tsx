@@ -39,7 +39,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
     const [grapeVarieties, setGrapeVarieties] = useState<GrapeVariety[]>([]);
     useEffect(() => {
         const getGrapeVarieties = async () => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/grape_varieties`);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/grape-varieties`);
             if (!response.ok) {
                 throw new Error('Failed to get wine types');
             }
@@ -50,7 +50,7 @@ const CreateWineVintage = ({setViewType, selectedWine}: Props) => {
 
     const createWineVintage = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine_vintage`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine-vintage`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

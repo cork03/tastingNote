@@ -6,7 +6,7 @@ import {getAlcoholContentChoices, getVintageChoices} from "@/utils/utils";
 const BlindTastingPage = async () => {
     const countriesData = await fetch(`${process.env.API_URL}/countries`);
     const countries: Country[] = await countriesData.json();
-    const grapeVarietiesData = await fetch(`${process.env.API_URL}/grape_varieties`);
+    const grapeVarietiesData = await fetch(`${process.env.API_URL}/grape-varieties`);
     const grapeVarieties: GrapeVariety[] = await grapeVarietiesData.json();
     return (
         <main className="flex-grow min-h-screen container mx-auto px-4 py-8">

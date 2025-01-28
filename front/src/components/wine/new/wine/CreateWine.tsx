@@ -32,7 +32,7 @@ const CreateWine = ({setIsViewMode, selectedProducer, setWines}: Props) => {
     const [wineTypes, setWineTypes] = useState<WineType[]>([]);
     const [countries, setCountries] = useState<Country[]>([]);
     const getWineTypes = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine_types`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine-types`);
         if (!response.ok) {
             throw new Error('Failed to get wine types');
         }
