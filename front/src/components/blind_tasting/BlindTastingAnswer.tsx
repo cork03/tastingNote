@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
+import React from "react";
 import {getAlcoholContentChoices, getBlendPercentageChoices, getVintageChoices} from "@/utils/utils";
 import {BlindTastingAnswer} from "@/types/domain/blindTasting";
 import {Country, GrapeVariety} from "@/types/wine";

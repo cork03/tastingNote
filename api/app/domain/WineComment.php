@@ -5,12 +5,12 @@ namespace App\domain;
 class WineComment
 {
     public function __construct(
-        private readonly ?int $id,
-        private readonly ?int $wine_vintage_id,
-        private readonly string $appearance,
-        private readonly string $aroma,
-        private readonly string $taste,
-        private readonly ?string $another_comment,
+        private readonly ?int    $id,
+        private readonly ?int    $wineVintageId,
+        private readonly string  $appearance,
+        private readonly string  $aroma,
+        private readonly string  $taste,
+        private readonly ?string $anotherComment,
     )
     {
     }
@@ -22,7 +22,7 @@ class WineComment
 
     public function getWineVintageId(): ?int
     {
-        return $this->wine_vintage_id;
+        return $this->wineVintageId;
     }
 
     public function getAppearance(): string
@@ -43,6 +43,6 @@ class WineComment
 
     public function getAnotherComment(): ?string
     {
-        return $this->another_comment;
+        return $this->anotherComment;
     }
 }

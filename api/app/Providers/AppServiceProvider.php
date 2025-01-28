@@ -14,6 +14,8 @@ use App\gateways\repository\wine\wineTypes\WineTypesRepository;
 use App\gateways\repository\wine\wineTypes\WineTypesRepositoryInterface;
 use App\gateways\repository\WineRepository;
 use App\gateways\repository\WineRepositoryInterface;
+use App\gateways\repository\wineVintage\WineCommentRepository;
+use App\gateways\repository\wineVintage\WineCommentRepositoryInterface;
 use App\gateways\repository\WineVintageRepository;
 use App\gateways\repository\WineVintageRepositoryInterface;
 use App\usecase\blindTasting\BlindTastingCreateUsecase;
@@ -38,6 +40,8 @@ use App\usecase\wine\types\GetWineTypesUseCase;
 use App\usecase\wine\types\GetWineTypesUseCaseInterface;
 use App\usecase\wineVintage\CreateUseCase;
 use App\usecase\wineVintage\CreateUseCaseInterface;
+use App\usecase\wineVintage\CreateWineCommentUseCase;
+use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCase;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use Illuminate\Support\ServiceProvider;
@@ -69,6 +73,8 @@ class AppServiceProvider extends ServiceProvider
             GetFullInfoUseCaseInterface::class => GetFullInfoUseCase::class,
             BlindTastingCreateUsecaseInterface::class => BlindTastingCreateUsecase::class,
             BlindTastingRepositoryInterface::class => BlindTastingRepository::class,
+            CreateWineCommentUseCaseInterface::class => CreateWineCommentUseCase::class,
+            WineCommentRepositoryInterface::class => WineCommentRepository::class,
         ];
 
         foreach ($bindings as $interface => $implementation) {

@@ -29,11 +29,11 @@ class BlindTastingController extends Controller
 
             $wineComment = new WineComment(
                 id: null,
-                wine_vintage_id: null,
+                wineVintageId: null,
                 appearance: $wineCommentInput['appearance'],
                 aroma: $wineCommentInput['aroma'],
                 taste: $wineCommentInput['taste'],
-                another_comment: $wineCommentInput['anotherComment'],
+                anotherComment: $wineCommentInput['anotherComment'],
             );
 
             $wineVarieties = [];

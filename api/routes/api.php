@@ -24,5 +24,6 @@ Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine-vintage', [WineVintageController::class, 'create']);
+Route::post('/wine-comment', [WineVintageController::class, 'createComment']);
 Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
 Route::get('/countries', [CountryController::class, 'getAll']);

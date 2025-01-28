@@ -1,7 +1,5 @@
 import React from "react";
-import {Country, GrapeVariety, WineWithProducer} from "@/types/wine";
-import Link from "next/link";
-import {getAlcoholContentChoices, getVintageChoices} from "@/utils/utils";
+import {Country, GrapeVariety} from "@/types/wine";
 import CreateBlindTasting from "@/components/blind_tasting/CreateBlindTasting";
 
 const BlindTastingPage = async () => {

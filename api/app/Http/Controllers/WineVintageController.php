@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\domain\GrapeVariety;
 use App\domain\WineBlend;
+use App\domain\WineComment;
 use App\domain\WineVariety;
 use App\domain\WineVintage;
 use App\presenter\WineVintagePresenter;
 use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wineVintage\CreateUseCaseInterface;
+use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -18,9 +20,10 @@ use Illuminate\Support\Facades\Log;
 class WineVintageController extends Controller
 {
     public function __construct(
-        private readonly CreateUseCaseInterface      $createWineVintageUseCase,
-        private readonly GetFullInfoUseCaseInterface $getFullInfoUseCase,
-        private readonly WineVintagePresenter        $wineVintagePresenter
+        private readonly CreateUseCaseInterface            $createWineVintageUseCase,
+        private readonly CreateWineCommentUseCaseInterface $createWineCommentUseCase,
+        private readonly GetFullInfoUseCaseInterface       $getFullInfoUseCase,
+        private readonly WineVintagePresenter              $wineVintagePresenter
     )
     {
     }
@@ -61,6 +64,25 @@ class WineVintageController extends Controller
         }
     }
 
+    public function createComment(Request $request): JsonResponse
+    {
+        try {
+            $wineComment = $request->input('wineComment');
+            $this->createWineCommentUseCase->handle(new WineComment(
+                id: null,
+                wineVintageId: $wineComment['wineVintageId'],
+                appearance: $wineComment['appearance'],
+                aroma: $wineComment['aroma'],
+                taste: $wineComment['taste'],
+                anotherComment: $wineComment['anotherComment'])
+            );
+            return response()->json(status: 201);
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response()->json(status: 400);
+        }
+    }
+
     public function getOne(int $wineId, int $vintage): JsonResponse
     {
         try {
@@ -68,7 +90,7 @@ class WineVintageController extends Controller
             return $this->wineVintagePresenter->getFullInfoResponse($wineVintageFullInfo);
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return response()->json(status:  404);
+            return response()->json(status: 404);
         }
     }
 }
