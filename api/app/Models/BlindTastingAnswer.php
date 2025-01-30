@@ -51,4 +51,9 @@ class BlindTastingAnswer extends Model
     {
         return $this->belongsTo(WineComment::class);
     }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

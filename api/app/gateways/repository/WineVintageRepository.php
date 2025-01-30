@@ -2,9 +2,11 @@
 
 namespace App\gateways\repository;
 
+use App\domain\BlindTastingAnswer;
 use App\domain\Country;
 use App\domain\GrapeVariety;
 use App\domain\Producer;
+use App\domain\TastingComment;
 use App\domain\Wine;
 use App\domain\WineBlend;
 use App\domain\WineComment;
@@ -12,6 +14,7 @@ use App\domain\WineType;
 use App\domain\WineVariety;
 use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
+use App\Models\BlindTastingAnswer as BlindTastingAnswerModel;
 use App\Models\WineVintage as WineVintageModel;
 use App\Models\WineComment as WineCommentModel;
 use Exception;
@@ -111,17 +114,20 @@ class WineVintageRepository implements WineVintageRepositoryInterface
     }
 
     /**
-     * @return WineComment[]
+     * @return TastingComment[]
      */
     public function getWineCommentsByWineVintageId(int $wineVintageId): array
     {
         /** @var Collection $wineCommentModels */
-        $wineCommentModels = $this->wineCommentModel->where('wine_vintage_id', $wineVintageId)->get();
+        $wineCommentModels = $this->wineCommentModel
+            ->with(['blindTastingAnswer.grapeVarieties', 'blindTastingAnswer.country'])
+            ->where('wine_vintage_id', $wineVintageId)
+            ->get();
 
-        $wineComments = [];
+        $tastingComments = [];
         /** @var WineCommentModel $wineCommentModel */
         foreach ($wineCommentModels as $wineCommentModel) {
-            $wineComments[] = new WineComment(
+            $wineComment = new WineComment(
                 id: $wineCommentModel->id,
                 wineVintageId: $wineCommentModel->wine_vintage_id,
                 appearance: $wineCommentModel->appearance,
@@ -129,7 +135,45 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                 taste: $wineCommentModel->taste,
                 anotherComment: $wineCommentModel->another_comment
             );
+            /** @var BlindTastingAnswerModel $blindTastingAnswer */
+            $blindTastingAnswerModel = $wineCommentModel->blindTastingAnswer;
+            if (!isset($wineCommentModel->blindTastingAnswer)) {
+                $tastingComments[] = new TastingComment(
+                    wineComment: $wineComment,
+                    blindTastingAnswer: null
+                );
+                continue;
+            }
+
+            $grapeVarieties = [];
+            foreach ($blindTastingAnswerModel->grapeVarieties as $grapeVariety) {
+                $grapeVarieties[] = new WineVariety(
+                    grapeVariety: new GrapeVariety(
+                        id: $grapeVariety->id,
+                        name: $grapeVariety->name
+                    ),
+                    percentage: $grapeVariety->pivot->percentage
+                );
+            }
+
+             $blindTastingAnswer = new BlindTastingAnswer(
+                id: $blindTastingAnswerModel->id,
+                wineCommentId: $blindTastingAnswerModel->wine_comment_id,
+                country: new Country(
+                    id: $blindTastingAnswerModel->country->id,
+                    name: $blindTastingAnswerModel->country->name
+                ),
+                vintage: $blindTastingAnswerModel->vintage,
+                price: $blindTastingAnswerModel->price,
+                alcoholContent: $blindTastingAnswerModel->alcohol_content,
+                wineBlend: new WineBlend($grapeVarieties),
+                anotherComment: $blindTastingAnswerModel->another_comment
+            );
+            $tastingComments[] = new TastingComment(
+                wineComment: $wineComment,
+                blindTastingAnswer: $blindTastingAnswer
+            );
         }
-        return $wineComments;
+        return $tastingComments;
     }
 }

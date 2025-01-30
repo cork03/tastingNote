@@ -7,7 +7,7 @@ class BlindTastingAnswer
     public function __construct(
         private readonly ?int      $id,
         private readonly ?int      $wineCommentId,
-        private readonly int       $countryId,
+        private readonly Country   $country,
         private readonly int       $vintage,
         private readonly int       $price,
         private readonly float     $alcoholContent,
@@ -27,9 +27,9 @@ class BlindTastingAnswer
         return $this->wineCommentId;
     }
 
-    public function getCountryId(): int
+    public function getCountry(): Country
     {
-        return $this->countryId;
+        return $this->country;
     }
 
     public function getVintage(): int

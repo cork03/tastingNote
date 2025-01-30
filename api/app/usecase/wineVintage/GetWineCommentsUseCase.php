@@ -2,6 +2,7 @@
 
 namespace App\usecase\wineVintage;
 
+use App\domain\TastingComment;
 use App\gateways\repository\WineVintageRepositoryInterface;
 
 class GetWineCommentsUseCase implements GetWineCommentsUseCaseInterface
@@ -11,6 +12,9 @@ class GetWineCommentsUseCase implements GetWineCommentsUseCaseInterface
     ) {
     }
 
+    /**
+     * @return TastingComment[]
+     */
     public function handle(int $wineVintageId): array
     {
         return $this->wineVintageRepository->getWineCommentsByWineVintageId($wineVintageId);

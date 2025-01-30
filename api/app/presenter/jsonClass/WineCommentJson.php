@@ -2,7 +2,7 @@
 
 namespace App\presenter\jsonClass;
 
-class WineCommentsJson
+class WineCommentJson
 {
     public function __construct(
         public readonly int    $id,

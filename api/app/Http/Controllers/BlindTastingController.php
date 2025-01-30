@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\domain\BlindTastingAnswer;
+use App\domain\Country;
 use App\domain\GrapeVariety;
 use App\domain\WineBlend;
 use App\domain\WineComment;
@@ -51,7 +52,7 @@ class BlindTastingController extends Controller
             $blindTastingAnswer = new BlindTastingAnswer(
                 id: null,
                 wineCommentId: null,
-                countryId: $blindTastingAnswerInput['countryId'],
+                country: new Country(id: $blindTastingAnswerInput['countryId'], name: null),
                 vintage: $blindTastingAnswerInput['vintage'],
                 price: $blindTastingAnswerInput['price'],
                 alcoholContent: $blindTastingAnswerInput['alcoholContent'],

@@ -2,6 +2,7 @@
 
 namespace App\gateways\repository;
 
+use App\domain\TastingComment;
 use App\domain\WineComment;
 use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
@@ -12,7 +13,7 @@ interface WineVintageRepositoryInterface
     public function getWithWineByWineIdAndVintage(int $wineId, int $vintage): WineVintageFullInfo;
 
     /**
-     * @return WineComment[]
+     * @return TastingComment[]
      */
     public function getWineCommentsByWineVintageId(int $wineVintageId): array;
 }

@@ -2,12 +2,12 @@
 
 namespace App\usecase\wineVintage;
 
-use App\domain\WineComment;
+use App\domain\TastingComment;
 
 interface GetWineCommentsUseCaseInterface
 {
     /**
-     * @return WineComment[]
+     * @return TastingComment[]
      */
     public function handle(int $wineVintageId): array;
 }

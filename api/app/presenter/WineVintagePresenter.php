@@ -3,13 +3,17 @@
 namespace App\presenter;
 
 use App\domain\Producer;
+use App\domain\TastingComment;
 use App\domain\Wine;
 use App\domain\WineComment;
 use App\domain\WineFullInfo;
 use App\domain\WineVintageFullInfo;
+use App\presenter\creator\BlindTastingAnswerJsonCreator;
+use App\presenter\creator\WineCommentJsonCreator;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
-use App\presenter\jsonClass\WineCommentsJson;
+use App\presenter\jsonClass\TastingCommentJson;
+use App\presenter\jsonClass\WineCommentJson;
 use App\presenter\jsonClass\WineFullInfoJson;
 use App\presenter\jsonClass\WineJson;
 use App\presenter\jsonClass\WineTypeJson;
@@ -61,20 +65,27 @@ class WineVintagePresenter
     }
 
     /**
-     * @param WineComment[] $wineComments
+     * @param TastingComment[] $tastingComments
      */
-    function getWineCommentsResponse(array $wineComments): JsonResponse
+    function getWineCommentsResponse(array $tastingComments): JsonResponse
     {
-        $wineCommentsJson = array_map(fn($wineComment) => (
-            new WineCommentsJson(
-                id: $wineComment->getId(),
-                wineVintageId: $wineComment->getWineVintageId(),
-                appearance: $wineComment->getAppearance(),
-                aroma: $wineComment->getAroma(),
-                taste: $wineComment->getTaste(),
-                anotherComment: $wineComment->getAnotherComment(),
-            )
-        ), $wineComments);
-        return response()->json($wineCommentsJson);
+        $tastingCommentsJson = [];
+        foreach ($tastingComments as $tastingComment) {
+            $wineComment = $tastingComment->getWineComment();
+            $wineCommentJson = (new WineCommentJsonCreator())->create($wineComment);
+            $blindTastingAnswer = $tastingComment->getBlindTastingAnswer();
+            if (!isset($blindTastingAnswer)) {
+                $tastingCommentsJson[] = new TastingCommentJson(
+                    wineCommentJson: $wineCommentJson,
+                    blindTastingAnswerJson: null
+                );
+                continue;
+            }
+           $tastingCommentsJson[] = new TastingCommentJson(
+               wineCommentJson: $wineCommentJson,
+               blindTastingAnswerJson: (new BlindTastingAnswerJsonCreator())->create($blindTastingAnswer)
+           ) ;
+        }
+        return response()->json($tastingCommentsJson);
     }
 }

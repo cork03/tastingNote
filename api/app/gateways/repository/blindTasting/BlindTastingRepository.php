@@ -36,7 +36,7 @@ class BlindTastingRepository implements BlindTastingRepositoryInterface
                 /** @var BlindTastingAnswerModel $blindTastingAnswerModel */
                 $blindTastingAnswerModel =$this->blindTastingAnswerModel->create([
                     'wine_comment_id' => $wineCommentModel->id,
-                    'country_id' => $blindTastingAnswer->getCountryId(),
+                    'country_id' => $blindTastingAnswer->getCountry()->getId(),
                     'vintage' => $blindTastingAnswer->getVintage(),
                     'price' => $blindTastingAnswer->getPrice(),
                     'alcohol_content' => $blindTastingAnswer->getAlcoholContent(),
