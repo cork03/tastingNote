@@ -1,9 +1,10 @@
 import {WineVariety} from "@/types/domain/wine";
+import {Country} from "@/types/domain/country";
 
 export interface BlindTastingAnswer {
     id: number | null;
     wineCommentId: number | null;
-    countryId: number;
+    country: Country;
     wineBlend: WineVariety[];
     vintage: number;
     price: string;
@@ -18,4 +19,9 @@ export interface WineComment {
     aroma: string;
     taste: string;
     anotherComment: string | null;
+}
+
+export interface TastingComment {
+    wineComment: WineComment;
+    blindTastingAnswer: BlindTastingAnswer | null;
 }

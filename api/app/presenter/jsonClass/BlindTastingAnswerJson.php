@@ -10,7 +10,7 @@ class BlindTastingAnswerJson
     public function __construct(
         public readonly int         $id,
         public readonly int         $wineCommentId,
-        public readonly CountryJson $countryJson,
+        public readonly CountryJson $country,
         public readonly int         $vintage,
         public readonly int         $price,
         public readonly float       $alcoholContent,

@@ -16,7 +16,7 @@ class BlindTastingAnswerJsonCreator
         return new BlindTastingAnswerJson(
             id: $blindTastingAnswer->getId(),
             wineCommentId: $blindTastingAnswer->getWineCommentId(),
-            countryJson: (new CountryJsonCreator())->create($blindTastingAnswer->getCountry()),
+            country: (new CountryJsonCreator())->create($blindTastingAnswer->getCountry()),
             vintage: $blindTastingAnswer->getVintage(),
             price: $blindTastingAnswer->getPrice(),
             alcoholContent: $blindTastingAnswer->getAlcoholContent(),

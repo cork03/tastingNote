@@ -76,14 +76,14 @@ class WineVintagePresenter
             $blindTastingAnswer = $tastingComment->getBlindTastingAnswer();
             if (!isset($blindTastingAnswer)) {
                 $tastingCommentsJson[] = new TastingCommentJson(
-                    wineCommentJson: $wineCommentJson,
-                    blindTastingAnswerJson: null
+                    wineComment: $wineCommentJson,
+                    blindTastingAnswer: null
                 );
                 continue;
             }
            $tastingCommentsJson[] = new TastingCommentJson(
-               wineCommentJson: $wineCommentJson,
-               blindTastingAnswerJson: (new BlindTastingAnswerJsonCreator())->create($blindTastingAnswer)
+               wineComment: $wineCommentJson,
+               blindTastingAnswer: (new BlindTastingAnswerJsonCreator())->create($blindTastingAnswer)
            ) ;
         }
         return response()->json($tastingCommentsJson);

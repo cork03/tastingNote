@@ -1,14 +1,14 @@
 import React from "react";
 import {WineVintageFullInfo} from "@/types/wine";
 import WineCommentPage from "@/components/wine/[id]/vintage/[vintage]/WineComment";
-import {WineComment} from "@/types/domain/blindTasting";
+import {TastingComment, WineComment} from "@/types/domain/blindTasting";
 
 const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: number } }) => {
     const {id, vintage} = await params;
     const data = await fetch(`${process.env.API_URL}/wine/${id}/vintage/${vintage}`);
     const initialWineVintage: WineVintageFullInfo = await data.json();
     const commentData = await fetch(`${process.env.API_URL}/wine-vintage/${initialWineVintage.id}/wine-comments`);
-    const initialWineComments: WineComment[] = await commentData.json();
+    const initialTastingComments: TastingComment[] = await commentData.json();
     return (
         <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
             <div className="text-center mb-8">
@@ -76,7 +76,7 @@ const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: 
                             </div>
                         </div>
                     </div>
-                    <WineCommentPage wineComments={initialWineComments} id={id} vintage={vintage}/>
+                    <WineCommentPage tastingComments={initialTastingComments} id={id} vintage={vintage}/>
                 </div>
             </section>
         </main>
