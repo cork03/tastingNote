@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\domain\Country;
 use App\domain\Producer;
 use App\presenter\ProducerPresenter;
 use App\usecase\producer\CreateProducerUseCaseInput;
@@ -29,7 +30,10 @@ class ProducerController extends Controller
             new CreateProducerUseCaseInput(
                 new Producer(
                     id: null,
-                    name: $request->name
+                    name: $request->name,
+                    country: new Country($request->countryId, null),
+                    description: $request->description,
+                    url: $request->url
                 )
             )
         );

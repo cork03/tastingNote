@@ -23,7 +23,10 @@ class ProducerRepository implements ProducerRepositoryInterface
     {
         try {
             $this->producerModel->create([
-                'name' => $producer->getName()
+                'name' => $producer->getName(),
+                'country_id' => $producer->getCountry()->getId(),
+                'description' => $producer->getDescription(),
+                'url' => $producer->getUrl(),
             ]);
         } catch (Exception $e) {
             Log::info($e->getMessage());

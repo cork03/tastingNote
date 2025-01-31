@@ -6,7 +6,11 @@ class Producer
 {
     public function __construct(
         private readonly ?int $id,
-        private readonly string $name)
+        private readonly string $name,
+        private readonly Country $country,
+        private readonly string $description,
+        private readonly ?string $url,
+    )
     {
     }
 
@@ -18,5 +22,20 @@ class Producer
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getCountry(): Country
+    {
+        return $this->country;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
     }
 }
