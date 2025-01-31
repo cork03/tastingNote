@@ -72,10 +72,7 @@ class WinePresenter
         $wineFullInfoJson = new WineFullInfoJson(
             id: $wine->getId(),
             name: $wine->getName(),
-            producer: new ProducerJson(
-                id: $producer->getId(),
-                name: $producer->getName(),
-            ),
+            producer: (new ProducerJsonCreator())->create($producer),
             wineType: new WineTypeJson(
                 id: $wineType->value,
                 label: $wineType->getLabel(),
