@@ -2,25 +2,17 @@
 
 namespace App\presenter;
 
-use App\domain\Producer;
 use App\domain\TastingComment;
-use App\domain\Wine;
-use App\domain\WineComment;
-use App\domain\WineFullInfo;
 use App\domain\WineVintageFullInfo;
 use App\presenter\creator\BlindTastingAnswerJsonCreator;
+use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\creator\WineCommentJsonCreator;
 use App\presenter\jsonClass\CountryJson;
-use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\TastingCommentJson;
-use App\presenter\jsonClass\WineCommentJson;
-use App\presenter\jsonClass\WineFullInfoJson;
 use App\presenter\jsonClass\WineJson;
 use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageFullInfoJson;
-use App\presenter\jsonClass\WineVintageJson;
-use App\presenter\jsonClass\WineWithProducerJson;
 use Illuminate\Http\JsonResponse;
 
 class WineVintagePresenter
@@ -31,10 +23,7 @@ class WineVintagePresenter
         $wine = $wineVintageFullInfo->getWine();
         $wineVintageFullInfoJson = new WineVintageFullInfoJson(
             id: $wineVintageFullInfo->getId(),
-            producer: new ProducerJson(
-                id: $producer->getId(),
-                name: $producer->getName(),
-            ),
+            producer: (new ProducerJsonCreator())->create($producer),
             wine: new WineJson(
                 id: $wine->getId(),
                 name: $wine->getName(),

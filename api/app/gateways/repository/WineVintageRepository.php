@@ -67,7 +67,7 @@ class WineVintageRepository implements WineVintageRepositoryInterface
     public function getWithWineByWineIdAndVintage(int $wineId, int $vintage): WineVintageFullInfo
     {
         $wineVintageEntity = $this->wineVintageModel
-            ->with(['wine.country', 'wine.producer', 'grapeVarieties'])
+            ->with(['wine.country', 'wine.producer.country', 'grapeVarieties'])
             ->where('wine_id', $wineId)
             ->where('vintage', $vintage)
             ->first();
@@ -102,7 +102,13 @@ class WineVintageRepository implements WineVintageRepositoryInterface
             ),
             producer: new Producer(
                 id: $producerEntity->id,
-                name: $producerEntity->name
+                name: $producerEntity->name,
+                country: new Country(
+                    id: $producerEntity->country->id,
+                    name: $producerEntity->country->name
+                ),
+                description: $producerEntity->description,
+                url: $producerEntity->url
             ),
             vintage: $wineVintageEntity->vintage,
             price: $wineVintageEntity->price,
