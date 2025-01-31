@@ -3,6 +3,9 @@ erDiagram
     producers {
         int id PK
         varchar name
+        int coutnry_id FK
+        text description 
+        string url "nullable"
     }
     
     wines {
@@ -75,6 +78,7 @@ erDiagram
     
     
     producers ||--o{ wines : ""
+    producers ||--|| countries : ""
     wines ||--|{ wine_vintages : ""
     wines ||--|| countries : ""
     wine_vintages ||--|{ wine_varieties : ""
