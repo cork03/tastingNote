@@ -4,8 +4,8 @@ namespace App\presenter;
 
 use App\domain\Producer;
 use App\domain\Wine;
+use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\jsonClass\CountryJson;
-use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\WineJson;
 use App\presenter\jsonClass\WineTypeJson;
 use Illuminate\Http\JsonResponse;
@@ -19,10 +19,7 @@ class ProducerPresenter
     {
         $producersJson = [];
         foreach ($producers as $producer) {
-            $producersJson[] = new ProducerJson(
-                $producer->getId(),
-                $producer->getName()
-            );
+            $producersJson[] = (new ProducerJsonCreator())->create($producer);
         }
         return response()->json($producersJson);
     }

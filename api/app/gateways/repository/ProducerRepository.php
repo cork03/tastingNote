@@ -41,12 +41,17 @@ class ProducerRepository implements ProducerRepositoryInterface
     public function getAll(): array
     {
         try {
-            $producerEntities =  $this->producerModel->get();
+            $producerEntities =  $this->producerModel->with('country')->get();
             $producers = [];
             foreach ($producerEntities as $producerEntity) {
                 $producers[] = new Producer(
-                    $producerEntity->id,
-                    $producerEntity->name
+                    id: $producerEntity->id,
+                    name: $producerEntity->name,
+                    country: new Country(
+                        id: $producerEntity->country->id, name: $producerEntity->country->name
+                    ),
+                    description: $producerEntity->description,
+                    url: $producerEntity->url
                 );
             }
             return $producers;
