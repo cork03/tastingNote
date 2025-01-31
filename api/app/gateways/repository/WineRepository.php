@@ -45,13 +45,19 @@ class WineRepository implements WineRepositoryInterface
      */
     public function getAll(): array
     {
-        $wineEntities = $this->wineModel->with(['producer', 'country'])->orderBy('country_id')->get();
+        $wineEntities = $this->wineModel->with(['producer.country', 'country'])->orderBy('country_id')->get();
         $wines = [];
         foreach ($wineEntities as $wineEntity) {
             $wines[] = [
                 'producer' => new Producer(
                     id: $wineEntity->producer->id,
                     name: $wineEntity->producer->name,
+                    country: new Country(
+                        $wineEntity->producer->country->id,
+                        $wineEntity->producer->country->name
+                    ),
+                    description: $wineEntity->producer->description,
+                    url: $wineEntity->producer->url
                 ),
                 'wine' => new Wine(
                     id: $wineEntity->id,

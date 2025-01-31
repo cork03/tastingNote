@@ -5,6 +5,7 @@ namespace App\presenter;
 use App\domain\Producer;
 use App\domain\Wine;
 use App\domain\WineFullInfo;
+use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\WineFullInfoJson;
@@ -28,10 +29,7 @@ class WinePresenter
             $winesWithProducerJson[] = new WineWithProducerJson(
                 id: $wine->getId(),
                 name: $wine->getName(),
-                producer: new ProducerJson(
-                    id: $producer->getId(),
-                    name: $producer->getName(),
-                ),
+                producer: (new ProducerJsonCreator())->create($producer),
                 wineType: new WineTypeJson(
                     id: $wine->getWineType()->value,
                     label: $wine->getWineType()->getLabel(),
