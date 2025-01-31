@@ -24,7 +24,10 @@ const CrateBlindTasting = ({grapeVarieties, countries}: Props) => {
     const [blindTastingAnswer, setBlindTastingAnswer] = useState<BlindTastingAnswer>({
         id: null,
         wineCommentId: null,
-        countryId: 0,
+        country: {
+            id: 0,
+            name: ""
+        },
         wineBlend: [{"grapeVarietyId": 0, name: "", "percentage": 50}],
         vintage: 2020,
         price: "",

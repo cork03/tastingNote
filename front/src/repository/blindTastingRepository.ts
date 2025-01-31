@@ -46,7 +46,7 @@ export const createBlindTasting = async ({wineComment, blindTastingAnswer}: Crea
             anotherComment: wineComment.anotherComment
         },
         blindTastingAnswer: {
-            countryId: blindTastingAnswer.countryId,
+            countryId: blindTastingAnswer.country.id,
             wineBlend: wineVarieties,
             vintage: blindTastingAnswer.vintage,
             price: blindTastingAnswer.price,

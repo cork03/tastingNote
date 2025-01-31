@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import {TastingComment, WineComment} from "@/types/domain/blindTasting";
+import {TastingComment} from "@/types/domain/blindTasting";
 import Link from "next/link";
 
 interface Props {

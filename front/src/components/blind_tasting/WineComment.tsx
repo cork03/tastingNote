@@ -2,7 +2,6 @@
 
 import React from "react";
 import {WineComment} from "@/types/domain/blindTasting";
-import {createBlindTasting} from "@/repository/blindTastingRepository";
 
 interface Props {
     wineComment: WineComment

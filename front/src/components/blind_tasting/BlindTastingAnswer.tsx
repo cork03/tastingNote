@@ -20,6 +20,10 @@ const BlindTastingAnswerPage = ({blindTastingAnswer, setBlindTastingAnswer, grap
     const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setBlindTastingAnswer({...blindTastingAnswer, [e.target.name]: Number(e.target.value)});
     }
+
+    const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setBlindTastingAnswer({...blindTastingAnswer, country: countries.filter(country => country.id === parseInt(e.target.value))[0]});
+    }
     const handleWineBlendChange = (index: number, key: keyof WineVariety, value: any) => {
         const newWineBlend = blindTastingAnswer.wineBlend;
         newWineBlend[index] = {...newWineBlend[index], [key]: value};
@@ -37,9 +41,9 @@ const BlindTastingAnswerPage = ({blindTastingAnswer, setBlindTastingAnswer, grap
                     <div className="flex flex-col">
                         <label className="text-lg font-medium text-gray-800 mb-2">国</label>
                         <select
-                            onChange={handleSelectChange}
-                            name="countryId"
-                            value={blindTastingAnswer.countryId}
+                            onChange={handleCountryChange}
+                            name="id"
+                            value={blindTastingAnswer.country.id ?? 0}
                             className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                         >
                             <option value={0}>

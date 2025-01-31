@@ -1,7 +1,7 @@
 import React from "react";
 import {WineVintageFullInfo} from "@/types/wine";
 import WineCommentPage from "@/components/wine/[id]/vintage/[vintage]/WineComment";
-import {TastingComment, WineComment} from "@/types/domain/blindTasting";
+import {TastingComment} from "@/types/domain/blindTasting";
 
 const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: number } }) => {
     const {id, vintage} = await params;

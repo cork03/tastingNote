@@ -1,11 +1,8 @@
 "use client"
 
 import React, {useState} from "react";
-import {Country, GrapeVariety} from "@/types/wine";
-import {BlindTastingAnswer, WineComment} from "@/types/domain/blindTasting";
+import {WineComment} from "@/types/domain/blindTasting";
 import WineCommentPage from "@/components/blind_tasting/WineComment";
-import BlindTastingAnswerPage from "@/components/blind_tasting/BlindTastingAnswer";
-import {createBlindTasting} from "@/repository/blindTastingRepository";
 import {createWineComment} from "@/repository/wineCommentRepository";
 import {redirect} from "next/navigation";
 
