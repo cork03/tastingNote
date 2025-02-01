@@ -5,18 +5,18 @@ import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
 import {Producer} from "@/types/producer";
+import {redirect} from "next/navigation";
 
 type Props = {
     producers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>;
     setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
 };
 
-const Producers = ({producers, setWines, setViewType, setIsViewMode, setSelectedProducer}: Props) => {
+const Producers = ({producers, setWines, setViewType,setSelectedProducer}: Props) => {
     const goToCreateProducer = () => {
-        setIsViewMode(false);
+        redirect('/producer/create');
     }
     return (
         <div>

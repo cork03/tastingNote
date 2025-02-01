@@ -1,7 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
-import CreateProducer from "@/components/wine/new/producer/CreateProducer";
+import React from "react";
 import Producers from "@/components/wine/new/producer/Producers";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
@@ -15,14 +14,11 @@ interface Props {
 }
 
 const ChoiceProducer = ({initialProducers, setWines, setViewType, setSelectedProducer}: Props) => {
-    const [producers, setProducers] = useState<Producer[]>(initialProducers);
-    const [isViewMode, setIsViewMode] = useState<boolean>(true);
     return (
         <section>
             <h2 className="text-2xl font-bold text-center mb-6">生産者</h2>
-            {isViewMode && <Producers producers={producers} setWines={setWines} setViewType={setViewType}
-                                      setIsViewMode={setIsViewMode} setSelectedProducer = {setSelectedProducer}/>}
-            {!isViewMode && <CreateProducer setProducers={setProducers} setIsViewMode={setIsViewMode}/>}
+            <Producers producers={initialProducers} setWines={setWines} setViewType={setViewType}
+                       setSelectedProducer={setSelectedProducer}/>
         </section>
     )
 }
