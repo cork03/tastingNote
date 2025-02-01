@@ -14,17 +14,18 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/producer', [ProducerController::class, 'create']);
-Route::get('/producers', [ProducerController::class, 'getAll']);
+Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
+Route::get('/countries', [CountryController::class, 'getAll']);
 Route::get('/grape-varieties', [GrapeVarietyController::class, 'getAll']);
+Route::post('/producer', [ProducerController::class, 'create']);
+Route::get('/producer/{id}', [ProducerController::class, 'getOne']);
 Route::get('/producer/{id}/wines', [ProducerController::class, 'getWines']);
-Route::get('/wine-types', [WineTypeController::class, 'getAll']);
+Route::get('/producers', [ProducerController::class, 'getAll']);
 Route::post('/wine', [WineController::class, 'create']);
 Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);
+Route::post('/wine-comment', [WineVintageController::class, 'createComment']);
+Route::get('/wine-types', [WineTypeController::class, 'getAll']);
 Route::post('/wine-vintage', [WineVintageController::class, 'create']);
 Route::get('/wine-vintage/{id}/wine-comments', [WineVintageController::class, 'getWineComments']);
-Route::post('/wine-comment', [WineVintageController::class, 'createComment']);
-Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
-Route::get('/countries', [CountryController::class, 'getAll']);

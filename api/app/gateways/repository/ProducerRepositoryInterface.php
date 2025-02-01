@@ -14,6 +14,8 @@ interface ProducerRepositoryInterface
      */
     public function getAll(): array;
 
+    public function getOneById(int $producerId): ?Producer;
+
     /**
      * @return Wine[]
      */

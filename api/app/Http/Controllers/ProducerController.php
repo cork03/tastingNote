@@ -8,6 +8,7 @@ use App\presenter\ProducerPresenter;
 use App\usecase\producer\CreateProducerUseCaseInput;
 use App\usecase\producer\CreateProducerUseCaseInterface;
 use App\usecase\producer\GetProducersUseCaseInterface;
+use App\usecase\producer\GetProducerUseCaseInterface;
 use App\usecase\producer\GetProducerWinesUseCase;
 use App\usecase\producer\GetProducerWinesUseCaseInput;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +19,7 @@ class ProducerController extends Controller
     public function __construct(
         private readonly CreateProducerUseCaseInterface $createProducerUseCase,
         private readonly GetProducersUseCaseInterface $getProducersUseCase,
+        private readonly GetProducerUseCaseInterface $getProducerUseCase,
         private readonly GetProducerWinesUseCase $getProducerWinesUseCase,
         private readonly ProducerPresenter $presenter
     )
@@ -44,6 +46,17 @@ class ProducerController extends Controller
     {
         $producers = $this->getProducersUseCase->handle();
         return $this->presenter->getProducersResponse($producers);
+    }
+
+    public function getOne(int $id): JsonResponse
+    {
+        $producer = $this->getProducerUseCase->handle($id);
+        if (!isset($producer)) {
+            return response()->json(status: 404);
+        } else {
+            return $this->presenter->getProducerResponse($producer);
+        }
+
     }
 
     public function getWines(int $id): JsonResponse

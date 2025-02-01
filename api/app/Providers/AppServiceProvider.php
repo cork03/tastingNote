@@ -28,6 +28,8 @@ use App\usecase\producer\CreateProducerUseCase;
 use App\usecase\producer\CreateProducerUseCaseInterface;
 use App\usecase\producer\GetProducersUseCase;
 use App\usecase\producer\GetProducersUseCaseInterface;
+use App\usecase\producer\GetProducerUseCase;
+use App\usecase\producer\GetProducerUseCaseInterface;
 use App\usecase\producer\GetProducerWinesUseCase;
 use App\usecase\producer\GetProducerWinesUseCaseInterface;
 use App\usecase\wine\CreateWineUseCase;
@@ -78,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
             CreateWineCommentUseCaseInterface::class => CreateWineCommentUseCase::class,
             WineCommentRepositoryInterface::class => WineCommentRepository::class,
             GetWineCommentsUseCaseInterface::class => GetWineCommentsUseCase::class,
+            GetProducerUseCaseInterface::class => GetProducerUseCase::class,
         ];
 
         foreach ($bindings as $interface => $implementation) {

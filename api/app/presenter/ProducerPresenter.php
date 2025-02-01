@@ -24,6 +24,11 @@ class ProducerPresenter
         return response()->json($producersJson);
     }
 
+    public function getProducerResponse(Producer $producer): JsonResponse
+    {
+        return response()->json((new ProducerJsonCreator())->create($producer));
+    }
+
     /**
      * @param Wine[] $wines
      * @return JsonResponse

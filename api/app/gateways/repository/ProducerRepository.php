@@ -61,6 +61,25 @@ class ProducerRepository implements ProducerRepositoryInterface
         }
     }
 
+    public function getOneById(int $producerId): ?Producer
+    {
+        /** @var ProducerModel $producerModel */
+        $producerModel = $this->producerModel->with('country')->find($producerId);
+        if (!isset($producerModel)) {
+            return null;
+        }
+        return new Producer(
+            id: $producerModel->id,
+            name: $producerModel->name,
+            country: new Country(
+                id: $producerModel->country->id,
+                name: $producerModel->country->name
+            ),
+            description: $producerModel->description,
+            url: $producerModel->url
+        );
+    }
+
     /**
      * @return Wine[]
      * @throws Exception
