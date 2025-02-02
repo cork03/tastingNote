@@ -35,3 +35,13 @@ services:
       MYSQL_DATABASE: tastingNote
       MYSQL_USER: tastingNote
       MYSQL_PASSWORD: tastingNote
+  minio:
+      image: minio/minio:RELEASE.2025-01-20T14-49-07Z-cpuv1
+      volumes:
+        - "./minio/data:/minio/data" # 任意の設定
+      ports:
+        - "${MINIO_PORT}:9090"
+      environment:
+        MINIO_ROOT_USER: "minio_root"
+        MINIO_ROOT_PASSWORD: "minio_password"
+      command: server --console-address ":9090" /minio/data

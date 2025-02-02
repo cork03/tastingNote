@@ -1,3 +1,4 @@
 .idea
 .env
 /mysql/var/log/mysql
+/minio/data

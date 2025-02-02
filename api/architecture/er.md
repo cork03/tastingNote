@@ -28,6 +28,7 @@ erDiagram
         int price
         text aging_method
         decimal alcohol_content
+        text image_path "nullable"
         text technical_comment "nullable"
     }
     

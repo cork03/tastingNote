@@ -12,7 +12,8 @@ class WineVintage
         private readonly string  $agingMethod,
         private readonly float   $alcoholContent,
         private readonly WineBlend $wineBlend,
-        private readonly ?string $technicalComment
+        private readonly ?string $technicalComment,
+        private readonly ?string $imagePath = null
     )
     {
     }
@@ -54,5 +55,10 @@ class WineVintage
     public function getTechnicalComment(): ?string
     {
         return $this->technicalComment;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
     }
 }
