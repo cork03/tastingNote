@@ -1,6 +1,6 @@
 import React from "react";
 import {Country, GrapeVariety} from "@/types/wine";
-import CreateBlindTasting from "@/components/blind_tasting/CreateBlindTasting";
+import CreateBlindTasting from "@/components/blind-tasting/CreateBlindTasting";
 
 const BlindTastingPage = async () => {
     const countriesData = await fetch(`${process.env.API_URL}/countries`);

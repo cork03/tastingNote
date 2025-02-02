@@ -2,7 +2,7 @@
 
 import React, {useState} from "react";
 import {WineComment} from "@/types/domain/blindTasting";
-import WineCommentPage from "@/components/blind_tasting/WineComment";
+import WineCommentPage from "@/components/blind-tasting/WineComment";
 import {createWineComment} from "@/repository/wineCommentRepository";
 import {redirect} from "next/navigation";
 

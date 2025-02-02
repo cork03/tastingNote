@@ -3,8 +3,8 @@
 import React, {useState} from "react";
 import {Country, GrapeVariety} from "@/types/wine";
 import {BlindTastingAnswer, WineComment} from "@/types/domain/blindTasting";
-import WineCommentPage from "@/components/blind_tasting/WineComment";
-import BlindTastingAnswerPage from "@/components/blind_tasting/BlindTastingAnswer";
+import WineCommentPage from "@/components/blind-tasting/WineComment";
+import BlindTastingAnswerPage from "@/components/blind-tasting/BlindTastingAnswer";
 import {createBlindTasting} from "@/repository/blindTastingRepository";
 
 interface Props {

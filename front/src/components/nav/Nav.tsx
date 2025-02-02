@@ -7,7 +7,7 @@ export interface NavProps {
 
 const Nav = () => {
     const navList: NavProps[] = [
-        {url: "/blind_tasting", text: "BlindTasting"},
+        {url: "/blind-tasting", text: "BlindTasting"},
         {url: "/wine/create", text: "NewWine"},
         {url: "/wines", text: "Wines"},
         {url: "/producers", text: "Producers"},

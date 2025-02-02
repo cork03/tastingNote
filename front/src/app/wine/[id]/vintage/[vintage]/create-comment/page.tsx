@@ -1,5 +1,5 @@
 import React from "react";
-import CreateComment from "@/components/wine/[id]/vintage/[vintage]/create_comment/CreateComment";
+import CreateComment from "@/components/wine/[id]/vintage/[vintage]/create-comment/CreateComment";
 import {WineVintageFullInfo} from "@/types/wine";
 
 const CreateCommentPage = async ({params}: { params: { id: number, vintage: number } }) => {
