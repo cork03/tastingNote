@@ -3,9 +3,9 @@
 import React from "react";
 import {Country} from "@/types/domain/country";
 import {Producer} from "@/types/domain/producer";
-import InputField from "@/components/utils/form/inputField";
-import TextField from "@/components/utils/form/textField";
-import CountrySelectField from "@/components/utils/form/countrySelectField";
+import InputField from "@/components/utils/form/Vertical/inputField";
+import TextField from "@/components/utils/form/Vertical/textField";
+import CountrySelectField from "@/components/utils/form/Vertical/countrySelectField";
 import {postProducer} from "@/repository/producerRepository";
 import {redirect} from "next/navigation";
 

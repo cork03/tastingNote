@@ -19,11 +19,6 @@ const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: 
             <section className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200">
                 <div className="space-y-6">
                     <div className="space-y-6">
-                        <div className="text-center mb-8">
-                            <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
-                                詳細
-                            </h2>
-                        </div>
                         <div className="gap-6 justify-center">
                             <div className="border rounded-lg shadow-lg p-6 flex items-center bg-gray-100">
                                 <img
@@ -80,9 +75,7 @@ const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: 
                 </div>
             </section>
         </main>
-
-    )
-        ;
+    );
 };
 
 export default WineVintageDetailPage;
