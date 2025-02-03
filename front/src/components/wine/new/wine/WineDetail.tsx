@@ -1,19 +1,18 @@
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
+import {redirect} from "next/navigation";
 
 interface Props {
     wine: Wine;
-    setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setSelectedWine: React.Dispatch<React.SetStateAction<Wine | null>>;
 }
 
-const WineDetail = ({wine, setViewType, setSelectedWine}: Props) => {
+const WineDetail = ({wine,}: Props) => {
     return (
         <div
             className="border rounded shadow p-4 text-center"
             onClick={() => {
-                setViewType(3)
-                setSelectedWine(wine)}}
+                redirect(`/wine/${wine.id}/vintage/create`);
+            }}
         >
             <img
                 src="/images/wine.jpg"

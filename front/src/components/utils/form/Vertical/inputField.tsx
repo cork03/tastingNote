@@ -5,9 +5,10 @@ import React from "react";
 interface Props {
     label: string;
     name: string;
-    value: string;
+    value: string | number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder: string;
+    type?: string;
 }
 
 const InputField = (
@@ -16,13 +17,14 @@ const InputField = (
         name,
         value,
         onChange,
-        placeholder
+        placeholder,
+        type
     }: Props) => {
     return (
         <div className="flex flex-col mb-4">
             <label className="text-lg font-medium text-gray-800 mb-2">{label}</label>
             < input
-                type="text"
+                type={type ?? "text"}
                 name={name}
                 value={value}
                 onChange={onChange}

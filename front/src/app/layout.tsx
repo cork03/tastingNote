@@ -32,9 +32,7 @@ export default function RootLayout({
         >
         <Header></Header>
         <Nav></Nav>
-        <main className="flex-grow container mx-auto px-4 py-8 min-h-screen">
-            {children}
-        </main>
+        {children}
         <Footer></Footer>
         </body>
         </html>

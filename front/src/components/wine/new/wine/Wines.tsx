@@ -7,10 +7,9 @@ interface Props {
     wines: Wine[];
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>;
-    setSelectedWine: React.Dispatch<React.SetStateAction<Wine | null>>;
 }
 
-const Wines = ({wines, setViewType, setIsViewMode, setSelectedWine}: Props) => {
+const Wines = ({wines, setViewType, setIsViewMode}: Props) => {
     return (
         <div>
             <div className="mb-8 flex flex-row justify-center items-center gap-x-4 mx-auto">
@@ -29,7 +28,7 @@ const Wines = ({wines, setViewType, setIsViewMode, setSelectedWine}: Props) => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {wines.map((wine) => {
-                    return <WineDetail key={wine.id} wine={wine} setViewType={setViewType} setSelectedWine={setSelectedWine}/>
+                    return <WineDetail key={wine.id} wine={wine}/>
                 })}
             </div>
             <div className="text-center mt-4">
