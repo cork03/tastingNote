@@ -12,6 +12,7 @@ import WineBlendSelectField from "@/components/utils/form/Vertical/wineBlendSele
 import {redirect} from "next/navigation";
 import {postProducer} from "@/repository/producerRepository";
 import {postWineVintage} from "@/repository/wineVintageRepository";
+import InputFileField from "@/components/utils/form/Vertical/inputFileField";
 
 interface Props {
     wineId: number;
@@ -29,6 +30,7 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
         wineBlend: [{grapeVarietyId: 0, percentage: 50, name: ""}],
         technicalComment: ""
     });
+    const [base64Image, setBase64Image] = React.useState<string | null>(null);
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setWineVintage({...wineVintage, [e.target.name]: e.target.value});
     }
@@ -61,7 +63,7 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await postWineVintage(wineVintage);
+            await postWineVintage(wineVintage, base64Image);
         } catch (e) {
             console.error(e);
             return;
@@ -88,6 +90,7 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
                         <TextField label={"その他製造に関するコメント"} name={"technicalComment"}
                                    value={wineVintage.technicalComment || ""} onChange={handleTextChange}
                                    placeholder={"例：マロラクティック発酵,全房発酵"}/>
+                        <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image} placeholder={"test"}/>
                     </GrayCard>
                     <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
                         <button

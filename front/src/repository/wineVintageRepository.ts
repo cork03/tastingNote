@@ -11,11 +11,12 @@ interface WineVintagePostBody {
             grapeVarietyId: number,
             percentage: number
         }[],
-        technicalComment: string | null
+        technicalComment: string | null,
+        base64Image: string | null
     }
 }
 
-export async function postWineVintage(wineVintage: WineVintage) {
+export async function postWineVintage(wineVintage: WineVintage, bae64Image: string | null): Promise<WineVintage> {
     const body = {
         wineVintage: {
             wineId: wineVintage.wineId,
@@ -29,7 +30,8 @@ export async function postWineVintage(wineVintage: WineVintage) {
                     percentage: wineVariety.percentage
                 }
             }),
-            technicalComment: wineVintage.technicalComment
+            technicalComment: wineVintage.technicalComment,
+            base64Image: bae64Image
         }
     } as WineVintagePostBody;
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wine-vintage`, {
