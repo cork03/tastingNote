@@ -20,6 +20,7 @@ class WineVintage extends Model
             'aging_method' => 'string',
             'alcohol_content' => 'float',
             'technical_comment' => 'string',
+            'image_path' => 'string',
         ];
     }
 
@@ -33,6 +34,7 @@ class WineVintage extends Model
         'aging_method',
         'alcohol_content',
         'technical_comment',
+        'image_path',
     ];
 
     public function grapeVarieties(): BelongsToMany

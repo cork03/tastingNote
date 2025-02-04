@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\domain\images\WineVintageImagePathCreator;
+use App\gateways\FileUploader\FileUploaderInterface;
+use App\gateways\FileUploader\S3FIleUploader;
 use App\gateways\repository\blindTasting\BlindTastingRepository;
 use App\gateways\repository\blindTasting\BlindTastingRepositoryInterface;
 use App\gateways\repository\CountryRepository;
@@ -48,6 +51,7 @@ use App\usecase\wineVintage\GetFullInfoUseCase;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCase;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
+use App\utils\Base64ImageResolver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -81,7 +85,9 @@ class AppServiceProvider extends ServiceProvider
             WineCommentRepositoryInterface::class => WineCommentRepository::class,
             GetWineCommentsUseCaseInterface::class => GetWineCommentsUseCase::class,
             GetProducerUseCaseInterface::class => GetProducerUseCase::class,
+            FileUploaderInterface::class => S3FIleUploader::class,
         ];
+
 
         foreach ($bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

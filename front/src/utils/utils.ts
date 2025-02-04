@@ -27,3 +27,35 @@ export const getAlcoholContentChoices = () => {
     }
     return alcoholContentChoices;
 }
+
+export const resizeImage = (file: File, maxWidth: number, maxHeight: number): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            let width = img.width;
+            let height = img.height;
+
+            // アスペクト比を維持しつつサイズ調整
+            if (width > maxWidth || height > maxHeight) {
+                const ratio = Math.min(maxWidth / width, maxHeight / height);
+                width *= ratio;
+                height *= ratio;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return reject(new Error("Canvas context is null"));
+            ctx.drawImage(img, 0, 0, width, height);
+
+            canvas.toBlob((blob) => {
+                if (blob) resolve(blob);
+                else reject(new Error("Image compression failed"));
+            }, "image/jpeg", 0.8); // JPEGフォーマットで画質80%に設定
+        };
+        img.onerror = reject;
+    });
+};

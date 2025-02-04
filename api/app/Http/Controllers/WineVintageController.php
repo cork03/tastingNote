@@ -32,7 +32,6 @@ class WineVintageController extends Controller
 
     public function create(Request $request): JsonResponse
     {
-        Log::info($request->input('wineVintage'));
         try {
             $wineVintage = $request->input('wineVintage');
             $wineVarieties = [];
@@ -55,8 +54,9 @@ class WineVintageController extends Controller
                         agingMethod: $wineVintage['agingMethod'],
                         alcoholContent: $wineVintage['alcoholContent'],
                         wineBlend: new WineBlend($wineVarieties),
-                        technicalComment: $wineVintage['technicalComment']
-                    )
+                        technicalComment: $wineVintage['technicalComment'],
+                    ),
+                    $wineVintage['base64Image']
                 )
             );
             return response()->json(status: 201);

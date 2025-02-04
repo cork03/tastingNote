@@ -9,7 +9,7 @@ use App\domain\WineVintageFullInfo;
 
 interface WineVintageRepositoryInterface
 {
-    public function create(WineVintage $wineVintage): void;
+    public function create(WineVintage $wineVintage, ?string $imagePath): void;
     public function getWithWineByWineIdAndVintage(int $wineId, int $vintage): WineVintageFullInfo;
 
     /**

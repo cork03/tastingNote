@@ -35,10 +35,10 @@ class WineVintageRepository implements WineVintageRepositoryInterface
     /**
      * @throws Exception
      */
-    public function create(WineVintage $wineVintage): void
+    public function create(WineVintage $wineVintage, ?string $imagePath): void
     {
         try {
-            DB::transaction(function () use ($wineVintage) {
+            DB::transaction(function () use ($wineVintage, $imagePath) {
                 $wineVintageModel = $this->wineVintageModel->create([
                     'wine_id' => $wineVintage->getWineId(),
                     'vintage' => $wineVintage->getVintage(),
@@ -46,6 +46,7 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                     'aging_method' => $wineVintage->getAgingMethod(),
                     'alcohol_content' => $wineVintage->getAlcoholContent(),
                     'technical_comment' => $wineVintage->getTechnicalComment(),
+                    'image_path' => $imagePath,
                 ]);
                 $wineVarieties = [];
                 foreach ($wineVintage->getWineBlend()->getWineVarieties() as $grapeVariety) {

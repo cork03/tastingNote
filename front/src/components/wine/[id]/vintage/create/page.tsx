@@ -70,6 +70,7 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
         }
         redirect("/wines");
     }
+
     return (
         <Section>
             <form onSubmit={handleSubmit}>

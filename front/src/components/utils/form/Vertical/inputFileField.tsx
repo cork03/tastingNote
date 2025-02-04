@@ -2,6 +2,7 @@
 
 import React from "react";
 import {BlindTastingAnswer} from "@/types/domain/blindTasting";
+import {resizeImage} from "@/utils/utils";
 
 interface Props {
     label: string;
@@ -16,13 +17,14 @@ const InputFileField = (
         label,
         setBase64Image,
     }: Props) => {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) {
             return;
         }
         const reader = new FileReader();
-        reader.readAsDataURL(file);
+        const resize = await resizeImage(file, 300, 400);
+        reader.readAsDataURL(resize);
         reader.onload = () => {
             setBase64Image(reader.result as string);
         }
