@@ -22,9 +22,9 @@ const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: 
                         <div className="gap-6 justify-center">
                             <div className="border rounded-lg shadow-lg p-6 flex items-center bg-gray-100">
                                 <img
-                                    src="/images/wine.jpg"
+                                    src={initialWineVintage.imagePath ?? '/images/wine.jpg'}
                                     alt="画像"
-                                    className="w-64 h-64 object-cover rounded-lg border border-gray-300 shadow-md mr-6"
+                                    className="h-128 object-cover rounded-lg border border-gray-300 shadow-md mr-6"
                                 />
                                 <div className="space-y-6">
                                     <div className="flex items-center">

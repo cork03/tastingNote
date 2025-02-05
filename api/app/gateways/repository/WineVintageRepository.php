@@ -116,7 +116,8 @@ class WineVintageRepository implements WineVintageRepositoryInterface
             agingMethod: $wineVintageEntity->aging_method,
             alcoholContent: $wineVintageEntity->alcohol_content,
             wineBlend: new WineBlend($grapeVarieties),
-            technicalComment: $wineVintageEntity->technical_comment
+            technicalComment: $wineVintageEntity->technical_comment,
+            imagePath: $wineVintageEntity->image_path
         );
     }
 

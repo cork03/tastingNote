@@ -11,4 +11,9 @@ class S3FIleUploader implements FileUploaderInterface
     {
         return Storage::disk('s3')->put($image->getPath(), $image->getBinary());
     }
+
+    public function getUrl(string $path): string
+    {
+        return Storage::disk('s3')->url($path);
+    }
 }

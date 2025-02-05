@@ -17,8 +17,13 @@ use Illuminate\Http\JsonResponse;
 
 class WineVintagePresenter
 {
-    function getFullInfoResponse(WineVintageFullInfo $wineVintageFullInfo): JsonResponse
+
+    /**
+     * @param array{wineVintageFullInfo: WineVintageFullInfo, imagePath: string} $wineVintageFullInfos
+     */
+    function getFullInfoResponse(array $wineVintageFullInfos): JsonResponse
     {
+        $wineVintageFullInfo = $wineVintageFullInfos['wineVintageFullInfo'];
         $producer = $wineVintageFullInfo->getProducer();
         $wine = $wineVintageFullInfo->getWine();
         $wineVintageFullInfoJson = new WineVintageFullInfoJson(
@@ -48,7 +53,8 @@ class WineVintagePresenter
                 ),
                 $wineVintageFullInfo->getWineBlend()->getWineVarieties()
             ),
-            technicalComment: $wineVintageFullInfo->getTechnicalComment()
+            technicalComment: $wineVintageFullInfo->getTechnicalComment(),
+            imagePath: $wineVintageFullInfos['imagePath']
         );
         return response()->json($wineVintageFullInfoJson);
     }
