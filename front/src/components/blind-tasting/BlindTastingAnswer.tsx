@@ -64,10 +64,10 @@ const BlindTastingAnswerPage = ({blindTastingAnswer, setBlindTastingAnswer, grap
                                     </label>
                                     <div className="flex items-center space-x-4">
                                         <select
-                                            name="grapeVarietyId"
-                                            value={wineVariety.grapeVarietyId}
+                                            name="id"
+                                            value={wineVariety.id}
                                             onChange={(e) => {
-                                                    handleWineBlendChange(index, "grapeVarietyId", parseInt(e.target.value))
+                                                    handleWineBlendChange(index, "id", parseInt(e.target.value))
                                                     const targetName = grapeVarieties.filter(grapeVariety => grapeVariety.id === parseInt(e.target.value))[0].name;
                                                     handleWineBlendChange(index, "name", targetName);
                                                 }
@@ -113,7 +113,7 @@ const BlindTastingAnswerPage = ({blindTastingAnswer, setBlindTastingAnswer, grap
                                 onClick={() => {
                                     setBlindTastingAnswer({
                                         ...blindTastingAnswer,
-                                        wineBlend: [...blindTastingAnswer.wineBlend, {"grapeVarietyId": 0, "name": "", "percentage": 50}]
+                                        wineBlend: [...blindTastingAnswer.wineBlend, {"id": 0, "name": "", "percentage": 50}]
                                     })
                                 }}
                                 className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"

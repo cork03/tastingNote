@@ -1,7 +1,7 @@
 import {Country} from "@/types/domain/country";
 
 export interface WineVariety {
-    grapeVarietyId: number;
+    id: number;
     name: string;
     percentage: number;
 }

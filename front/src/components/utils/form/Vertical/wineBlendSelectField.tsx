@@ -23,6 +23,7 @@ const wineBlendSelect = (
         addWineBlend,
         grapeVarieties,
     }: Props) => {
+    console.log(wineBlend);
     return (
         <div>
             <label className="text-lg font-medium text-gray-800 mb-2">{label}</label>
@@ -34,9 +35,9 @@ const wineBlendSelect = (
                         </label>
                         <div className="flex items-center space-x-4">
                             <select
-                                name="grapeVarietyId"
-                                value={wineVariety.grapeVarietyId}
-                                onChange={(e) => onChange(index, "grapeVarietyId", parseInt(e.target.value))}
+                                name="id"
+                                value={wineVariety.id}
+                                onChange={(e) => onChange(index, "id", parseInt(e.target.value))}
                                 className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                             >
                                 <option value={0}>種別を選択してください</option>
