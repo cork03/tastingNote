@@ -23,7 +23,6 @@ const wineBlendSelect = (
         addWineBlend,
         grapeVarieties,
     }: Props) => {
-    console.log(wineBlend);
     return (
         <div>
             <label className="text-lg font-medium text-gray-800 mb-2">{label}</label>

@@ -28,6 +28,7 @@ export interface WineVintage {
     alcoholContent: number;
     wineBlend: WineVariety[];
     technicalComment: string | null;
+    imagePath: string | null;
 }
 
 export interface GrapeVariety {

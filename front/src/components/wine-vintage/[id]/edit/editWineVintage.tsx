@@ -10,9 +10,10 @@ import VintageSelectField from "@/components/utils/form/Vertical/vintageSelectFi
 import AlcoholContentSelectField from "@/components/utils/form/Vertical/alcoholContentSelectField";
 import WineBlendSelectField from "@/components/utils/form/Vertical/wineBlendSelectField";
 import {redirect} from "next/navigation";
-import {postProducer} from "@/repository/producerRepository";
-import {postWineVintage} from "@/repository/wineVintageRepository";
+import {updateWineVintage} from "@/repository/wineVintageRepository";
 import InputFileField from "@/components/utils/form/Vertical/inputFileField";
+import NormalButton from "@/components/utils/view/button/NormalButton";
+import GrayButton from "@/components/utils/view/button/GrayButton";
 
 interface Props {
     initialWineVintage: WineVintage;
@@ -28,9 +29,9 @@ const EditWineVintage = ({initialWineVintage, grapeVarieties}: Props) => {
         agingMethod: initialWineVintage.agingMethod,
         alcoholContent: initialWineVintage.alcoholContent,
         wineBlend: initialWineVintage.wineBlend,
-        technicalComment: initialWineVintage.technicalComment
+        technicalComment: initialWineVintage.technicalComment,
+        imagePath: initialWineVintage.imagePath
     });
-    console.log(wineVintage);
     const [base64Image, setBase64Image] = React.useState<string | null>(null);
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setWineVintage({...wineVintage, [e.target.name]: e.target.value});
@@ -63,14 +64,16 @@ const EditWineVintage = ({initialWineVintage, grapeVarieties}: Props) => {
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        redirect(`/wine/${wineVintage.wineId}/vintage/${wineVintage.vintage}`);
         try {
-            // await postWineVintage(wineVintage, base64Image);
+            await updateWineVintage(wineVintage, base64Image);
         } catch (e) {
             console.error(e);
             return;
         }
+        redirect(`/wine/${wineVintage.wineId}/vintage/${wineVintage.vintage}`);
     }
+    console.log(wineVintage);
+    console.log(base64Image);
 
     return (
         <Section>
@@ -92,24 +95,15 @@ const EditWineVintage = ({initialWineVintage, grapeVarieties}: Props) => {
                         <TextField label={"その他製造に関するコメント"} name={"technicalComment"}
                                    value={wineVintage.technicalComment || ""} onChange={handleTextChange}
                                    placeholder={"例：マロラクティック発酵,全房発酵"}/>
-                        <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image} placeholder={"test"}/>
+                        <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image}
+                                        placeholder={"test"}/>
                     </GrayCard>
                     <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
-                        <button
-                            type="submit"
-                            className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                        >
-                            作成
-                        </button>
-                        <button
-                            className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                            onClick={(e: React.FormEvent<HTMLButtonElement>) => {
-                                e.preventDefault()
-                                redirect(`/wine/${wineVintage.wineId}/vintage/${wineVintage.vintage}`);
-                            }}
-                        >
-                            戻る
-                        </button>
+                        <NormalButton text={"更新"} type={"submit"}/>
+                        <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
+                            e.preventDefault()
+                            redirect(`/wine/${wineVintage.wineId}/vintage/${wineVintage.vintage}`);
+                        }}/>
                     </div>
                 </div>
             </form>

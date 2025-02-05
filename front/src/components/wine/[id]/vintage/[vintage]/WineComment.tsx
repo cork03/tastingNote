@@ -43,9 +43,9 @@ const WineCommentPage = ({id, vintage, tastingComments}: Props) => {
                                 </div>
                             )}
                         </div>
-                        <div
-                            className="border rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 bg-gray-100">
-                            {tastingComment.blindTastingAnswer && (
+                        {tastingComment.blindTastingAnswer && (
+                            <div
+                                className="border rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 bg-gray-100">
                                 <div className="flex flex-col">
                                     <div className="text-center">
                                         <h3 className="text-2xl font-extrabold text-gray-800 mb-4">ブラインドテイスティングの回答</h3>
@@ -66,8 +66,8 @@ const WineCommentPage = ({id, vintage, tastingComments}: Props) => {
                                         )}
                                     </div>
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                 );
             })}

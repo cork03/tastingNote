@@ -27,7 +27,7 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
         price: 0,
         agingMethod: "",
         alcoholContent: 12,
-        wineBlend: [{grapeVarietyId: 0, percentage: 50, name: ""}],
+        wineBlend: [{id: 0, percentage: 50, name: ""}],
         technicalComment: ""
     });
     const [base64Image, setBase64Image] = React.useState<string | null>(null);
@@ -57,7 +57,7 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
     const addWineBlend = () => {
         setWineVintage({
             ...wineVintage,
-            wineBlend: [...wineVintage.wineBlend, {"grapeVarietyId": 0, name: "", "percentage": 50}]
+            wineBlend: [...wineVintage.wineBlend, {"id": 0, name: "", "percentage": 50}]
         })
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

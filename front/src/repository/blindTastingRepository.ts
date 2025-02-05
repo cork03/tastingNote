@@ -33,7 +33,7 @@ interface CreateBlindTasting {
 export const createBlindTasting = async ({wineComment, blindTastingAnswer}: CreateBlindTasting) => {
     const wineVarieties: WineVariety[] = blindTastingAnswer.wineBlend.map((wineVariety)=> {
         return {
-            grapeVarietyId: wineVariety.grapeVarietyId,
+            grapeVarietyId: wineVariety.id,
             percentage: wineVariety.percentage
         }
     });

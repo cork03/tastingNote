@@ -74,15 +74,18 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                 if (!isset($wineVintageModel)) {
                     throw new Exception('該当のwineVintageが見つかりません');
                 }
-                $wineVintageModel->update([
+                $updateArray = [
                     'wine_id' => $wineVintage->getWineId(),
                     'vintage' => $wineVintage->getVintage(),
                     'price' => $wineVintage->getPrice(),
                     'aging_method' => $wineVintage->getAgingMethod(),
                     'alcohol_content' => $wineVintage->getAlcoholContent(),
                     'technical_comment' => $wineVintage->getTechnicalComment(),
-                    'image_path' => $imagePath,
-                ]);
+                ];
+                if (isset($imagePath)) {
+                    $updateArray['image_path'] = $imagePath;
+                }
+                $wineVintageModel->update($updateArray);
                 $wineVarieties = [];
                 foreach ($wineVintage->getWineBlend()->getWineVarieties() as $grapeVariety) {
                     $wineVarieties[$grapeVariety->getGrapeVariety()->getId()] = [

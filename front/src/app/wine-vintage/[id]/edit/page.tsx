@@ -1,12 +1,11 @@
 import React from "react";
 import Title from "@/components/utils/view/title";
-import CreateWineVintage from "@/components/wine/[id]/vintage/create/page";
 import {WineVintage} from "@/types/domain/wine";
 import EditWineVintage from "@/components/wine-vintage/[id]/edit/editWineVintage";
 
-const WineVintageEditPage = async ({params}: { params: { id: number}}) => {
-    const wineId = await params.id;
-    const initialWineVintageData = await fetch(`${process.env.API_URL}/wine-vintage/${wineId}`);
+const WineVintageEditPage = async ({params}: { params: { id: number } }) => {
+    const {id} = await params;
+    const initialWineVintageData = await fetch(`${process.env.API_URL}/wine-vintage/${id}`);
     const initialWineVintage: WineVintage = await initialWineVintageData.json();
     const grapeVarietiesData = await fetch(`${process.env.API_URL}/grape-varieties`);
     const grapeVarieties = await grapeVarietiesData.json();

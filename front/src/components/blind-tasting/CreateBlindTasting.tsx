@@ -28,7 +28,7 @@ const CrateBlindTasting = ({grapeVarieties, countries}: Props) => {
             id: 0,
             name: ""
         },
-        wineBlend: [{"grapeVarietyId": 0, name: "", "percentage": 50}],
+        wineBlend: [{"id": 0, name: "", "percentage": 50}],
         vintage: 2020,
         price: "",
         alcoholContent: 0,

@@ -103,9 +103,8 @@ class WineVintageController extends Controller
                     percentage: $wineVariety['percentage'],
                 );
             }
-            $this->createWineVintageUseCase->handle(
-                new CreateWineVintageUseCaseInput(
-                    new WineVintage(
+            $this->editWineVintageUseCase->handle(
+                    wineVintage: new WineVintage(
                         id: $id,
                         wineId: $wineVintage['wineId'],
                         vintage: $wineVintage['vintage'],
@@ -115,8 +114,7 @@ class WineVintageController extends Controller
                         wineBlend: new WineBlend($wineVarieties),
                         technicalComment: $wineVintage['technicalComment'],
                     ),
-                    $wineVintage['base64Image']
-                )
+                    base64Image: $wineVintage['base64Image']
             );
             return response()->json();
         } catch (Exception $e) {
