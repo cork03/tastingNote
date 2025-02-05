@@ -18,4 +18,6 @@ interface WineVintageRepositoryInterface
     public function getWineCommentsByWineVintageId(int $wineVintageId): array;
 
     public function getById(int $id): ?WineVintage;
+
+    public function update(WineVintage $wineVintage, ?string $imagePath): void;
 }

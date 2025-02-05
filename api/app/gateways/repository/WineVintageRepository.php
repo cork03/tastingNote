@@ -62,6 +62,41 @@ class WineVintageRepository implements WineVintageRepositoryInterface
         }
     }
 
+    /**
+     * @throws Exception
+     */
+    public function update(WineVintage $wineVintage, ?string $imagePath): void
+    {
+        try {
+            DB::transaction(function () use ($wineVintage, $imagePath) {
+                /** @var ?WineVintageModel $wineVintageModel */
+                $wineVintageModel = $this->wineVintageModel->find($wineVintage->getId());
+                if (!isset($wineVintageModel)) {
+                    throw new Exception('該当のwineVintageが見つかりません');
+                }
+                $wineVintageModel->update([
+                    'wine_id' => $wineVintage->getWineId(),
+                    'vintage' => $wineVintage->getVintage(),
+                    'price' => $wineVintage->getPrice(),
+                    'aging_method' => $wineVintage->getAgingMethod(),
+                    'alcohol_content' => $wineVintage->getAlcoholContent(),
+                    'technical_comment' => $wineVintage->getTechnicalComment(),
+                    'image_path' => $imagePath,
+                ]);
+                $wineVarieties = [];
+                foreach ($wineVintage->getWineBlend()->getWineVarieties() as $grapeVariety) {
+                    $wineVarieties[$grapeVariety->getGrapeVariety()->getId()] = [
+                        'percentage' => $grapeVariety->getPercentage(),
+                    ];
+                }
+                $wineVintageModel->grapeVarieties()->sync($wineVarieties);
+            });
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function getById(int $id): ?WineVintage
     {
         /**

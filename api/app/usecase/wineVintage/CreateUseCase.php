@@ -7,7 +7,7 @@ use App\domain\images\WineVintageImagePathCreator;
 use App\gateways\FileUploader\FileUploaderInterface;
 use App\gateways\repository\WineVintageRepositoryInterface;
 use App\usecase\wine\CreateWineVintageUseCaseInput;
-use Illuminate\Support\Facades\Storage;
+use App\utils\Base64ImageResolver;
 
 class CreateUseCase implements CreateUseCaseInterface
 {
@@ -25,15 +25,16 @@ class CreateUseCase implements CreateUseCaseInterface
             if ($input->getBase64Image() === null) {
                 $this->wineVintageRepository->create($input->getWineVintage(), null);
             } else {
+                $base64ImageResolver = new Base64ImageResolver($input->getBase64Image());
                 $path = $this->wineVintageImagePathCreator->createPath(
                     wineId: $input->getWineVintage()->getWineId(),
                     vintage: $input->getWineVintage()->getVintage(),
-                    base64Image: $input->getBase64Image());
-                $base64_string = preg_replace('/^data:image\/\w+;base64,/', '', $input->getBase64Image());
+                    extension: $base64ImageResolver->getExtension()
+                );
                 $isSuccess = $this->fileUploader->upload(
                     new Image(
                         path: $path,
-                        binary: base64_decode($base64_string)
+                        binary: base64_decode($base64ImageResolver->getBase64String())
                     )
                 );
                 if (!$isSuccess) {

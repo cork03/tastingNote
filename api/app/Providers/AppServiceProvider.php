@@ -47,6 +47,8 @@ use App\usecase\wineVintage\CreateUseCase;
 use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCase;
 use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
+use App\usecase\wineVintage\EditWineVintageUseCase;
+use App\usecase\wineVintage\EditWineVintageUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCase;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCase;
@@ -89,6 +91,7 @@ class AppServiceProvider extends ServiceProvider
             GetProducerUseCaseInterface::class => GetProducerUseCase::class,
             FileUploaderInterface::class => S3FIleUploader::class,
             GetWineVintageByIdUseCaseInterface::class => GetWineVintageByIdUseCase::class,
+            EditWineVintageUseCaseInterface::class => EditWineVintageUseCase::class,
         ];
 
 
