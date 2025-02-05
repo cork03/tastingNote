@@ -51,6 +51,8 @@ use App\usecase\wineVintage\GetFullInfoUseCase;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCase;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
+use App\usecase\wineVintage\GetWineVintageByIdUseCase;
+use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
 use App\utils\Base64ImageResolver;
 use Illuminate\Support\ServiceProvider;
 
@@ -86,6 +88,7 @@ class AppServiceProvider extends ServiceProvider
             GetWineCommentsUseCaseInterface::class => GetWineCommentsUseCase::class,
             GetProducerUseCaseInterface::class => GetProducerUseCase::class,
             FileUploaderInterface::class => S3FIleUploader::class,
+            GetWineVintageByIdUseCaseInterface::class => GetWineVintageByIdUseCase::class,
         ];
 
 

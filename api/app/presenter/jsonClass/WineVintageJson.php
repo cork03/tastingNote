@@ -15,7 +15,8 @@ class WineVintageJson
         public readonly string $agingMethod,
         public readonly float $alcoholContent,
         public readonly array $wineBlend,
-        public readonly ?string $technicalComment
+        public readonly ?string $technicalComment,
+        public readonly ?string $imagePath = null
     )
     {
     }

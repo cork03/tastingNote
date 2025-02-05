@@ -62,6 +62,38 @@ class WineVintageRepository implements WineVintageRepositoryInterface
         }
     }
 
+    public function getById(int $id): ?WineVintage
+    {
+        /**
+         * @var ?WineVintageModel $wineVintageModel
+         */
+        $wineVintageModel = $this->wineVintageModel->with("grapeVarieties")->find($id);
+        if (!isset($wineVintageModel)) {
+            return null;
+        }
+        $grapeVarieties = [];
+        foreach ($wineVintageModel->grapeVarieties as $grapeVariety) {
+            $grapeVarieties[] = new WineVariety(
+                grapeVariety: new GrapeVariety(
+                    id: $grapeVariety->id,
+                    name: $grapeVariety->name
+                ),
+                percentage: $grapeVariety->pivot->percentage
+            );
+        }
+        return new WineVintage(
+            id: $wineVintageModel->id,
+            wineId: $wineVintageModel->wine_id,
+            vintage: $wineVintageModel->vintage,
+            price: $wineVintageModel->price,
+            agingMethod: $wineVintageModel->aging_method,
+            alcoholContent: $wineVintageModel->alcohol_content,
+            wineBlend: new WineBlend($grapeVarieties),
+            technicalComment: $wineVintageModel->technical_comment,
+            imagePath: $wineVintageModel->image_path
+        );
+    }
+
     /**
      * @throws Exception
      */

@@ -28,4 +28,5 @@ Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine-comment', [WineVintageController::class, 'createComment']);
 Route::get('/wine-types', [WineTypeController::class, 'getAll']);
 Route::post('/wine-vintage', [WineVintageController::class, 'create']);
+Route::get('/wine-vintage/{id}', [WineVintageController::class, 'getById']);
 Route::get('/wine-vintage/{id}/wine-comments', [WineVintageController::class, 'getWineComments']);

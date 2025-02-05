@@ -3,10 +3,12 @@
 namespace App\presenter;
 
 use App\domain\TastingComment;
+use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
 use App\presenter\creator\BlindTastingAnswerJsonCreator;
 use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\creator\WineCommentJsonCreator;
+use App\presenter\creator\WineVintageJsonCreator;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\TastingCommentJson;
 use App\presenter\jsonClass\WineJson;
@@ -82,5 +84,14 @@ class WineVintagePresenter
            ) ;
         }
         return response()->json($tastingCommentsJson);
+    }
+
+    /**
+     * @param array{wineVintage: WineVintage, imagePath: ?string} $wineVintageInfo
+     */
+    public function getWineVintageByIdResponse(array $wineVintageInfo): JsonResponse
+    {
+        $wineVintageJson = (new WineVintageJsonCreator())->create($wineVintageInfo['wineVintage'], $wineVintageInfo['imagePath']);
+        return response()->json($wineVintageJson);
     }
 }

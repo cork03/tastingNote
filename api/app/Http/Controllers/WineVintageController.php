@@ -13,6 +13,7 @@ use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
+use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,11 +22,12 @@ use Illuminate\Support\Facades\Log;
 class WineVintageController extends Controller
 {
     public function __construct(
-        private readonly CreateUseCaseInterface            $createWineVintageUseCase,
-        private readonly CreateWineCommentUseCaseInterface $createWineCommentUseCase,
-        private readonly GetFullInfoUseCaseInterface       $getFullInfoUseCase,
-        private readonly GetWineCommentsUseCaseInterface   $getWineCommentsUseCase,
-        private readonly WineVintagePresenter              $wineVintagePresenter
+        private readonly CreateUseCaseInterface             $createWineVintageUseCase,
+        private readonly CreateWineCommentUseCaseInterface  $createWineCommentUseCase,
+        private readonly GetFullInfoUseCaseInterface        $getFullInfoUseCase,
+        private readonly GetWineCommentsUseCaseInterface    $getWineCommentsUseCase,
+        private readonly GetWineVintageByIdUseCaseInterface $getWineVintageByIdUseCase,
+        private readonly WineVintagePresenter               $wineVintagePresenter
     )
     {
     }
@@ -94,6 +96,15 @@ class WineVintageController extends Controller
             Log::info($e->getMessage());
             return response()->json(status: 404);
         }
+    }
+
+    public function getById(int $id): JsonResponse
+    {
+        $wineVintageInfo = $this->getWineVintageByIdUseCase->handle($id);
+        if (!isset($wineVintageInfo)) {
+            return response()->json(status: 404);
+        }
+        return $this->wineVintagePresenter->getWineVintageByIdResponse($wineVintageInfo);
     }
 
     public function getWineComments(int $id): JsonResponse

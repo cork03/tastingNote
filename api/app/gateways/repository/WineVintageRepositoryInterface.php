@@ -16,4 +16,6 @@ interface WineVintageRepositoryInterface
      * @return TastingComment[]
      */
     public function getWineCommentsByWineVintageId(int $wineVintageId): array;
+
+    public function getById(int $id): ?WineVintage;
 }
