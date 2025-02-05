@@ -1,3 +1,6 @@
+import {WineVariety} from "@/types/wine";
+import {WineVariety as WineVarietyDomain} from "@/types/domain/wine";
+
 export const getVintageChoices = () => {
     let vintageChoices = [];
     const start = 1900;
@@ -59,3 +62,27 @@ export const resizeImage = (file: File, maxWidth: number, maxHeight: number): Pr
         img.onerror = reject;
     });
 };
+
+export const getWineVarietiesText = (wineBlend: WineVariety[]): string => {
+    let wineVarietiesText = '';
+    wineBlend.forEach((wineVariety, index) => {
+        if (index === wineBlend.length - 1) {
+            wineVarietiesText += wineVariety.name + ':' + wineVariety.percentage + '%';
+            return;
+        }
+        wineVarietiesText += wineVariety.name + ':' + wineVariety.percentage + '%, ';
+    });
+    return wineVarietiesText;
+}
+
+export const getWineVarietiesTextDomain = (wineBlend: WineVarietyDomain[]): string => {
+    let wineVarietiesText = '';
+    wineBlend.forEach((wineVariety, index) => {
+        if (index === wineBlend.length - 1) {
+            wineVarietiesText += wineVariety.name + ':' + wineVariety.percentage + '%';
+            return;
+        }
+        wineVarietiesText += wineVariety.name + ':' + wineVariety.percentage + '%, ';
+    });
+    return wineVarietiesText;
+}

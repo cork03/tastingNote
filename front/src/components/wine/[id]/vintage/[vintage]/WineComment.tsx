@@ -1,8 +1,9 @@
-"use client"
-
 import React from "react";
 import {TastingComment} from "@/types/domain/blindTasting";
 import Link from "next/link";
+import Paragraph from "@/components/utils/view/side/paragraph";
+import {getWineVarietiesText, getWineVarietiesTextDomain} from "@/utils/utils";
+import NormalButton from "@/components/utils/view/button/NormalButton";
 
 interface Props {
     id: number
@@ -50,38 +51,18 @@ const WineCommentPage = ({id, vintage, tastingComments}: Props) => {
                                         <h3 className="text-2xl font-extrabold text-gray-800 mb-4">ブラインドテイスティングの回答</h3>
                                     </div>
                                     <div className="space-y-6">
-                                        <div className="flex items-center">
-                                            <label className="text-lg font-medium text-gray-800 w-40">生産地</label>
-                                            <p className="text-lg text-gray-700 font-semibold">{tastingComment.blindTastingAnswer.country.name}</p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <label className="text-lg font-medium text-gray-800 w-40">葡萄品種</label>
-                                            <p className="text-lg text-gray-700 font-semibold">{tastingComment.blindTastingAnswer.wineBlend.map((wineVariety, index) => {
-                                                // @ts-ignore
-                                                if (index === tastingComment.blindTastingAnswer.wineBlend.length - 1) {
-                                                    return wineVariety.name + ':' + wineVariety.percentage + '%';
-                                                }
-                                                return wineVariety.name + ':' + wineVariety.percentage + '%, ';
-                                            })}</p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <label className="text-lg font-medium text-gray-800 w-40">ヴィンテージ</label>
-                                            <p className="text-lg text-gray-700 font-semibold">{tastingComment.blindTastingAnswer.vintage}年</p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <label className="text-lg font-medium text-gray-800 w-40">価格</label>
-                                            <p className="text-lg text-gray-700 font-semibold">¥{tastingComment.blindTastingAnswer.price}</p>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <label className="text-lg font-medium text-gray-800 w-40">アルコール度数</label>
-                                            <p className="text-lg text-gray-700 font-semibold">{tastingComment.blindTastingAnswer.alcoholContent}%</p>
-                                        </div>
+                                        <Paragraph label={"生産地"}
+                                                   text={tastingComment.blindTastingAnswer.country.name}/>
+                                        <Paragraph label={"葡萄品種"}
+                                                   text={getWineVarietiesTextDomain(tastingComment.blindTastingAnswer.wineBlend)}/>
+                                        <Paragraph label={"ヴィンテージ"}
+                                                   text={tastingComment.blindTastingAnswer.vintage + '年'}/>
+                                        <Paragraph label={"価格"} text={'¥' + tastingComment.blindTastingAnswer.price}/>
+                                        <Paragraph label={"アルコール度数"}
+                                                   text={tastingComment.blindTastingAnswer.alcoholContent + '%'}/>
                                         {tastingComment.blindTastingAnswer.anotherComment && (
-                                            <div className="flex items-center">
-                                                <label
-                                                    className="text-lg font-medium text-gray-800 w-40">その他コメント</label>
-                                                <p className="text-lg text-gray-700 font-semibold">{tastingComment.blindTastingAnswer.anotherComment}</p>
-                                            </div>
+                                            <Paragraph label={"その他コメント"}
+                                                       text={tastingComment.blindTastingAnswer.anotherComment}/>
                                         )}
                                     </div>
                                 </div>
@@ -91,13 +72,8 @@ const WineCommentPage = ({id, vintage, tastingComments}: Props) => {
                 );
             })}
             <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
-            <Link href={`/wine/${id}/vintage/${vintage}/create-comment`}>
-                <button
-                        type="button"
-                        className="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400 transition-all duration-300"
-                    >
-                        コメントを追加する
-                    </button>
+                <Link href={`/wine/${id}/vintage/${vintage}/create-comment`}>
+                    <NormalButton text={"コメントを追加する"}/>
                 </Link>
             </div>
         </div>
