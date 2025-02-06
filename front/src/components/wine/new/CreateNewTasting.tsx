@@ -3,8 +3,8 @@
 import ChoiceProducer from "@/components/wine/new/producer/ChoiceProducer";
 import ChoiceWine from "@/components/wine/new/wine/ChoiceWine";
 import {useState} from "react";
-import {Wine} from "@/types/wine";
 import {Producer} from "@/types/domain/producer";
+import {Wine} from "@/types/domain/wine";
 
 interface Props {
     producers: Producer[];

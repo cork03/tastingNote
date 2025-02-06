@@ -2,7 +2,6 @@
 
 import React from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
-import {Wine} from "@/types/wine";
 import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import {redirect} from "next/navigation";
@@ -10,6 +9,7 @@ import NormalButton from "@/components/utils/view/button/NormalButton";
 import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
 import Grid from "@/components/utils/view/grid";
 import {Producer} from "@/types/domain/producer";
+import {Wine} from "@/types/domain/wine";
 
 interface Props {
     producers: Producer[];

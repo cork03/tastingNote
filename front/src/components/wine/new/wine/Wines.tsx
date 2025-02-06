@@ -1,9 +1,9 @@
 import React from "react";
 import WineDetail from "@/components/wine/new/wine/WineDetail";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
-import {Wine} from "@/types/wine";
 import GrayButton from "@/components/utils/view/button/GrayButton";
 import Grid from "@/components/utils/view/grid";
+import {Wine} from "@/types/domain/wine";
 
 interface Props {
     wines: Wine[];

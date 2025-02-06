@@ -3,12 +3,11 @@
 import React from "react";
 import Wines from "@/components/wine/new/wine/Wines";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
-import {Wine} from "@/types/wine";
-import {Producer} from "@/types/producer";
 import Section from "@/components/utils/view/section";
 import Title from "@/components/utils/view/title";
 import {redirect} from "next/navigation";
 import NormalButton from "@/components/utils/view/button/NormalButton";
+import {Wine} from "@/types/domain/wine";
 
 interface Props {
     wines: Wine[]

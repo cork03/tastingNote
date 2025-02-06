@@ -1,5 +1,3 @@
-import CreateNewTasting from "@/components/wine/new/CreateNewTasting";
-import {Producer} from "@/types/producer";
 import React from "react";
 import {Country} from "@/types/domain/country";
 import ProducerPage from "@/components/proucer/create/Producer";

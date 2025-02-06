@@ -34,3 +34,27 @@ export const createWine = async (wine: Wine) => {
 
     redirect(`/wine/${responseJson.id}/vintage/create`);
 }
+
+export const getWinesByProducerId = async (producerId: number): Promise<Wine[]> => {
+    const response = await fetch(`${process.env.API_URL}/producer/${producerId}/wines`);
+    if (!response.ok) {
+        throw new Error('Failed to get wines');
+    }
+    const winesResponse: Wine[] = await response.json();
+    // wineの型に整形して親のstateを更新
+    return winesResponse.map((wine: Wine) => {
+        return {
+            id: wine.id,
+            name: wine.name,
+            producerId: wine.producerId,
+            wineType: {
+                id: wine.wineType.id,
+                label: wine.wineType.label,
+            },
+            country: {
+                id: wine.country.id,
+                name: wine.country.name,
+            }
+        }
+    });
+}

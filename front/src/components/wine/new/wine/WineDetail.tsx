@@ -1,6 +1,6 @@
-import {Wine} from "@/types/wine";
 import Link from "next/link";
 import GrayCard from "@/components/utils/view/grayCard";
+import {Wine} from "@/types/domain/wine";
 
 interface Props {
     wine: Wine;

@@ -1,9 +1,10 @@
 import React from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
-import {Wine} from "@/types/wine";
 import GrayCard from "@/components/utils/view/grayCard";
 import {Producer} from "@/types/domain/producer";
 import ProducerCardTexts from "@/components/utils/domainView/producer/ProducerCardTexts";
+import {Wine} from "@/types/domain/wine";
+import {getWinesByProducerId} from "@/repository/serverActions/wineRepository";
 
 interface Props {
     producer: Producer;
@@ -15,29 +16,12 @@ interface Props {
 
 const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducerId}: Props) => {
     const selectProducer = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producer/${producer.id}/wines`);
-        if (!response.ok) {
-            throw new Error('Failed to get wines');
+        if (!producer.id) {
+            throw new Error("Producer id is not defined");
         }
-        const winesResponse: Wine[] = await response.json();
-        // wineの型に整形して親のstateを更新
-        const wine: Wine[] = winesResponse.map((wine: Wine) => {
-            return {
-                id: wine.id,
-                name: wine.name,
-                producerId: wine.producerId,
-                wineType: {
-                    id: wine.wineType.id,
-                    label: wine.wineType.label,
-                },
-                country: {
-                    id: wine.country.id,
-                    name: wine.country.name,
-                }
-            }
-        });
-        setWines(wine);
-        setSelectedProducerId(winesResponse[0].producerId);
+        const wines = await getWinesByProducerId(producer.id);
+        setWines(wines);
+        setSelectedProducerId(producer.id);
         setViewType(2);
     }
     return (
