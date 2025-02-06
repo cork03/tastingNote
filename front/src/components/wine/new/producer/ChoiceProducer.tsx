@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react";
-import Producers from "@/components/wine/new/producer/Producers";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
 import {Producer} from "@/types/producer";
@@ -9,6 +8,8 @@ import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import {redirect} from "next/navigation";
 import NormalButton from "@/components/utils/view/button/NormalButton";
+import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
+import Grid from "@/components/utils/view/grid";
 
 interface Props {
     initialProducers: Producer[];
@@ -33,8 +34,12 @@ const ChoiceProducer = ({initialProducers, setWines, setViewType, setSelectedPro
                 />
             </div>
             <Section>
-                <Producers producers={initialProducers} setWines={setWines} setViewType={setViewType}
-                           setSelectedProducer={setSelectedProducer}/>
+                <Grid>
+                    {initialProducers.map((producer) => {
+                        return <ProducerDetail key={producer.id} producer={producer} setWines={setWines}
+                                               setViewType={setViewType} setSelectedProducer={setSelectedProducer}/>
+                    })}
+                </Grid>
             </Section>
         </>
     )
