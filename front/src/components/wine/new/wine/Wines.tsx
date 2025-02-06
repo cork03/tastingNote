@@ -6,16 +6,17 @@ import Grid from "@/components/utils/view/grid";
 import {Wine} from "@/types/domain/wine";
 
 interface Props {
+    wineCommentId: number | null;
     wines: Wine[];
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
 }
 
-const Wines = ({wines, setViewType}: Props) => {
+const Wines = ({wineCommentId, wines, setViewType}: Props) => {
     return (
         <>
             <Grid>
                 {wines.map((wine) => {
-                    return <WineDetail key={wine.id} wine={wine}/>
+                    return <WineDetail key={wine.id} wine={wine} wineCommentId={wineCommentId}/>
                 })}
             </Grid>
             <div className="text-center">

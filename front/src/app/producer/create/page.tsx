@@ -1,6 +1,6 @@
 import React from "react";
 import {Country} from "@/types/domain/country";
-import ProducerPage from "@/components/proucer/create/Producer";
+import ProducerCreate from "@/components/utils/domainView/producer/ProducerCreate";
 
 const ProducerCreatePage = async () => {
     const data = await fetch(`${process.env.API_URL}/countries`);
@@ -10,7 +10,7 @@ const ProducerCreatePage = async () => {
             <div className="text-center mb-8">
                 <h2 className="text-3xl font-extrabold text-gray-800 mb-4">生産者作成</h2>
             </div>
-           <ProducerPage countries={countries}></ProducerPage>
+           <ProducerCreate redirectPath={"/wine/create"} countries={countries}/>
         </main>
     );
 };

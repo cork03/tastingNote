@@ -12,13 +12,14 @@ import {Producer} from "@/types/domain/producer";
 import {Wine} from "@/types/domain/wine";
 
 interface Props {
+    wineCommentId: number | null;
     producers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setSelectedProducerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ChoiceProducer = ({producers, setWines, setViewType, setSelectedProducerId}: Props) => {
+const ChoiceProducer = ({wineCommentId, producers, setWines, setViewType, setSelectedProducerId}: Props) => {
     return (
         <>
             <Title title={"生産者"}/>
@@ -29,7 +30,10 @@ const ChoiceProducer = ({producers, setWines, setViewType, setSelectedProducerId
                     className="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                 />
                 <NormalButton text={"新しい生産者を登録"} onClick={() => {
-                    redirect('/producer/create')
+                    if (wineCommentId) {
+                        redirect(`/wine-comment/${wineCommentId}/producer/create`)
+                    }
+                    redirect(`/producer/create`)
                 }}
                 />
             </div>

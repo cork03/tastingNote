@@ -13,10 +13,11 @@ import NormalButton from "@/components/utils/view/button/NormalButton";
 import GrayButton from "@/components/utils/view/button/GrayButton";
 
 interface Props {
+    redirectPath: string
     countries: Country[];
 }
 
-const ProducerPage = ({countries}: Props) => {
+const ProducerCreate = ({redirectPath, countries}: Props) => {
     const [producer, setProducer] = React.useState<Producer>({
         id: null,
         name: "",
@@ -41,9 +42,8 @@ const ProducerPage = ({countries}: Props) => {
             console.error(e);
             return;
         }
-        redirect("/wine/create");
+        redirect(redirectPath);
     }
-    console.log(producer);
     return (
         <section className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200">
             <form onSubmit={handleSubmit}>
@@ -63,7 +63,7 @@ const ProducerPage = ({countries}: Props) => {
                         <NormalButton text={"作成"} type="submit"/>
                         <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
                             e.preventDefault()
-                            redirect("/wine/create")
+                            redirect(redirectPath)
                         }}/>
                     </ButtonsDiv>
                 </div>
@@ -72,4 +72,4 @@ const ProducerPage = ({countries}: Props) => {
     )
 }
 
-export default ProducerPage;
+export default ProducerCreate;

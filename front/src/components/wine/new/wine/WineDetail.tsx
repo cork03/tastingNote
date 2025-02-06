@@ -3,12 +3,19 @@ import GrayCard from "@/components/utils/view/grayCard";
 import {Wine} from "@/types/domain/wine";
 
 interface Props {
+    wineCommentId: number | null;
     wine: Wine;
 }
 
-const WineDetail = ({wine}: Props) => {
+const WineDetail = ({wineCommentId, wine}: Props) => {
+    const getLink = () => {
+        if (wineCommentId) {
+            return `/wine-comment/${wineCommentId}/wine/${wine.id}/vintage/create`;
+        }
+        return `/wine/${wine.id}/vintage/create`;
+    }
     return (
-        <Link href={'/wine/${wine.id}/vintage/create'} className="text-center">
+        <Link href={getLink()} className="text-center">
             <GrayCard>
                 <img
                     src="/images/wine.jpg"
