@@ -5,6 +5,10 @@ import Producers from "@/components/wine/new/producer/Producers";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
 import {Producer} from "@/types/producer";
+import Title from "@/components/utils/view/title";
+import Section from "@/components/utils/view/section";
+import {redirect} from "next/navigation";
+import NormalButton from "@/components/utils/view/button/NormalButton";
 
 interface Props {
     initialProducers: Producer[];
@@ -15,11 +19,24 @@ interface Props {
 
 const ChoiceProducer = ({initialProducers, setWines, setViewType, setSelectedProducer}: Props) => {
     return (
-        <section>
-            <h2 className="text-2xl font-bold text-center mb-6">生産者</h2>
-            <Producers producers={initialProducers} setWines={setWines} setViewType={setViewType}
-                       setSelectedProducer={setSelectedProducer}/>
-        </section>
+        <>
+            <Title title={"生産者"}/>
+            <div className="mb-8 flex flex-row justify-center items-center gap-x-4 mx-auto">
+                <input
+                    type="text"
+                    placeholder="生産者を検索"
+                    className="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
+                />
+                <NormalButton text={"新しい生産者を登録"} onClick={() => {
+                    redirect('/producer/create')
+                }}
+                />
+            </div>
+            <Section>
+                <Producers producers={initialProducers} setWines={setWines} setViewType={setViewType}
+                           setSelectedProducer={setSelectedProducer}/>
+            </Section>
+        </>
     )
 }
 

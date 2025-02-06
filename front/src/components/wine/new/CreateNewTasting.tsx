@@ -10,7 +10,7 @@ interface Props {
     initialProducers: Producer[];
 }
 
-export type ViewType = 1 | 2 | 3;
+export type ViewType = 1 | 2;
 
 
 const CreateNewTasting = ({initialProducers}: Props) => {
@@ -21,7 +21,7 @@ const CreateNewTasting = ({initialProducers}: Props) => {
     });
     const [viewType, setViewType] = useState<ViewType>(1);
     return (
-        <section>
+        <>
             {viewType === 1 &&
                 <ChoiceProducer
                     initialProducers={initialProducers}
@@ -35,7 +35,7 @@ const CreateNewTasting = ({initialProducers}: Props) => {
                     setViewType={setViewType}
                     selectedProducer={selectedProducer}
                 />}
-        </section>
+        </>
     )
 }
 
