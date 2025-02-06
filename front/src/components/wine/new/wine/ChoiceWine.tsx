@@ -13,10 +13,10 @@ import NormalButton from "@/components/utils/view/button/NormalButton";
 interface Props {
     wines: Wine[]
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    selectedProducer: Producer;
+    selectedProducerId: number;
 }
 
-const ChoiceWine = ({wines, setViewType, selectedProducer}: Props) => {
+const ChoiceWine = ({wines, setViewType, selectedProducerId}: Props) => {
     return (
         <>
             <Title title={"ワイン"}/>
@@ -27,7 +27,7 @@ const ChoiceWine = ({wines, setViewType, selectedProducer}: Props) => {
                     className="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                 />
                 <NormalButton text={"新しいワインを登録"} type="submit" onClick={() => {
-                    redirect(`/producer/${selectedProducer.id}/wine/create`)
+                    redirect(`/producer/${selectedProducerId}/wine/create`)
                 }}
                 />
             </div>

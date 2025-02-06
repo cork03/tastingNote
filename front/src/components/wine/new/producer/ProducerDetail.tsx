@@ -1,18 +1,19 @@
 import React from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
-import {Producer} from "@/types/producer";
 import GrayCard from "@/components/utils/view/grayCard";
+import {Producer} from "@/types/domain/producer";
+import ProducerCardTexts from "@/components/utils/domainView/producer/ProducerCardTexts";
 
 interface Props {
     producer: Producer;
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer>>;
+    setSelectedProducerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 
-const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: Props) => {
+const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducerId}: Props) => {
     const selectProducer = async () => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/producer/${producer.id}/wines`);
         if (!response.ok) {
@@ -24,7 +25,7 @@ const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: 
             return {
                 id: wine.id,
                 name: wine.name,
-                producerId: producer.id,
+                producerId: wine.producerId,
                 wineType: {
                     id: wine.wineType.id,
                     label: wine.wineType.label,
@@ -36,16 +37,13 @@ const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducer}: 
             }
         });
         setWines(wine);
-        setSelectedProducer(producer);
+        setSelectedProducerId(winesResponse[0].producerId);
         setViewType(2);
     }
     return (
-        <div className="text-center" onClick={selectProducer}>
+        <div className="text-center cursor-pointer" onClick={selectProducer}>
             <GrayCard>
-                <h3 className="text-lg font-semibold mb-2">{producer.name}</h3>
-                <p className="text-sm text-gray-600">
-                    こちらは生産者の説明文です。生産者の特徴や背景を簡単に説明します。
-                </p>
+                <ProducerCardTexts producer={producer}/>
             </GrayCard>
         </div>
     )

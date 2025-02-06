@@ -1,13 +1,14 @@
 import CreateNewTasting from "@/components/wine/new/CreateNewTasting";
-import {Producer} from "@/types/producer";
+import Main from "@/components/utils/view/main";
+import {Producer} from "@/types/domain/producer";
 
 const WineNewPage = async () => {
     const data = await fetch(`${process.env.API_URL}/producers`);
     const producers: Producer[] = await data.json();
     return (
-        <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
-            <CreateNewTasting initialProducers={producers}/>
-        </main>
+        <Main>
+            <CreateNewTasting producers={producers}/>
+        </Main>
     );
 };
 

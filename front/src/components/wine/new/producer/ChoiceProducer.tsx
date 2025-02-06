@@ -3,22 +3,22 @@
 import React from "react";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
-import {Producer} from "@/types/producer";
 import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import {redirect} from "next/navigation";
 import NormalButton from "@/components/utils/view/button/NormalButton";
 import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
 import Grid from "@/components/utils/view/grid";
+import {Producer} from "@/types/domain/producer";
 
 interface Props {
-    initialProducers: Producer[];
+    producers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer>>;
+    setSelectedProducerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ChoiceProducer = ({initialProducers, setWines, setViewType, setSelectedProducer}: Props) => {
+const ChoiceProducer = ({producers, setWines, setViewType, setSelectedProducerId}: Props) => {
     return (
         <>
             <Title title={"生産者"}/>
@@ -35,9 +35,9 @@ const ChoiceProducer = ({initialProducers, setWines, setViewType, setSelectedPro
             </div>
             <Section>
                 <Grid>
-                    {initialProducers.map((producer) => {
+                    {producers.map((producer) => {
                         return <ProducerDetail key={producer.id} producer={producer} setWines={setWines}
-                                               setViewType={setViewType} setSelectedProducer={setSelectedProducer}/>
+                                               setViewType={setViewType} setSelectedProducerId={setSelectedProducerId}/>
                     })}
                 </Grid>
             </Section>
