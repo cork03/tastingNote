@@ -10,7 +10,7 @@ interface Props {
     initialProducers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
+    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer>>;
 }
 
 const ChoiceProducer = ({initialProducers, setWines, setViewType, setSelectedProducer}: Props) => {

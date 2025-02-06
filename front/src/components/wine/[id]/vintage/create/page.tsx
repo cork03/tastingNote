@@ -13,6 +13,9 @@ import {redirect} from "next/navigation";
 import {postProducer} from "@/repository/producerRepository";
 import {postWineVintage} from "@/repository/wineVintageRepository";
 import InputFileField from "@/components/utils/form/Vertical/inputFileField";
+import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
+import NormalButton from "@/components/utils/view/button/NormalButton";
+import GrayButton from "@/components/utils/view/button/GrayButton";
 
 interface Props {
     wineId: number;
@@ -28,7 +31,8 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
         agingMethod: "",
         alcoholContent: 12,
         wineBlend: [{id: 0, percentage: 50, name: ""}],
-        technicalComment: ""
+        technicalComment: "",
+        imagePath: ""
     });
     const [base64Image, setBase64Image] = React.useState<string | null>(null);
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -91,25 +95,17 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
                         <TextField label={"その他製造に関するコメント"} name={"technicalComment"}
                                    value={wineVintage.technicalComment || ""} onChange={handleTextChange}
                                    placeholder={"例：マロラクティック発酵,全房発酵"}/>
-                        <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image} placeholder={"test"}/>
+                        <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image}
+                                        placeholder={"test"}/>
                     </GrayCard>
-                    <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
-                        <button
-                            type="submit"
-                            className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                        >
-                            作成
-                        </button>
-                        <button
-                            className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                            onClick={(e: React.FormEvent<HTMLButtonElement>) => {
-                                e.preventDefault()
-                                redirect("/wine/create")
-                            }}
-                        >
-                            戻る
-                        </button>
-                    </div>
+                    <ButtonsDiv>
+                        <NormalButton text={"作成"}/>
+                        <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
+                            e.preventDefault()
+                            redirect("/wine/create")
+                        }}
+                        />
+                    </ButtonsDiv>
                 </div>
             </form>
         </Section>

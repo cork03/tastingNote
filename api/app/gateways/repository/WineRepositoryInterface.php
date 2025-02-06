@@ -8,7 +8,7 @@ use App\domain\WineFullInfo;
 
 interface WineRepositoryInterface
 {
-    public function create(Wine $wine): void;
+    public function create(Wine $wine): Wine;
 
     /**
      * @return array<array{producer: Producer, wine: Wine}>

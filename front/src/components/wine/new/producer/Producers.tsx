@@ -11,7 +11,7 @@ type Props = {
     producers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer | null>>;
+    setSelectedProducer: React.Dispatch<React.SetStateAction<Producer>>;
 };
 
 const Producers = ({producers, setWines, setViewType,setSelectedProducer}: Props) => {

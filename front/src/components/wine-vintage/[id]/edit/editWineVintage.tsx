@@ -14,6 +14,7 @@ import {updateWineVintage} from "@/repository/wineVintageRepository";
 import InputFileField from "@/components/utils/form/Vertical/inputFileField";
 import NormalButton from "@/components/utils/view/button/NormalButton";
 import GrayButton from "@/components/utils/view/button/GrayButton";
+import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
 
 interface Props {
     initialWineVintage: WineVintage;
@@ -98,13 +99,13 @@ const EditWineVintage = ({initialWineVintage, grapeVarieties}: Props) => {
                         <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image}
                                         placeholder={"test"}/>
                     </GrayCard>
-                    <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
+                    <ButtonsDiv>
                         <NormalButton text={"更新"} type={"submit"}/>
                         <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
                             e.preventDefault()
                             redirect(`/wine/${wineVintage.wineId}/vintage/${wineVintage.vintage}`);
                         }}/>
-                    </div>
+                    </ButtonsDiv>
                 </div>
             </form>
         </Section>

@@ -24,15 +24,22 @@ class WineRepository implements WineRepositoryInterface
     /**
      * @throws Exception
      */
-    public function create(Wine $wine): void
+    public function create(Wine $wine): Wine
     {
         try {
-            $this->wineModel->create([
+            $wineModel = $this->wineModel->create([
                 'name' => $wine->getName(),
                 'producer_id' => $wine->getProducerId(),
                 'wine_type_id' => $wine->getWineType()->value,
                 'country_id' => $wine->getCountry()->getId(),
             ]);
+            return new Wine(
+                id: $wineModel->id,
+                name: $wineModel->name,
+                producerId: $wineModel->producer_id,
+                wineType: WineType::fromId($wineModel->wine_type_id),
+                country: new Country($wineModel->country_id, null)
+            );
         } catch (Exception $e) {
             Log::info($e->getMessage());
             throw $e;

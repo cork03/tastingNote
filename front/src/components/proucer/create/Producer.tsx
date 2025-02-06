@@ -8,6 +8,9 @@ import TextField from "@/components/utils/form/Vertical/textField";
 import CountrySelectField from "@/components/utils/form/Vertical/countrySelectField";
 import {postProducer} from "@/repository/producerRepository";
 import {redirect} from "next/navigation";
+import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
+import NormalButton from "@/components/utils/view/button/NormalButton";
+import GrayButton from "@/components/utils/view/button/GrayButton";
 
 interface Props {
     countries: Country[];
@@ -56,23 +59,13 @@ const ProducerPage = ({countries}: Props) => {
                         <InputField label={"url"} name={"url"} value={producer.url ?? ""} onChange={inputHandleChange}
                                     placeholder={"https://example.com"}/>
                     </div>
-                    <div className="flex flex-row justify-center items-center gap-x-10 mx-auto">
-                        <button
-                            type="submit"
-                            className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                        >
-                            作成
-                        </button>
-                        <button
-                            className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                            onClick={(e: React.FormEvent<HTMLButtonElement>) => {
-                                e.preventDefault()
-                                redirect("/wine/create")
-                            }}
-                        >
-                            戻る
-                        </button>
-                    </div>
+                    <ButtonsDiv>
+                        <NormalButton text={"作成"} type="submit"/>
+                        <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
+                            e.preventDefault()
+                            redirect("/wine/create")
+                        }}/>
+                    </ButtonsDiv>
                 </div>
             </form>
         </section>

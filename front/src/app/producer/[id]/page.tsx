@@ -6,6 +6,7 @@ import {Wine} from "@/types/domain/wine";
 import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
+import Main from "@/components/utils/view/main";
 
 const WineDetailPage = async ({params}: { params: { id: number } }) => {
     const {id} = await params;
@@ -14,7 +15,7 @@ const WineDetailPage = async ({params}: { params: { id: number } }) => {
     const winesData = await fetch(`${process.env.API_URL}/producer/${id}/wines`);
     const wines: Wine[] = await winesData.json();
     return (
-        <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
+        <Main>
             <Title title={producer.name}/>
             <Section>
                 <GrayCard>
@@ -53,7 +54,7 @@ const WineDetailPage = async ({params}: { params: { id: number } }) => {
                     </div>
                 </div>
             </Section>
-        </main>
+        </Main>
     );
 };
 

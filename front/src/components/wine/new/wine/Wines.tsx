@@ -2,14 +2,16 @@ import React from "react";
 import WineDetail from "@/components/wine/new/wine/WineDetail";
 import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import {Wine} from "@/types/wine";
+import {Producer} from "@/types/producer";
+import {redirect} from "next/navigation";
 
 interface Props {
     wines: Wine[];
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
-    setIsViewMode: React.Dispatch<React.SetStateAction<boolean>>;
+    producer: Producer;
 }
 
-const Wines = ({wines, setViewType, setIsViewMode}: Props) => {
+const Wines = ({wines, setViewType,  producer}: Props) => {
     return (
         <div>
             <div className="mb-8 flex flex-row justify-center items-center gap-x-4 mx-auto">
@@ -21,7 +23,7 @@ const Wines = ({wines, setViewType, setIsViewMode}: Props) => {
                 <button
                     type="submit"
                     className="bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-400"
-                    onClick={() => setIsViewMode(false)}
+                    onClick={() => {redirect(`/producer/${producer.id}/wine/create`)}}
                 >
                     新しいワインを登録
                 </button>

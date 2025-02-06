@@ -15,7 +15,10 @@ export type ViewType = 1 | 2 | 3;
 
 const CreateNewTasting = ({initialProducers}: Props) => {
     const [wines, setWines] = useState<Wine[]>([]);
-    const [selectedProducer, setSelectedProducer] = useState<Producer | null>(null);
+    const [selectedProducer, setSelectedProducer] = useState<Producer>({
+        id: 0,
+        name: "",
+    });
     const [viewType, setViewType] = useState<ViewType>(1);
     return (
         <section>
@@ -31,7 +34,6 @@ const CreateNewTasting = ({initialProducers}: Props) => {
                     wines={wines}
                     setViewType={setViewType}
                     selectedProducer={selectedProducer}
-                    setWines={setWines}
                 />}
         </section>
     )

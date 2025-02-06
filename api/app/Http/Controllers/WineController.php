@@ -29,19 +29,19 @@ class WineController extends Controller
     public function create(Request $request): JsonResponse
     {
         try {
-            $wine = $request->input('wine');
-            $this->createWineUseCase->handle(
+            $wineRequest = $request->input('wine');
+            $wine = $this->createWineUseCase->handle(
                 new CreateWineUseCaseInput(
                     new Wine(
                         id: null,
-                        name: $wine['name'],
-                        producerId: $wine['producerId'],
-                        wineType: WineType::fromId($wine['wineTypeId']),
-                        country: new Country($wine['countryId'], null),
+                        name: $wineRequest['name'],
+                        producerId: $wineRequest['producerId'],
+                        wineType: WineType::fromId($wineRequest['wineTypeId']),
+                        country: new Country($wineRequest['countryId'], null),
                     )
                 )
             );
-            return response()->json(status: 201);
+            return response()->json(['id' => $wine->getId()], 201);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return response()->json(status: 400);
