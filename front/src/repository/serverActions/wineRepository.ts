@@ -11,7 +11,7 @@ interface WineCreateBody {
     }
 }
 
-export const createWine = async (wine: Wine) => {
+export const createWine = async (wine: Wine, prefix: string) => {
     const body: WineCreateBody = {
         "wine": {
             "producerId": wine.producerId,
@@ -32,7 +32,7 @@ export const createWine = async (wine: Wine) => {
     }
     const responseJson: {id: number} = await response.json();
 
-    redirect(`/wine/${responseJson.id}/vintage/create`);
+    redirect(`${prefix}/wine/${responseJson.id}/vintage/create`);
 }
 
 export const getWinesByProducerId = async (producerId: number): Promise<Wine[]> => {

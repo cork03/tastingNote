@@ -1,17 +1,15 @@
 "use client"
 
-import ChoiceProducer from "@/components/utils/domainView/producer/ChoiceProducer";
-import ChoiceWine from "@/components/wine/new/wine/ChoiceWine";
+import ChoiceProducer from "@/components/common/createWineVintageRoute/ChoiceProducer";
+import ChoiceWine from "@/components/common/createWineVintageRoute/ChoiceWine";
 import {useState} from "react";
 import {Producer} from "@/types/domain/producer";
 import {Wine} from "@/types/domain/wine";
+import {ViewType} from "@/components/common/createWineVintageRoute/type";
 
 interface Props {
     producers: Producer[];
 }
-
-export type ViewType = 1 | 2;
-
 
 const CreateNewTasting = ({producers}: Props) => {
     const [wines, setWines] = useState<Wine[]>([]);
@@ -21,7 +19,7 @@ const CreateNewTasting = ({producers}: Props) => {
         <>
             {viewType === 1 &&
                 <ChoiceProducer
-                    wineCommentId={null}
+                    prefix={""}
                     producers={producers}
                     setWines={setWines}
                     setViewType={setViewType}
@@ -29,7 +27,7 @@ const CreateNewTasting = ({producers}: Props) => {
                 />}
             {viewType === 2 &&
                 <ChoiceWine
-                    wineCommentId={null}
+                    prefix={""}
                     wines={wines}
                     setViewType={setViewType}
                     selectedProducerId={selectedProducerId}

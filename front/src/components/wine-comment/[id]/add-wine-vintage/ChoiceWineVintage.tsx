@@ -1,20 +1,21 @@
 "use client"
 
-import ChoiceWine from "@/components/wine/new/wine/ChoiceWine";
+import ChoiceWine from "@/components/common/createWineVintageRoute/ChoiceWine";
 import {useState} from "react";
 import {Producer} from "@/types/domain/producer";
 import {Wine} from "@/types/domain/wine";
-import ChoiceProducer from "@/components/utils/domainView/producer/ChoiceProducer";
+import ChoiceProducer from "@/components/common/createWineVintageRoute/ChoiceProducer";
+import {ViewType} from "@/components/common/createWineVintageRoute/type";
 
 interface Props {
-    wineCommentId: number;
+    prefix: string;
     producers: Producer[];
 }
 
-export type ViewType = 1 | 2;
 
 
-const ChoiceWineVintage = ({wineCommentId, producers}: Props) => {
+
+const ChoiceWineVintage = ({prefix, producers}: Props) => {
     const [wines, setWines] = useState<Wine[]>([]);
     const [selectedProducerId, setSelectedProducerId] = useState<number>(0);
     const [viewType, setViewType] = useState<ViewType>(1);
@@ -22,7 +23,7 @@ const ChoiceWineVintage = ({wineCommentId, producers}: Props) => {
         <>
             {viewType === 1 &&
                 <ChoiceProducer
-                    wineCommentId={wineCommentId}
+                    prefix={prefix}
                     producers={producers}
                     setWines={setWines}
                     setViewType={setViewType}
@@ -30,11 +31,13 @@ const ChoiceWineVintage = ({wineCommentId, producers}: Props) => {
                 />}
             {viewType === 2 &&
                 <ChoiceWine
-                    wineCommentId={wineCommentId}
+                    prefix={prefix}
                     wines={wines}
                     setViewType={setViewType}
                     selectedProducerId={selectedProducerId}
                 />}
+            {viewType === 3 &&
+                <div>ChoiceWineVintage</div>}
         </>
     )
 }

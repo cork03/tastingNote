@@ -1,10 +1,10 @@
 import React from "react";
-import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import GrayCard from "@/components/utils/view/grayCard";
 import {Producer} from "@/types/domain/producer";
 import ProducerCardTexts from "@/components/utils/domainView/producer/ProducerCardTexts";
 import {Wine} from "@/types/domain/wine";
 import {getWinesByProducerId} from "@/repository/serverActions/wineRepository";
+import {ViewType} from "@/components/common/createWineVintageRoute/type";
 
 interface Props {
     producer: Producer;

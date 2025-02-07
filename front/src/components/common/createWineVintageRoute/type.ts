@@ -1,0 +1,1 @@
+export type ViewType = 1 | 2 | 3;

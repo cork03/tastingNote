@@ -1,6 +1,6 @@
 import React from "react";
 import {Country} from "@/types/domain/country";
-import ProducerCreate from "@/components/utils/domainView/producer/ProducerCreate";
+import ProducerCreate from "@/components/common/createWineVintageRoute/createProducer/ProducerCreate";
 import Main from "@/components/utils/view/main";
 import Title from "@/components/utils/view/title";
 

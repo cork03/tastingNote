@@ -1,22 +1,30 @@
 import React from "react";
-import WineDetail from "@/components/wine/new/wine/WineDetail";
-import {ViewType} from "@/components/wine/new/CreateNewTasting";
+import WineDetail from "@/components/common/createWineVintageRoute/WineDetail";
 import GrayButton from "@/components/utils/view/button/GrayButton";
 import Grid from "@/components/utils/view/grid";
 import {Wine} from "@/types/domain/wine";
+import {redirect} from "next/navigation";
+import {ViewType} from "@/components/common/createWineVintageRoute/type";
 
 interface Props {
-    wineCommentId: number | null;
+    prefix: string;
     wines: Wine[];
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
 }
 
-const Wines = ({wineCommentId, wines, setViewType}: Props) => {
+const Wines = ({prefix, wines, setViewType}: Props) => {
     return (
         <>
             <Grid>
                 {wines.map((wine) => {
-                    return <WineDetail key={wine.id} wine={wine} wineCommentId={wineCommentId}/>
+                    const onClick = () => {
+                        if (prefix) {
+                            setViewType(3);
+                        } else {
+                            redirect(`/wine/${wine.id}/vintage/create`);
+                        }
+                    }
+                    return <WineDetail key={wine.id} wine={wine} onClick={onClick}/>
                 })}
             </Grid>
             <div className="text-center">

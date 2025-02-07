@@ -1,25 +1,25 @@
 "use client"
 
 import React from "react";
-import {ViewType} from "@/components/wine/new/CreateNewTasting";
 import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import {redirect} from "next/navigation";
 import NormalButton from "@/components/utils/view/button/NormalButton";
-import ProducerDetail from "@/components/wine/new/producer/ProducerDetail";
+import ProducerDetail from "@/components/common/createWineVintageRoute/ProducerDetail";
 import Grid from "@/components/utils/view/grid";
 import {Producer} from "@/types/domain/producer";
 import {Wine} from "@/types/domain/wine";
+import {ViewType} from "@/components/common/createWineVintageRoute/type";
 
 interface Props {
-    wineCommentId: number | null;
+    prefix: string;
     producers: Producer[];
     setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setSelectedProducerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ChoiceProducer = ({wineCommentId, producers, setWines, setViewType, setSelectedProducerId}: Props) => {
+const ChoiceProducer = ({prefix, producers, setWines, setViewType, setSelectedProducerId}: Props) => {
     return (
         <>
             <Title title={"生産者"}/>
@@ -30,10 +30,7 @@ const ChoiceProducer = ({wineCommentId, producers, setWines, setViewType, setSel
                     className="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                 />
                 <NormalButton text={"新しい生産者を登録"} onClick={() => {
-                    if (wineCommentId) {
-                        redirect(`/wine-comment/${wineCommentId}/producer/create`)
-                    }
-                    redirect(`/producer/create`)
+                    redirect(prefix + `/producer/create`)
                 }}
                 />
             </div>

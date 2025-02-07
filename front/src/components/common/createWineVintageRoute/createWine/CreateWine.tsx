@@ -15,12 +15,13 @@ import GrayButton from "@/components/utils/view/button/GrayButton";
 import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
 
 interface Props {
+    prefix: string;
     producerId: number;
     countries: Country[];
     wineTypes: WineType[];
 }
 
-const CreateWine = ({producerId, countries, wineTypes}: Props) => {
+const CreateWine = ({prefix, producerId, countries, wineTypes}: Props) => {
     const [wine, setWine] = React.useState<Wine>({
         id: null,
         name: "",
@@ -37,7 +38,7 @@ const CreateWine = ({producerId, countries, wineTypes}: Props) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await createWine(wine);
+            await createWine(wine, prefix);
         } catch (e) {
             console.error(e);
         }
@@ -68,6 +69,9 @@ const CreateWine = ({producerId, countries, wineTypes}: Props) => {
                     <NormalButton text={"作成"} type={"submit"}/>
                     <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
                         e.preventDefault()
+                        if (prefix) {
+                            redirect(`${prefix}/add-wine-vintage`);
+                        }
                         redirect(`/wine/create`);
                     }}/>
                 </ButtonsDiv>

@@ -9,7 +9,7 @@ const WineCommentAddWineVintagePage = async ({params}: { params: { id: number } 
     const producers: Producer[] = await data.json();
     return (
         <Main>
-            <ChoiceWineVintage wineCommentId={id} producers={producers}/>
+            <ChoiceWineVintage prefix={`/wine-comment/${id}`} producers={producers}/>
         </Main>
     );
 };
