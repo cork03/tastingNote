@@ -3,7 +3,7 @@ import {Wine} from "@/types/domain/wine";
 
 interface Props {
     wine: Wine;
-    onClick: () => any;
+    onClick: () => void;
 }
 
 const WineDetail = ({wine, onClick}: Props) => {

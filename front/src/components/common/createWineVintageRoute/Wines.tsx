@@ -7,22 +7,21 @@ import {redirect} from "next/navigation";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
 
 interface Props {
-    prefix: string;
+    onClickWineDetail: (windId: number) => void;
     wines: Wine[];
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
 }
 
-const Wines = ({prefix, wines, setViewType}: Props) => {
+const Wines = ({onClickWineDetail, wines, setViewType}: Props) => {
     return (
         <>
             <Grid>
                 {wines.map((wine) => {
                     const onClick = () => {
-                        if (prefix) {
-                            setViewType(3);
-                        } else {
-                            redirect(`/wine/${wine.id}/vintage/create`);
+                        if (!wine.id) {
+                            throw new Error("wine.id is not defined");
                         }
+                        onClickWineDetail(wine.id);
                     }
                     return <WineDetail key={wine.id} wine={wine} onClick={onClick}/>
                 })}

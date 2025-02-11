@@ -1,4 +1,5 @@
 import {Producer} from "@/types/producer";
+import {WineVintage} from "@/types/domain/wine";
 
 export interface WineType {
     id: number;
@@ -32,25 +33,10 @@ export interface WineVariety {
     percentage: number;
 }
 
-export interface WineVintage {
-    id: number;
-    wineId: number;
-    vintage: number;
-    price: number;
-    agingMethod: string;
-    alcoholContent: number;
-    wineBlend: WineVariety[];
-    technicalComment: string | null;
-}
 
-export interface WineFullInfo {
-    id: number;
-    name: string;
-    producer: Producer;
-    wineType: WineType;
-    country: Country;
-    wineVintages: WineVintage[];
-}
+
+
+
 
 export interface WineVintageFullInfo {
     id: number;

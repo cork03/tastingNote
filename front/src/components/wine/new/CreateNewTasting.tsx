@@ -6,6 +6,7 @@ import {useState} from "react";
 import {Producer} from "@/types/domain/producer";
 import {Wine} from "@/types/domain/wine";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
+import {redirect} from "next/navigation";
 
 interface Props {
     producers: Producer[];
@@ -15,6 +16,12 @@ const CreateNewTasting = ({producers}: Props) => {
     const [wines, setWines] = useState<Wine[]>([]);
     const [selectedProducerId, setSelectedProducerId] = useState<number>(0);
     const [viewType, setViewType] = useState<ViewType>(1);
+    const toCreateWine = () => {
+        redirect(`/producer/${selectedProducerId}/wine/create`)
+    }
+    const onClickWineDetail = (wineId: number) => {
+        redirect(`/wine/${wineId}/vintage/create`);
+    }
     return (
         <>
             {viewType === 1 &&
@@ -27,10 +34,10 @@ const CreateNewTasting = ({producers}: Props) => {
                 />}
             {viewType === 2 &&
                 <ChoiceWine
-                    prefix={""}
                     wines={wines}
                     setViewType={setViewType}
-                    selectedProducerId={selectedProducerId}
+                    toCreateWine={toCreateWine}
+                    onClickWineDetail={onClickWineDetail}
                 />}
         </>
     )
