@@ -42,6 +42,8 @@ use App\usecase\wine\GetWineWithVintagesUseCase;
 use App\usecase\wine\GetWineWithVintagesUseCaseInterface;
 use App\usecase\wine\types\GetWineTypesUseCase;
 use App\usecase\wine\types\GetWineTypesUseCaseInterface;
+use App\usecase\wineComment\LinkWineCommentToWineVintageUseCase;
+use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
 use App\usecase\wineVintage\CreateUseCase;
 use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCase;
@@ -96,6 +98,7 @@ class AppServiceProvider extends ServiceProvider
             EditWineVintageUseCaseInterface::class => EditWineVintageUseCase::class,
             CreateWineVintageAndLinkCommentUseCaseInterface::class => CreateWineVintageAndLinkCommentUseCase::class,
             GetWineVintagesByIdUseCaseInterface::class => GetWineVintagesByIdUseCase::class,
+            LinkWineCommentToWineVintageUseCaseInterface::class => LinkWineCommentToWineVintageUseCase::class,
         ];
 
 

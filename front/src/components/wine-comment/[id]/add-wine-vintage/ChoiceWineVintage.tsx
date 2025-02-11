@@ -27,11 +27,10 @@ const ChoiceWineVintage = ({prefix, producers, commentId}: Props) => {
         redirect(`/wine-comment/${commentId}/producer/${selectedProducerId}/wine/create`)
     }
     const clickHandleWineDetail = async (wineId: number) => {
-        console.log(wineId);
         try {
-            setViewType(3);
             setSelectedWineId(wineId);
             setWineVintages(await getAllByWineId(wineId));
+            setViewType(3);
         } catch (e) {
             console.error(e);
         }

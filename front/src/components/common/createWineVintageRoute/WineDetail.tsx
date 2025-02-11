@@ -9,7 +9,7 @@ interface Props {
 const WineDetail = ({wine, onClick}: Props) => {
 
     return (
-        <div onClick={onClick} className={"cursor-pointer"}>
+        <div onClick={onClick} className={"cursor-pointer text-center"}>
             <GrayCard>
                 <img
                     src="/images/wine.jpg"

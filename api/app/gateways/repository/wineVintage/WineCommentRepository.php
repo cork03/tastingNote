@@ -31,4 +31,17 @@ class WineCommentRepository implements WineCommentRepositoryInterface
             throw $e;
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    public function linkToWineVintage(int $wineCommentId, int $wineVintageId): void
+    {
+        $wineCommentModel = $this->wineCommentModel->find($wineCommentId);
+        if (!isset($wineCommentModel)) {
+            throw new Exception('WineComment not found');
+        }
+        $wineCommentModel->wine_vintage_id = $wineVintageId;
+        $wineCommentModel->save();
+    }
 }

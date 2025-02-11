@@ -73,9 +73,6 @@ const EditWineVintage = ({initialWineVintage, grapeVarieties}: Props) => {
         }
         redirect(`/wine/${wineVintage.wineId}/vintage/${wineVintage.vintage}`);
     }
-    console.log(wineVintage);
-    console.log(base64Image);
-
     return (
         <Section>
             <form onSubmit={handleSubmit}>

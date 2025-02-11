@@ -29,7 +29,6 @@ class WineVintageController extends Controller
         private readonly CreateUseCaseInterface                          $createWineVintageUseCase,
         private readonly CreateWineVintageAndLinkCommentUseCaseInterface $createWineVintageAndLinkCommentUseCase,
         private readonly EditWineVintageUseCaseInterface                 $editWineVintageUseCase,
-        private readonly CreateWineCommentUseCaseInterface               $createWineCommentUseCase,
         private readonly GetFullInfoUseCaseInterface                     $getFullInfoUseCase,
         private readonly GetWineCommentsUseCaseInterface                 $getWineCommentsUseCase,
         private readonly GetWineVintageByIdUseCaseInterface              $getWineVintageByIdUseCase,
@@ -72,25 +71,6 @@ class WineVintageController extends Controller
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return response()->json(data: $e->getMessage(), status: 400);
-        }
-    }
-
-    public function createComment(Request $request): JsonResponse
-    {
-        try {
-            $wineComment = $request->input('wineComment');
-            $this->createWineCommentUseCase->handle(new WineComment(
-                    id: null,
-                    wineVintageId: $wineComment['wineVintageId'],
-                    appearance: $wineComment['appearance'],
-                    aroma: $wineComment['aroma'],
-                    taste: $wineComment['taste'],
-                    anotherComment: $wineComment['anotherComment'])
-            );
-            return response()->json(status: 201);
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
-            return response()->json(status: 400);
         }
     }
 
