@@ -21,7 +21,7 @@ class GetWineVintageByIdUseCase implements GetWineVintageByIdUseCaseInterface
     {
         $wineVintage = $this->wineVintageRepository->getById($id);
         if (!isset($wineVintage)) {
-            return ['wineVintage' => $wineVintage, 'imagePath' => null];
+            return null;
         }
         if ($wineVintage->getImagePath() === null) {
             return ['wineVintage' => $wineVintage, 'imagePath' => null];

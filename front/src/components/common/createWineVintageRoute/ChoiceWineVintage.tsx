@@ -6,16 +6,19 @@ import Section from "@/components/utils/view/section";
 import Title from "@/components/utils/view/title";
 import {redirect} from "next/navigation";
 import NormalButton from "@/components/utils/view/button/NormalButton";
-import {Wine} from "@/types/domain/wine";
+import {Wine, WineVintage} from "@/types/domain/wine";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
+import Grid from "@/components/utils/view/grid";
+import WineVintageDetail from "@/components/utils/domainView/WineVintage/WineVintageDetail";
 
 interface Props {
     wineId: number
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     commentId: number
+    wineVintages: WineVintage[]
 }
 
-const ChoiceWineVintage = ({wineId, setViewType, commentId}: Props) => {
+const ChoiceWineVintage = ({wineId, setViewType, commentId, wineVintages}: Props) => {
 
     return (
         <>
@@ -27,7 +30,16 @@ const ChoiceWineVintage = ({wineId, setViewType, commentId}: Props) => {
                 />
             </div>
             <Section>
-                <div></div>
+                <Grid>
+                    {wineVintages.map((wineVintage) => {
+                        const onClick = async () => {
+                            console.log(wineVintage.id);
+                        }
+                        return (
+                            <WineVintageDetail key={wineVintage.id} wineVintage={wineVintage} onClick={onClick}/>
+                        );
+                    })}
+                </Grid>
             </Section>
         </>
     )

@@ -21,7 +21,6 @@ use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use function Termwind\renderUsing;
 
 class WineVintageRepository implements WineVintageRepositoryInterface
 {
@@ -287,5 +286,39 @@ class WineVintageRepository implements WineVintageRepositoryInterface
             );
         }
         return $tastingComments;
+    }
+
+    /**
+     * @return WineVintage[]
+     */
+    public function getAllById(int $wineId): array
+    {
+        /** @var Collection $wineVintageModels */
+        $wineVintageModels = $this->wineVintageModel->where('wine_id', $wineId)->get();
+        $wineVintages = [];
+        foreach ($wineVintageModels as $wineVintageModel) {
+            $grapeVarieties = [];
+            foreach ($wineVintageModel->grapeVarieties as $grapeVariety) {
+                $grapeVarieties[] = new WineVariety(
+                    grapeVariety: new GrapeVariety(
+                        id: $grapeVariety->id,
+                        name: $grapeVariety->name
+                    ),
+                    percentage: $grapeVariety->pivot->percentage
+                );
+            }
+            $wineVintages[] = new WineVintage(
+                id: $wineVintageModel->id,
+                wineId: $wineVintageModel->wine_id,
+                vintage: $wineVintageModel->vintage,
+                price: $wineVintageModel->price,
+                agingMethod: $wineVintageModel->aging_method,
+                alcoholContent: $wineVintageModel->alcohol_content,
+                wineBlend: new WineBlend($grapeVarieties),
+                technicalComment: $wineVintageModel->technical_comment,
+                imagePath: $wineVintageModel->image_path
+            );
+        }
+        return $wineVintages;
     }
 }

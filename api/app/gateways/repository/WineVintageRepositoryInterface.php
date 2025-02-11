@@ -19,4 +19,9 @@ interface WineVintageRepositoryInterface
     public function getWithWineByWineIdAndVintage(int $wineId, int $vintage): WineVintageFullInfo;
 
     public function update(WineVintage $wineVintage, ?string $imagePath): void;
+
+    /**
+     * @return WineVintage[]
+     */
+    public function getAllById(int $wineId): array;
 }

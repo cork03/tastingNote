@@ -78,10 +78,10 @@ class WineVintagePresenter
                 );
                 continue;
             }
-           $tastingCommentsJson[] = new TastingCommentJson(
-               wineComment: $wineCommentJson,
-               blindTastingAnswer: (new BlindTastingAnswerJsonCreator())->create($blindTastingAnswer)
-           ) ;
+            $tastingCommentsJson[] = new TastingCommentJson(
+                wineComment: $wineCommentJson,
+                blindTastingAnswer: (new BlindTastingAnswerJsonCreator())->create($blindTastingAnswer)
+            );
         }
         return response()->json($tastingCommentsJson);
     }
@@ -93,5 +93,21 @@ class WineVintagePresenter
     {
         $wineVintageJson = (new WineVintageJsonCreator())->create($wineVintageInfo['wineVintage'], $wineVintageInfo['imagePath']);
         return response()->json($wineVintageJson);
+    }
+
+    /**
+     * @param array<array{wineVintage: WineVintage, imagePath: ?string}> $wineVintagesInfo
+     */
+    public function getWineVintagesByIdResponse(array $wineVintagesInfo): JsonResponse
+    {
+        $wineVintagesJson = [];
+        foreach ($wineVintagesInfo as $wineVintageInfo) {
+            $wineVintagesJson[] = (new WineVintageJsonCreator())
+                ->create(
+                    $wineVintageInfo['wineVintage'],
+                    $wineVintageInfo['imagePath']
+                );
+        }
+        return response()->json($wineVintagesJson);
     }
 }

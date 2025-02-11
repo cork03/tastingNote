@@ -17,6 +17,7 @@ use App\usecase\wineVintage\EditWineVintageUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
+use App\usecase\wineVintage\GetWineVintagesByIdUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class WineVintageController extends Controller
         private readonly GetFullInfoUseCaseInterface                     $getFullInfoUseCase,
         private readonly GetWineCommentsUseCaseInterface                 $getWineCommentsUseCase,
         private readonly GetWineVintageByIdUseCaseInterface              $getWineVintageByIdUseCase,
+        private readonly GetWineVintagesByIdUseCaseInterface             $getWineVintagesByIdUseCase,
         private readonly WineVintagePresenter                            $wineVintagePresenter
     )
     {
@@ -181,6 +183,12 @@ class WineVintageController extends Controller
             return response()->json(status: 404);
         }
         return $this->wineVintagePresenter->getWineVintageByIdResponse($wineVintageInfo);
+    }
+
+    public function getAllByWineId(int $id): JsonResponse
+    {
+        $wineVintages = $this->getWineVintagesByIdUseCase->handle($id);
+        return $this->wineVintagePresenter->getWineVintagesByIdResponse($wineVintages);
     }
 
     public function getWineComments(int $id): JsonResponse

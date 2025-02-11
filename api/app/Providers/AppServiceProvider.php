@@ -56,6 +56,8 @@ use App\usecase\wineVintage\GetWineCommentsUseCase;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintageByIdUseCase;
 use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
+use App\usecase\wineVintage\GetWineVintagesByIdUseCase;
+use App\usecase\wineVintage\GetWineVintagesByIdUseCaseInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -93,6 +95,7 @@ class AppServiceProvider extends ServiceProvider
             GetWineVintageByIdUseCaseInterface::class => GetWineVintageByIdUseCase::class,
             EditWineVintageUseCaseInterface::class => EditWineVintageUseCase::class,
             CreateWineVintageAndLinkCommentUseCaseInterface::class => CreateWineVintageAndLinkCommentUseCase::class,
+            GetWineVintagesByIdUseCaseInterface::class => GetWineVintagesByIdUseCase::class,
         ];
 
 

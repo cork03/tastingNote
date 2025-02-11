@@ -47,3 +47,16 @@ export async function createWineVintageAndLinkComment(wineVintage: WineVintage, 
     }
     return await response.json();
 }
+
+export async function getAllByWineId(wineId: number) {
+    const response = await fetch(`${process.env.API_URL}/wine/${wineId}/wine-vintages`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (!response.ok) {
+        throw new Error('Failed to get wine vintages');
+    }
+    return await response.json() as WineVintage[];
+}

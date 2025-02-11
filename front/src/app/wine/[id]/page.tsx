@@ -4,7 +4,6 @@ import Section from "@/components/utils/view/section";
 import {WineFullInfo} from "@/types/domain/wine";
 import WineVintages from "@/components/wine/[id]/WineVintages";
 
-
 const WineDetailPage = async ({params}: { params: { id: number } }) => {
     const {id} = await params;
     const data = await fetch(`${process.env.API_URL}/wine/${id}`);
