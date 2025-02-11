@@ -1,16 +1,17 @@
 import React from "react";
 import Title from "@/components/utils/view/title";
-import CreateWineVintage from "@/components/wine/[id]/vintage/create/page";
+import CreateWineVintage from "@/components/wine/[id]/vintage/create/createWineVintage";
+import Main from "@/components/utils/view/main";
 
 const WineVintageDetailPage = async ({params}: { params: { id: number}}) => {
-    const wineId = await params.id;
+    const {id} = await params;
     const grapeVarietiesData = await fetch(`${process.env.API_URL}/grape-varieties`);
     const grapeVarieties = await grapeVarietiesData.json();
     return (
-        <main className="flex-grow min-h-screen container mx-auto px-4 py-8">
+        <Main>
             <Title title="ワイン作成"/>
-            <CreateWineVintage wineId={wineId} grapeVarieties={grapeVarieties}/>
-        </main>
+            <CreateWineVintage wineId={id} grapeVarieties={grapeVarieties}/>
+        </Main>
     );
 };
 

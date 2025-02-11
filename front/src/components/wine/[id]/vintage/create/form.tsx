@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react";
-import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
 import TextField from "@/components/utils/form/Vertical/textField";
 import {GrapeVariety, WineVariety, WineVintage} from "@/types/domain/wine";
@@ -10,7 +9,6 @@ import VintageSelectField from "@/components/utils/form/Vertical/vintageSelectFi
 import AlcoholContentSelectField from "@/components/utils/form/Vertical/alcoholContentSelectField";
 import WineBlendSelectField from "@/components/utils/form/Vertical/wineBlendSelectField";
 import {redirect} from "next/navigation";
-import {postProducer} from "@/repository/producerRepository";
 import {postWineVintage} from "@/repository/wineVintageRepository";
 import InputFileField from "@/components/utils/form/Vertical/inputFileField";
 import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
@@ -20,9 +18,11 @@ import GrayButton from "@/components/utils/view/button/GrayButton";
 interface Props {
     wineId: number;
     grapeVarieties: GrapeVariety[];
+    handle: (e: React.FormEvent<HTMLFormElement>, wineVintage: WineVintage, base64Image: string | null) => void;
+    backHandle: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
-const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
+const Form = ({wineId, grapeVarieties, handle, backHandle}: Props) => {
     const [wineVintage, setWineVintage] = React.useState<WineVintage>({
         id: null,
         wineId: wineId,
@@ -76,40 +76,39 @@ const CreateWineVintage = ({wineId, grapeVarieties}: Props) => {
     }
 
     return (
-        <Section>
-            <form onSubmit={handleSubmit}>
-                <div className="space-y-6">
-                    <GrayCard>
-                        <VintageSelectField label={"ヴィンテージ"} name={"vintage"} value={wineVintage.vintage}
-                                            onChange={handleSelectChange}/>
-                        <WineBlendSelectField wineBlend={wineVintage.wineBlend} label={"ブドウ品種"}
-                                              onChange={handleWineBlendChange} deleteButton={deleteButton}
-                                              addWineBlend={addWineBlend} grapeVarieties={grapeVarieties}/>
-                        <TextField label={"熟成方法"} name={"agingMethod"} value={wineVintage.agingMethod}
-                                   onChange={handleTextChange}
-                                   placeholder={"例：フレンチオークの大樽で12ヶ月。新樽比率50%"}/>
-                        <AlcoholContentSelectField label={"アルコール度数"} name={"alcoholContent"}
-                                                   value={wineVintage.alcoholContent} onChange={handleSelectChange}/>
-                        <InputField label={"価格"} name={"price"} value={wineVintage.price} onChange={handleInputChange}
-                                    placeholder={"5000"} type={"number"}/>
-                        <TextField label={"その他製造に関するコメント"} name={"technicalComment"}
-                                   value={wineVintage.technicalComment || ""} onChange={handleTextChange}
-                                   placeholder={"例：マロラクティック発酵,全房発酵"}/>
-                        <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image}
-                                        placeholder={"test"}/>
-                    </GrayCard>
-                    <ButtonsDiv>
-                        <NormalButton text={"作成"}/>
-                        <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
-                            e.preventDefault()
-                            redirect("/wine/create")
-                        }}
-                        />
-                    </ButtonsDiv>
-                </div>
-            </form>
-        </Section>
+        <form onSubmit={(event) => {
+            handle(event, wineVintage, base64Image);
+        }}>
+            <div className="space-y-6">
+                <GrayCard>
+                    <VintageSelectField label={"ヴィンテージ"} name={"vintage"} value={wineVintage.vintage}
+                                        onChange={handleSelectChange}/>
+                    <WineBlendSelectField wineBlend={wineVintage.wineBlend} label={"ブドウ品種"}
+                                          onChange={handleWineBlendChange} deleteButton={deleteButton}
+                                          addWineBlend={addWineBlend} grapeVarieties={grapeVarieties}/>
+                    <TextField label={"熟成方法"} name={"agingMethod"} value={wineVintage.agingMethod}
+                               onChange={handleTextChange}
+                               placeholder={"例：フレンチオークの大樽で12ヶ月。新樽比率50%"}/>
+                    <AlcoholContentSelectField label={"アルコール度数"} name={"alcoholContent"}
+                                               value={wineVintage.alcoholContent} onChange={handleSelectChange}/>
+                    <InputField label={"価格"} name={"price"} value={wineVintage.price} onChange={handleInputChange}
+                                placeholder={"5000"} type={"number"}/>
+                    <TextField label={"その他製造に関するコメント"} name={"technicalComment"}
+                               value={wineVintage.technicalComment || ""} onChange={handleTextChange}
+                               placeholder={"例：マロラクティック発酵,全房発酵"}/>
+                    <InputFileField label={"画像"} name={"image"} value={"image"} setBase64Image={setBase64Image}
+                                    placeholder={"test"}/>
+                </GrayCard>
+                <ButtonsDiv>
+                    <NormalButton text={"作成"} type={"submit"}/>
+                    <GrayButton text={"戻る"} onClick={(e: React.FormEvent<HTMLButtonElement>) => {
+                        backHandle(e);
+                    }}
+                    />
+                </ButtonsDiv>
+            </div>
+        </form>
     );
 };
 
-export default CreateWineVintage;
+export default Form;
