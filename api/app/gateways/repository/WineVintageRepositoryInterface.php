@@ -10,14 +10,13 @@ use App\domain\WineVintageFullInfo;
 interface WineVintageRepositoryInterface
 {
     public function create(WineVintage $wineVintage, ?string $imagePath): void;
-    public function getWithWineByWineIdAndVintage(int $wineId, int $vintage): WineVintageFullInfo;
-
+    public function createAndLinkComment(WineVintage $wineVintage, ?string $imagePath, int $commentId): void;
+    public function getById(int $id): ?WineVintage;
     /**
      * @return TastingComment[]
      */
     public function getWineCommentsByWineVintageId(int $wineVintageId): array;
-
-    public function getById(int $id): ?WineVintage;
+    public function getWithWineByWineIdAndVintage(int $wineId, int $vintage): WineVintageFullInfo;
 
     public function update(WineVintage $wineVintage, ?string $imagePath): void;
 }

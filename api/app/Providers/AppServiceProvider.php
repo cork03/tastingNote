@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\domain\images\WineVintageImagePathCreator;
 use App\gateways\FileUploader\FileUploaderInterface;
 use App\gateways\FileUploader\S3FIleUploader;
 use App\gateways\repository\blindTasting\BlindTastingRepository;
@@ -47,6 +46,8 @@ use App\usecase\wineVintage\CreateUseCase;
 use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCase;
 use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
+use App\usecase\wineVintage\CreateWineVintageAndLinkCommentUseCase;
+use App\usecase\wineVintage\CreateWineVintageAndLinkCommentUseCaseInterface;
 use App\usecase\wineVintage\EditWineVintageUseCase;
 use App\usecase\wineVintage\EditWineVintageUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCase;
@@ -55,7 +56,6 @@ use App\usecase\wineVintage\GetWineCommentsUseCase;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintageByIdUseCase;
 use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
-use App\utils\Base64ImageResolver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -92,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
             FileUploaderInterface::class => S3FIleUploader::class,
             GetWineVintageByIdUseCaseInterface::class => GetWineVintageByIdUseCase::class,
             EditWineVintageUseCaseInterface::class => EditWineVintageUseCase::class,
+            CreateWineVintageAndLinkCommentUseCaseInterface::class => CreateWineVintageAndLinkCommentUseCase::class,
         ];
 
 

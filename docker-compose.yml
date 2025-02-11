@@ -30,6 +30,7 @@ services:
     image: "mysql:8.3"
     volumes:
       - "./mysql/var/log/mysql:/var/lib/mysql:delegated"
+      - "./mysql/my.cnf:/etc/mysql/my.cnf"
     ports:
       - "${MYSQL_PORT}:3306"
     environment:

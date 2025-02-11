@@ -11,6 +11,8 @@ use App\presenter\WineVintagePresenter;
 use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
+use App\usecase\wineVintage\CreateWineVintageAndLinkCommentUseCaseInput;
+use App\usecase\wineVintage\CreateWineVintageAndLinkCommentUseCaseInterface;
 use App\usecase\wineVintage\EditWineVintageUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
@@ -23,13 +25,14 @@ use Illuminate\Support\Facades\Log;
 class WineVintageController extends Controller
 {
     public function __construct(
-        private readonly CreateUseCaseInterface             $createWineVintageUseCase,
-        private readonly EditWineVintageUseCaseInterface    $editWineVintageUseCase,
-        private readonly CreateWineCommentUseCaseInterface  $createWineCommentUseCase,
-        private readonly GetFullInfoUseCaseInterface        $getFullInfoUseCase,
-        private readonly GetWineCommentsUseCaseInterface    $getWineCommentsUseCase,
-        private readonly GetWineVintageByIdUseCaseInterface $getWineVintageByIdUseCase,
-        private readonly WineVintagePresenter               $wineVintagePresenter
+        private readonly CreateUseCaseInterface                          $createWineVintageUseCase,
+        private readonly CreateWineVintageAndLinkCommentUseCaseInterface $createWineVintageAndLinkCommentUseCase,
+        private readonly EditWineVintageUseCaseInterface                 $editWineVintageUseCase,
+        private readonly CreateWineCommentUseCaseInterface               $createWineCommentUseCase,
+        private readonly GetFullInfoUseCaseInterface                     $getFullInfoUseCase,
+        private readonly GetWineCommentsUseCaseInterface                 $getWineCommentsUseCase,
+        private readonly GetWineVintageByIdUseCaseInterface              $getWineVintageByIdUseCase,
+        private readonly WineVintagePresenter                            $wineVintagePresenter
     )
     {
     }
@@ -89,6 +92,43 @@ class WineVintageController extends Controller
         }
     }
 
+    public function createAndLinkComment(Request $request, int $id): JsonResponse
+    {
+        try {
+            $wineVintage = $request->input('wineVintage');
+            $wineVarieties = [];
+            foreach ($wineVintage['wineBlend'] as $wineVariety) {
+                $wineVarieties[] = new WineVariety(
+                    grapeVariety: new GrapeVariety(
+                        id: $wineVariety['grapeVarietyId'],
+                        name: null
+                    ),
+                    percentage: $wineVariety['percentage'],
+                );
+            }
+            $this->createWineVintageAndLinkCommentUseCase->handle(
+                new CreateWineVintageAndLinkCommentUseCaseInput(
+                    wineVintage: new WineVintage(
+                        id: null,
+                        wineId: $wineVintage['wineId'],
+                        vintage: $wineVintage['vintage'],
+                        price: $wineVintage['price'],
+                        agingMethod: $wineVintage['agingMethod'],
+                        alcoholContent: $wineVintage['alcoholContent'],
+                        wineBlend: new WineBlend($wineVarieties),
+                        technicalComment: $wineVintage['technicalComment'],
+                    ),
+                    base64Image: $wineVintage['base64Image'],
+                    commentId: $id
+                )
+            );
+            return response()->json(status: 201);
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response()->json(data: $e->getMessage(), status: 400);
+        }
+    }
+
     public function edit(Request $request, int $id): JsonResponse
     {
         try {
@@ -104,17 +144,17 @@ class WineVintageController extends Controller
                 );
             }
             $this->editWineVintageUseCase->handle(
-                    wineVintage: new WineVintage(
-                        id: $id,
-                        wineId: $wineVintage['wineId'],
-                        vintage: $wineVintage['vintage'],
-                        price: $wineVintage['price'],
-                        agingMethod: $wineVintage['agingMethod'],
-                        alcoholContent: $wineVintage['alcoholContent'],
-                        wineBlend: new WineBlend($wineVarieties),
-                        technicalComment: $wineVintage['technicalComment'],
-                    ),
-                    base64Image: $wineVintage['base64Image']
+                wineVintage: new WineVintage(
+                    id: $id,
+                    wineId: $wineVintage['wineId'],
+                    vintage: $wineVintage['vintage'],
+                    price: $wineVintage['price'],
+                    agingMethod: $wineVintage['agingMethod'],
+                    alcoholContent: $wineVintage['alcoholContent'],
+                    wineBlend: new WineBlend($wineVarieties),
+                    technicalComment: $wineVintage['technicalComment'],
+                ),
+                base64Image: $wineVintage['base64Image']
             );
             return response()->json();
         } catch (Exception $e) {
