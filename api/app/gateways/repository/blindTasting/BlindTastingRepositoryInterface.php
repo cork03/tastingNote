@@ -7,5 +7,5 @@ use App\domain\WineComment;
 
 interface BlindTastingRepositoryInterface
 {
-    public function create(WineComment $wineComment, BlindTastingAnswer $blindTastingAnswer): void;
+    public function create(WineComment $wineComment, BlindTastingAnswer $blindTastingAnswer): int;
 }

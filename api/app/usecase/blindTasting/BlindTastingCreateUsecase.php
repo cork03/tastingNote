@@ -11,8 +11,8 @@ class BlindTastingCreateUsecase implements BlindTastingCreateUsecaseInterface
     {
     }
 
-    public function handle(BlindTastingCreateUsecaseInput $input): void
+    public function handle(BlindTastingCreateUsecaseInput $input): int
     {
-        $this->blindTastingRepository->create($input->getWineComment(), $input->getBlindTastingAnswer());
+        return $this->blindTastingRepository->create($input->getWineComment(), $input->getBlindTastingAnswer());
     }
 }

@@ -6,6 +6,7 @@ import {GrapeVariety, WineVintage} from "@/types/domain/wine";
 import {redirect, usePathname} from "next/navigation";
 import {postWineVintage} from "@/repository/wineVintageRepository";
 import Form from "@/components/wine/[id]/vintage/create/form";
+import {createWineVintageAndLinkComment} from "@/repository/serverActions/wineVintageRepository";
 
 interface Props {
     wineCommentId: number;
@@ -17,8 +18,7 @@ const CreateWineVintage = ({wineCommentId, wineId, grapeVarieties}: Props) => {
     const handle = async (e: React.FormEvent<HTMLFormElement>, wineVintage: WineVintage, base64Image: string | null) => {
         e.preventDefault();
         try {
-            // ワインを作成してコメントと紐づけるapiを呼び出す
-            // await function(wineVintage, base64Image, wineCommentId);
+            await createWineVintageAndLinkComment(wineVintage, base64Image, wineCommentId);
         } catch (e) {
             console.error(e);
             return;

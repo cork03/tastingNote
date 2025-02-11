@@ -4,5 +4,5 @@ namespace App\usecase\blindTasting;
 
 interface BlindTastingCreateUsecaseInterface
 {
-    public function handle(BlindTastingCreateUsecaseInput $input): void;
+    public function handle(BlindTastingCreateUsecaseInput $input): int;
 }

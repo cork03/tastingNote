@@ -60,15 +60,18 @@ class BlindTastingController extends Controller
                 anotherComment: $blindTastingAnswerInput['anotherComment'],
             );
 
-            $this->blindTastingCreateUsecase->handle(new BlindTastingCreateUsecaseInput(
+            $commentId = $this->blindTastingCreateUsecase->handle(new BlindTastingCreateUsecaseInput(
                 wineComment: $wineComment,
                 blindTastingAnswer: $blindTastingAnswer,
             ));
+            return response()->json(
+                data: ['id' => $commentId],
+                status: 201
+            );
         } catch (\Exception $e) {
             Log::info($e->getMessage());
             return response()->json(status: 400);
         }
 
-        return response()->json(status: 201);
     }
 }

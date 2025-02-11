@@ -1,4 +1,9 @@
-import {BlindTastingAnswer as DomainBlindTastingAnswer, WineComment as DomainWineComment} from "@/types/domain/blindTasting";
+"use server"
+import {
+    BlindTastingAnswer as DomainBlindTastingAnswer,
+    WineComment as DomainWineComment
+} from "@/types/domain/blindTasting";
+import {redirect} from "next/navigation";
 
 interface WineComment {
     appearance: string;
@@ -20,6 +25,7 @@ interface WineVariety {
     grapeVarietyId: number;
     percentage: number;
 }
+
 interface CreateBlindTastingPost {
     wineComment: WineComment
     blindTastingAnswer: BlindTastingAnswer;
@@ -31,7 +37,7 @@ interface CreateBlindTasting {
 }
 
 export const createBlindTasting = async ({wineComment, blindTastingAnswer}: CreateBlindTasting) => {
-    const wineVarieties: WineVariety[] = blindTastingAnswer.wineBlend.map((wineVariety)=> {
+    const wineVarieties: WineVariety[] = blindTastingAnswer.wineBlend.map((wineVariety) => {
         return {
             grapeVarietyId: wineVariety.id,
             percentage: wineVariety.percentage
@@ -54,7 +60,7 @@ export const createBlindTasting = async ({wineComment, blindTastingAnswer}: Crea
             anotherComment: blindTastingAnswer.anotherComment
         }
     }
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blind-tasting`, {
+    const response = await fetch(`${process.env.API_URL}/blind-tasting`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -65,4 +71,6 @@ export const createBlindTasting = async ({wineComment, blindTastingAnswer}: Crea
     if (!response.ok) {
         throw new Error('Failed to create producer');
     }
+    const responseJson: { id: number } = await response.json();
+    redirect(`/wine-comment/${responseJson.id}/add-wine-vintage`);
 }

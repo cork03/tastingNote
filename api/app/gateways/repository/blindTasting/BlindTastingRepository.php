@@ -22,10 +22,10 @@ class BlindTastingRepository implements BlindTastingRepositoryInterface
     /**
      * @throws Exception
      */
-    public function create(WineComment $wineComment, BlindTastingAnswer $blindTastingAnswer): void
+    public function create(WineComment $wineComment, BlindTastingAnswer $blindTastingAnswer): int
     {
         try {
-            DB::transaction(function () use ($wineComment, $blindTastingAnswer) {
+            return DB::transaction(function () use ($wineComment, $blindTastingAnswer) {
                 /** @var WineCommentModel $wineCommentModel */
                 $wineCommentModel = $this->wineCommentModel->create([
                     'appearance' => $wineComment->getAppearance(),
@@ -49,6 +49,7 @@ class BlindTastingRepository implements BlindTastingRepositoryInterface
                     ];
                 }
                 $blindTastingAnswerModel->grapeVarieties()->attach($blindTastingWineVarieties);
+                return $wineCommentModel->id;
             });
         } catch (Exception $e) {
             Log::info($e->getMessage());
