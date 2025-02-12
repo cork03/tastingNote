@@ -14,6 +14,8 @@ use App\gateways\repository\ProducerRepository;
 use App\gateways\repository\ProducerRepositoryInterface;
 use App\gateways\repository\wine\wineTypes\WineTypesRepository;
 use App\gateways\repository\wine\wineTypes\WineTypesRepositoryInterface;
+use App\gateways\repository\wineRanking\WineRankingRepository;
+use App\gateways\repository\wineRanking\WineRankingRepositoryInterface;
 use App\gateways\repository\WineRepository;
 use App\gateways\repository\WineRepositoryInterface;
 use App\gateways\repository\wineVintage\WineCommentRepository;
@@ -44,6 +46,8 @@ use App\usecase\wine\types\GetWineTypesUseCase;
 use App\usecase\wine\types\GetWineTypesUseCaseInterface;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCase;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
+use App\usecase\wineRanking\WineRankingCreateUseCase;
+use App\usecase\wineRanking\WineRankingCreateUseCaseInterface;
 use App\usecase\wineVintage\CreateUseCase;
 use App\usecase\wineVintage\CreateUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCase;
@@ -60,6 +64,9 @@ use App\usecase\wineVintage\GetWineVintageByIdUseCase;
 use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintagesByIdUseCase;
 use App\usecase\wineVintage\GetWineVintagesByIdUseCaseInterface;
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -99,6 +106,8 @@ class AppServiceProvider extends ServiceProvider
             CreateWineVintageAndLinkCommentUseCaseInterface::class => CreateWineVintageAndLinkCommentUseCase::class,
             GetWineVintagesByIdUseCaseInterface::class => GetWineVintagesByIdUseCase::class,
             LinkWineCommentToWineVintageUseCaseInterface::class => LinkWineCommentToWineVintageUseCase::class,
+            WineRankingCreateUseCaseInterface::class => WineRankingCreateUseCase::class,
+            WineRankingRepositoryInterface::class => WineRankingRepository::class,
         ];
 
 
@@ -112,6 +121,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        DB::listen(function (QueryExecuted $query) {
+            Log::info($query->sql);
+            // $query->sql;
+            // $query->bindings;
+            // $query->time;
+            // $query->toRawSql();
+        });
     }
 }

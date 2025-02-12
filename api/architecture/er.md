@@ -77,6 +77,11 @@ erDiagram
         tinyint percentage
     }
     
+    wine_rankings {
+        int id PK
+        int wine_vintage_id FK,UK
+        int ranking UK
+    }
     
     producers ||--o{ wines : ""
     producers ||--|| countries : ""
@@ -90,4 +95,5 @@ erDiagram
     blind_tasting_answers ||--|| wine_comments : ""
     blind_tasting_answers ||--o{ blind_tasting_wine_varieties : ""
     grape_varieties ||--o{ blind_tasting_wine_varieties : ""
+    wine_vintages ||--|| wine_rankings : ""
 ```
