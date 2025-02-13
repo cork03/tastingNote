@@ -2,6 +2,7 @@
 
 namespace App\usecase\wineRanking;
 
+use App\domain\WineType;
 use App\gateways\repository\wineRanking\WineRankingRepositoryInterface;
 
 class WineRankingCreateUseCase implements WineRankingCreateUseCaseInterface
@@ -10,8 +11,8 @@ class WineRankingCreateUseCase implements WineRankingCreateUseCaseInterface
     {
     }
 
-    public function handle(int $wineVintageId, int $rank): void
+    public function handle(int $wineVintageId, int $rank, WineType $wineType): void
     {
-        $this->wineRankingRepository->create($wineVintageId, $rank);
+        $this->wineRankingRepository->create($wineVintageId, $rank, $wineType);
     }
 }

@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('wine_rankings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('wine_vintage_id')->unique()->comment('ワインヴィンテージのid')->constrained();
-            $table->integer('rank')->unique()->comment('順位');
+            $table->unsignedInteger('rank')->comment('順位');
+            $table->foreignId('wine_type_id')->comment('ワイン種別id')->constrained();
+            $table->unique(['wine_type_id', 'rank']);
         });
     }
 

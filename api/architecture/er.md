@@ -81,6 +81,7 @@ erDiagram
         int id PK
         int wine_vintage_id FK,UK
         int ranking UK
+        int wine_type_id FK
     }
     
     producers ||--o{ wines : ""
@@ -96,4 +97,5 @@ erDiagram
     blind_tasting_answers ||--o{ blind_tasting_wine_varieties : ""
     grape_varieties ||--o{ blind_tasting_wine_varieties : ""
     wine_vintages ||--|| wine_rankings : ""
+    wine_types ||--|{ wine_rankings : ""
 ```

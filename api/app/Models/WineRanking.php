@@ -15,6 +15,7 @@ class WineRanking extends Model
         return [
             'wine_vintage_id' => 'integer',
             'rank' => 'integer',
+            'wine_type_id' => 'integer',
         ];
     }
 
@@ -24,6 +25,7 @@ class WineRanking extends Model
     protected $fillable = [
         'wine_vintage_id',
         'rank',
+        'wine_type_id',
     ];
 
     /**
@@ -34,5 +36,10 @@ class WineRanking extends Model
     public function wineVintage(): BelongsTo
     {
         return $this->belongsTo(WineVintage::class);
+    }
+
+    public function wineType(): BelongsTo
+    {
+        return $this->belongsTo(WineType::class);
     }
 }

@@ -12,6 +12,7 @@ const Nav = () => {
         {url: "/wines", text: "Wines"},
         {url: "/producers", text: "Producers"},
         {url: "/map", text: "Map"},
+        {url: "/ranking", text: "Ranking"},
     ];
     return (
         <nav className="bg-gray-700 text-white py-2 shadow">
