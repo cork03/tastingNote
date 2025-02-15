@@ -3,6 +3,7 @@
 namespace App\gateways\repository;
 
 use App\domain\TastingComment;
+use App\domain\Wine;
 use App\domain\WineComment;
 use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
@@ -24,4 +25,9 @@ interface WineVintageRepositoryInterface
      * @return WineVintage[]
      */
     public function getAllById(int $wineId): array;
+
+    /**
+     * @return array<array{wine: Wine, wineVintage: WineVintage}>
+     */
+    public function getAllWithWine(): array;
 }

@@ -33,11 +33,6 @@ export interface WineVariety {
     percentage: number;
 }
 
-
-
-
-
-
 export interface WineVintageFullInfo {
     id: number;
     producer: Producer;

@@ -3,11 +3,13 @@
 namespace App\presenter;
 
 use App\domain\TastingComment;
+use App\domain\Wine;
 use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
 use App\presenter\creator\BlindTastingAnswerJsonCreator;
 use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\creator\WineCommentJsonCreator;
+use App\presenter\creator\WineJsonCreator;
 use App\presenter\creator\WineVintageJsonCreator;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\TastingCommentJson;
@@ -109,5 +111,24 @@ class WineVintagePresenter
                 );
         }
         return response()->json($wineVintagesJson);
+    }
+
+    /**
+     * @param array<array{wine: Wine, wineVintage: WineVintage}> $notRegisteredWineVintageInfo
+     */
+    public function getNotRegisteredRankingWineVintagesResponse(array $notRegisteredWineVintageInfo): JsonResponse
+    {
+        $notRegisteredWineVintageJson = [];
+        foreach ($notRegisteredWineVintageInfo as $wineVintageInfo) {
+            $notRegisteredWineVintageJson[] = [
+                'wineVintage' => (new WineVintageJsonCreator())->create(
+                    $wineVintageInfo['wineVintage'],
+                    null
+                ),
+                'wine' => (new WineJsonCreator())->create($wineVintageInfo['wine'])
+            ];
+
+        }
+        return response()->json($notRegisteredWineVintageJson);
     }
 }

@@ -74,7 +74,8 @@ class WineRankingRepository implements WineRankingRepositoryInterface
                 'wineRank' => new WineRanking(
                     id: $wineRankingModel->id,
                     rank:$wineRankingModel->rank,
-                    wineType: WineType::fromId($wineRankingModel->wineType->id),
+                    wineVintageId: $wineRankingModel->wine_vintage_id,
+                    wineType: WineType::fromId($wineRankingModel->wineType->id)
                 ),
                 'wineVintage' => new WineVintage(
                     id: $wineVintage->id,
@@ -100,5 +101,24 @@ class WineRankingRepository implements WineRankingRepositoryInterface
             ];
         }
         return $wineRanksInfo;
+    }
+
+    /**
+     * @return WineRanking[]
+     * @throws \Exception
+     */
+    public function getAll(): array
+    {
+        $wineRankingModels = $this->wineRankingModel->get();
+        $wineRanks = [];
+        foreach ($wineRankingModels as $wineRankingModel) {
+            $wineRanks[] = new WineRanking(
+                id: $wineRankingModel->id,
+                rank: $wineRankingModel->rank,
+                wineVintageId: $wineRankingModel->wine_vintage_id,
+                wineType: WineType::fromId($wineRankingModel->wine_type_id),
+            );
+        }
+        return $wineRanks;
     }
 }

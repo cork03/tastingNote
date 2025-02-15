@@ -7,6 +7,7 @@ class WineRanking
     public function __construct(
         private readonly ?int $id,
         private readonly int $rank,
+        private readonly int $wineVintageId,
         private readonly WineType $wineType,
     )
     {
@@ -25,5 +26,10 @@ class WineRanking
     public function getWineType(): WineType
     {
         return $this->wineType;
+    }
+
+    public function getWineVintageId(): int
+    {
+        return $this->wineVintageId;
     }
 }

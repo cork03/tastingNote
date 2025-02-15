@@ -267,7 +267,7 @@ class WineVintageRepository implements WineVintageRepositoryInterface
                 );
             }
 
-             $blindTastingAnswer = new BlindTastingAnswer(
+            $blindTastingAnswer = new BlindTastingAnswer(
                 id: $blindTastingAnswerModel->id,
                 wineCommentId: $blindTastingAnswerModel->wine_comment_id,
                 country: new Country(
@@ -320,5 +320,54 @@ class WineVintageRepository implements WineVintageRepositoryInterface
             );
         }
         return $wineVintages;
+    }
+
+    /**
+     * @return array<array{wine: Wine, wineVintage: WineVintage}>
+     * @throws Exception
+     */
+    public function getAllWithWine(): array
+    {
+        $wineVintageModels = $this->wineVintageModel->with('wine')->get();
+        $wineVintagesInfo = [];
+        foreach ($wineVintageModels as $wineVintageModel) {
+            $grapeVarieties = [];
+            foreach ($wineVintageModel->grapeVarieties as $grapeVariety) {
+                $grapeVarieties[] = new WineVariety(
+                    grapeVariety: new GrapeVariety(
+                        id: $grapeVariety->id,
+                        name: $grapeVariety->name
+                    ),
+                    percentage: $grapeVariety->pivot->percentage
+                );
+            }
+            $wineVintage = new WineVintage(
+                id: $wineVintageModel->id,
+                wineId: $wineVintageModel->wine_id,
+                vintage: $wineVintageModel->vintage,
+                price: $wineVintageModel->price,
+                agingMethod: $wineVintageModel->aging_method,
+                alcoholContent: $wineVintageModel->alcohol_content,
+                wineBlend: new WineBlend($grapeVarieties),
+                technicalComment: $wineVintageModel->technical_comment,
+                imagePath: $wineVintageModel->image_path
+            );
+            $wineModel = $wineVintageModel->wine;
+            $wine = new Wine(
+                id: $wineModel->id,
+                name: $wineModel->name,
+                producerId: $wineModel->producer_id,
+                wineType: WineType::fromId($wineModel->wine_type_id),
+                country: new Country(
+                    id: $wineModel->country->id,
+                    name: $wineModel->country->name
+                )
+            );
+            $wineVintagesInfo[] = [
+                'wine' => $wine,
+                'wineVintage' => $wineVintage
+            ];
+        }
+        return $wineVintagesInfo;
     }
 }

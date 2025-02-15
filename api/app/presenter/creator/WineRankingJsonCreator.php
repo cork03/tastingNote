@@ -13,6 +13,7 @@ class WineRankingJsonCreator
         return new WineRankingJson(
             id: $wineRanking->getId(),
             rank: $wineRanking->getRank(),
+            wineVintageId: $wineRanking->getWineVintageId(),
             wineType: new WineTypeJson(
                 $wineRanking->getWineType()->value,
                 $wineRanking->getWineType()->getLabel(),

@@ -16,4 +16,9 @@ interface WineRankingRepositoryInterface
      * @return array<array{wineRank: WineRanking, wineVintage: WineVintage, wine: Wine}>
      */
     public function get(WineType $wineType): array;
+
+    /**
+     * @return WineRanking[]
+     */
+    public function getAll(): array;
 }

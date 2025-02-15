@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use App\domain\GrapeVariety;
 use App\domain\WineBlend;
-use App\domain\WineComment;
 use App\domain\WineVariety;
 use App\domain\WineVintage;
 use App\presenter\WineVintagePresenter;
 use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\usecase\wineVintage\CreateUseCaseInterface;
-use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use App\usecase\wineVintage\CreateWineVintageAndLinkCommentUseCaseInput;
 use App\usecase\wineVintage\CreateWineVintageAndLinkCommentUseCaseInterface;
 use App\usecase\wineVintage\EditWineVintageUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
+use App\usecase\wineVintage\GetNotRegisteredRankingWineVintagesUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintageByIdUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintagesByIdUseCaseInterface;
@@ -26,14 +25,15 @@ use Illuminate\Support\Facades\Log;
 class WineVintageController extends Controller
 {
     public function __construct(
-        private readonly CreateUseCaseInterface                          $createWineVintageUseCase,
-        private readonly CreateWineVintageAndLinkCommentUseCaseInterface $createWineVintageAndLinkCommentUseCase,
-        private readonly EditWineVintageUseCaseInterface                 $editWineVintageUseCase,
-        private readonly GetFullInfoUseCaseInterface                     $getFullInfoUseCase,
-        private readonly GetWineCommentsUseCaseInterface                 $getWineCommentsUseCase,
-        private readonly GetWineVintageByIdUseCaseInterface              $getWineVintageByIdUseCase,
-        private readonly GetWineVintagesByIdUseCaseInterface             $getWineVintagesByIdUseCase,
-        private readonly WineVintagePresenter                            $wineVintagePresenter
+        private readonly CreateUseCaseInterface                              $createWineVintageUseCase,
+        private readonly CreateWineVintageAndLinkCommentUseCaseInterface     $createWineVintageAndLinkCommentUseCase,
+        private readonly EditWineVintageUseCaseInterface                     $editWineVintageUseCase,
+        private readonly GetFullInfoUseCaseInterface                         $getFullInfoUseCase,
+        private readonly GetWineCommentsUseCaseInterface                     $getWineCommentsUseCase,
+        private readonly GetWineVintageByIdUseCaseInterface                  $getWineVintageByIdUseCase,
+        private readonly GetWineVintagesByIdUseCaseInterface                 $getWineVintagesByIdUseCase,
+        private readonly GetNotRegisteredRankingWineVintagesUseCaseInterface $getNotRegisterdRankingWineVintagesUseCase,
+        private readonly WineVintagePresenter                                $wineVintagePresenter
     )
     {
     }
@@ -163,6 +163,12 @@ class WineVintageController extends Controller
             return response()->json(status: 404);
         }
         return $this->wineVintagePresenter->getWineVintageByIdResponse($wineVintageInfo);
+    }
+
+    public function getNotRegisteredRanking(): JsonResponse
+    {
+        $notRegisteredWineVintageInfo = $this->getNotRegisterdRankingWineVintagesUseCase->handle();
+        return $this->wineVintagePresenter->getNotRegisteredRankingWineVintagesResponse($notRegisteredWineVintageInfo);
     }
 
     public function getAllByWineId(int $id): JsonResponse

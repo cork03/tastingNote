@@ -60,6 +60,8 @@ use App\usecase\wineVintage\EditWineVintageUseCase;
 use App\usecase\wineVintage\EditWineVintageUseCaseInterface;
 use App\usecase\wineVintage\GetFullInfoUseCase;
 use App\usecase\wineVintage\GetFullInfoUseCaseInterface;
+use App\usecase\wineVintage\GetNotRegisteredRankingWineVintagesUseCase;
+use App\usecase\wineVintage\GetNotRegisteredRankingWineVintagesUseCaseInterface;
 use App\usecase\wineVintage\GetWineCommentsUseCase;
 use App\usecase\wineVintage\GetWineCommentsUseCaseInterface;
 use App\usecase\wineVintage\GetWineVintageByIdUseCase;
@@ -111,6 +113,7 @@ class AppServiceProvider extends ServiceProvider
             WineRankingCreateUseCaseInterface::class => WineRankingCreateUseCase::class,
             WineRankingRepositoryInterface::class => WineRankingRepository::class,
             GetWineRankingsUseCaseInterface::class => GetWineRankingsUseCase::class,
+            GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
         ];
 
 
