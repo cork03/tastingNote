@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\domain\Country;
-use App\domain\Wine;
-use App\domain\WineType;
 use App\presenter\WinePresenter;
 use App\usecase\wine\CreateWineUseCaseInput;
 use App\usecase\wine\CreateWineUseCaseInterface;
@@ -29,16 +26,13 @@ class WineController extends Controller
     public function create(Request $request): JsonResponse
     {
         try {
-            $wineRequest = $request->input('wine');
             $wine = $this->createWineUseCase->handle(
                 new CreateWineUseCaseInput(
-                    new Wine(
-                        id: null,
-                        name: $wineRequest['name'],
-                        producerId: $wineRequest['producerId'],
-                        wineType: WineType::fromId($wineRequest['wineTypeId']),
-                        country: new Country($wineRequest['countryId'], null),
-                    )
+                    producerId: $request->input('producerId'),
+                    name: $request->input('name'),
+                    wineTypeId: $request->input('wineTypeId'),
+                    countryId: $request->input('countryId'),
+                    appellationId: $request->input('appellationId')
                 )
             );
             return response()->json(['id' => $wine->getId()], 201);

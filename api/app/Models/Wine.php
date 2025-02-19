@@ -21,7 +21,8 @@ class Wine extends Model
             'name' => 'string',
             'producer_id' => 'integer',
             'wine_type_id' => 'integer',
-            'country_id' => 'integer'
+            'country_id' => 'integer',
+            'appellation_id' => 'integer'
         ];
     }
 
@@ -32,7 +33,8 @@ class Wine extends Model
         'name',
         'producer_id',
         'wine_type_id',
-        'country_id'
+        'country_id',
+        'appellation_id'
     ];
 
 
@@ -51,5 +53,10 @@ class Wine extends Model
     public function vineVintages(): HasMany
     {
         return $this->hasMany(WineVintage::class);
+    }
+
+    public function appellation(): BelongsTo
+    {
+        return $this->belongsTo(Appellation::class);
     }
 }

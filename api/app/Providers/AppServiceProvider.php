@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\gateways\FileUploader\FileUploaderInterface;
 use App\gateways\FileUploader\S3FIleUploader;
+use App\gateways\repository\AppellationRepository;
+use App\gateways\repository\AppellationRepositoryInterface;
 use App\gateways\repository\blindTasting\BlindTastingRepository;
 use App\gateways\repository\blindTasting\BlindTastingRepositoryInterface;
 use App\gateways\repository\CountryRepository;
@@ -22,6 +24,10 @@ use App\gateways\repository\wineVintage\WineCommentRepository;
 use App\gateways\repository\wineVintage\WineCommentRepositoryInterface;
 use App\gateways\repository\WineVintageRepository;
 use App\gateways\repository\WineVintageRepositoryInterface;
+use App\usecase\appellation\AppellationCreateUseCase;
+use App\usecase\appellation\AppellationCreateUseCaseInterface;
+use App\usecase\appellation\GetAppellationTypesUseCase;
+use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
 use App\usecase\blindTasting\BlindTastingCreateUsecase;
 use App\usecase\blindTasting\BlindTastingCreateUsecaseInterface;
 use App\usecase\country\GetCountriesUseCase;
@@ -114,8 +120,10 @@ class AppServiceProvider extends ServiceProvider
             WineRankingRepositoryInterface::class => WineRankingRepository::class,
             GetWineRankingsUseCaseInterface::class => GetWineRankingsUseCase::class,
             GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
+            AppellationCreateUseCaseInterface::class => AppellationCreateUseCase::class,
+            AppellationRepositoryInterface::class => AppellationRepository::class,
+            GetAppellationTypesUseCaseInterface::class => GetAppellationTypesUseCase::class,
         ];
-
 
         foreach ($bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

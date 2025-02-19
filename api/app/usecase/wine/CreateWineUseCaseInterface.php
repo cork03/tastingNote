@@ -2,7 +2,8 @@
 
 namespace App\usecase\wine;
 
-use App\domain\Wine;
+
+use App\domain\Aggregate\Wine;
 
 interface CreateWineUseCaseInterface
 {

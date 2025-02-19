@@ -14,6 +14,7 @@ erDiagram
         int wine_type_id FK
         int producer_id FK
         int country_id FK
+        int appellation_id FK "nullable"
     }
     
     wine_types {
@@ -83,6 +84,19 @@ erDiagram
         int ranking UK
         int wine_type_id FK
     }
+
+    appellations {
+        int id PK
+        varchar name
+        int appellation_type_id FK
+        text regulation 
+    }
+
+    appellation_types {
+        int id PK
+        varchar name
+        int country_id FK
+    }
     
     producers ||--o{ wines : ""
     producers ||--|| countries : ""
@@ -98,4 +112,7 @@ erDiagram
     grape_varieties ||--o{ blind_tasting_wine_varieties : ""
     wine_vintages ||--|| wine_rankings : ""
     wine_types ||--|{ wine_rankings : ""
+    appellations ||--|| appellation_types : ""
+    appellations ||--|| wines : ""
+    appellation_types ||--|| countries : ""
 ```

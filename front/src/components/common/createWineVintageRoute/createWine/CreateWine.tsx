@@ -63,6 +63,23 @@ const CreateWine = ({prefix, producerId, countries, wineTypes}: Props) => {
                                             onChange={selectCountryHandleChange} countries={countries}/>
                         <WineTypeSelectField label={"ワイン種別"} name={"id"} value={wine.wineType.id}
                                              onChange={selectWineTypeHandleChange} wineTypes={wineTypes}/>
+                        <div className="flex flex-col mb-4">
+                            <label className="text-lg font-medium text-gray-800 mb-2">{"アペラシオン"}</label>
+                            <div className="flex items-center gap-4">
+                                <select
+                                    name={"appellationId"}
+                                    className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
+                                >
+                                    <option value={0}>
+                                        {`アペラシオンを選択してください`}
+                                    </option>
+                                    {wineTypes.map((wineType) => {
+                                        return <option key={wineType.id} value={wineType.id}>{wineType.label}</option>
+                                    })}
+                                </select>
+                                <NormalButton text={"新しいアペラシオンを追加"} onClick={() => {redirect("/appellation/create")}}/>
+                            </div>
+                        </div>
                     </div>
                 </GrayCard>
                 <ButtonsDiv>

@@ -5,7 +5,8 @@ namespace App\gateways\repository;
 use App\domain\Country;
 use App\domain\GrapeVariety;
 use App\domain\Producer;
-use App\domain\Wine;
+use App\domain\Aggregate\Wine;
+use App\domain\Wine as WineDomain;
 use App\domain\WineBlend;
 use App\domain\WineType;
 use App\domain\WineVariety;
@@ -30,15 +31,17 @@ class WineRepository implements WineRepositoryInterface
             $wineModel = $this->wineModel->create([
                 'name' => $wine->getName(),
                 'producer_id' => $wine->getProducerId(),
-                'wine_type_id' => $wine->getWineType()->value,
-                'country_id' => $wine->getCountry()->getId(),
+                'wine_type_id' => $wine->getWineTypeId(),
+                'country_id' => $wine->getCountryId(),
+                'appellation_id' => $wine->getAppellationId()
             ]);
             return new Wine(
                 id: $wineModel->id,
                 name: $wineModel->name,
                 producerId: $wineModel->producer_id,
-                wineType: WineType::fromId($wineModel->wine_type_id),
-                country: new Country($wineModel->country_id, null)
+                wineTypeId: $wineModel->wine_type_id,
+                countryId: $wineModel->country_id,
+                appellationId: $wineModel->appellation_id
             );
         } catch (Exception $e) {
             Log::info($e->getMessage());
@@ -47,7 +50,7 @@ class WineRepository implements WineRepositoryInterface
     }
 
     /**
-     * @return array<array{producer: Producer, wine: Wine}>
+     * @return array<array{producer: Producer, wine: WineDomain}>
      * @throws Exception
      */
     public function getAll(): array
@@ -66,7 +69,7 @@ class WineRepository implements WineRepositoryInterface
                     description: $wineEntity->producer->description,
                     url: $wineEntity->producer->url
                 ),
-                'wine' => new Wine(
+                'wine' => new WineDomain(
                     id: $wineEntity->id,
                     name: $wineEntity->name,
                     producerId: $wineEntity->producer_id,
@@ -112,7 +115,7 @@ class WineRepository implements WineRepositoryInterface
             );
         }
         return new WineFullInfo(
-            wine: new Wine(
+            wine: new WineDomain(
                 id: $wineWithVintagesEntity->id,
                 name: $wineWithVintagesEntity->name,
                 producerId: $wineWithVintagesEntity->producer_id,

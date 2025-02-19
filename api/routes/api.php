@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppellationController;
 use App\Http\Controllers\BlindTastingController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GrapeVarietyController;
@@ -16,6 +17,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::post('/appellation', [AppellationController::class, 'create']);
+Route::get('/appellation/types', [AppellationController::class, 'getTypes']);
 Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
 Route::get('/countries', [CountryController::class, 'getAll']);
 Route::get('/grape-varieties', [GrapeVarietyController::class, 'getAll']);
