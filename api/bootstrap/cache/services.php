@@ -38,6 +38,9 @@
     34 => 'App\\Providers\\AppServiceProvider',
     35 => 'App\\Providers\\FortifyServiceProvider',
     36 => 'App\\Providers\\JetstreamServiceProvider',
+    37 => 'App\\Providers\\QueryServiceServiceProvider',
+    38 => 'App\\Providers\\RepositoryServiceProvider',
+    39 => 'App\\Providers\\UseCaseServiceProvider',
   ),
   'eager' => 
   array (
@@ -63,6 +66,9 @@
     19 => 'App\\Providers\\AppServiceProvider',
     20 => 'App\\Providers\\FortifyServiceProvider',
     21 => 'App\\Providers\\JetstreamServiceProvider',
+    22 => 'App\\Providers\\QueryServiceServiceProvider',
+    23 => 'App\\Providers\\RepositoryServiceProvider',
+    24 => 'App\\Providers\\UseCaseServiceProvider',
   ),
   'deferred' => 
   array (

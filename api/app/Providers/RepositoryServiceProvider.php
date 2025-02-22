@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\gateways\FileUploader\FileUploaderInterface;
-use App\gateways\FileUploader\S3FIleUploader;
-use App\gateways\queryService\GetAppellationTypesQueryService;
 use App\gateways\repository\AppellationRepository;
 use App\gateways\repository\AppellationTypeRepository;
 use App\gateways\repository\blindTasting\BlindTastingRepository;
@@ -26,45 +23,43 @@ use App\gateways\repository\wineVintage\WineCommentRepository;
 use App\gateways\repository\wineVintage\WineCommentRepositoryInterface;
 use App\gateways\repository\WineVintageRepository;
 use App\gateways\repository\WineVintageRepositoryInterface;
-use App\interfaceAdapter\queryService\GetAppellationTypesQueryServiceInterface;
 use App\interfaceAdapter\repository\AppellationRepositoryInterface;
 use App\interfaceAdapter\repository\AppellationTypeRepositoryInterface;
 use App\interfaceAdapter\repository\TransactionInterface;
-use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      */
     public function register(): void
     {
-        $this->app->register(UseCaseServiceProvider::class);
-        $this->app->register(QueryServiceServiceProvider::class);
-        $this->app->register(RepositoryServiceProvider::class);
         $bindings = [
-            FileUploaderInterface::class => S3FIleUploader::class,
+            ProducerRepositoryInterface::class => ProducerRepository::class,
+            BlindTastingRepositoryInterface::class => BlindTastingRepository::class,
+            GrapeVarietyRepositoryInterface::class => GrapeVarietyRepository::class,
+            WineRepositoryInterface::class => WineRepository::class,
+            CountryRepositoryInterface::class => CountryRepository::class,
+            WineVintageRepositoryInterface::class => WineVintageRepository::class,
+            WineTypesRepositoryInterface::class => WineTypesRepository::class,
+            WineCommentRepositoryInterface::class => WineCommentRepository::class,
+            WineRankingRepositoryInterface::class => WineRankingRepository::class,
+            AppellationRepositoryInterface::class => AppellationRepository::class,
+            AppellationTypeRepositoryInterface::class => AppellationTypeRepository::class,
+            TransactionInterface::class => Transaction::class,
         ];
 
-        foreach ($bindings as $interface => $implementation) {
-            $this->app->bind($interface, $implementation);
+        foreach ($bindings as $interface => $concrete) {
+            $this->app->bind($interface, $concrete);
         }
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      */
     public function boot(): void
     {
-        DB::listen(function (QueryExecuted $query) {
-            Log::info($query->sql);
-            // $query->sql;
-            // $query->bindings;
-            // $query->time;
-            // $query->toRawSql();
-        });
+        //
     }
 }
