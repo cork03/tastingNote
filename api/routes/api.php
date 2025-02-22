@@ -18,6 +18,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/appellation', [AppellationController::class, 'create']);
+Route::get('/appellations', [AppellationController::class, 'getAll']);
 Route::get('/appellation/types', [AppellationController::class, 'getTypes']);
 Route::post('/blind-tasting', [BlindTastingController::class, 'create']);
 Route::get('/countries', [CountryController::class, 'getAll']);

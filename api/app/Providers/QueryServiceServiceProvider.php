@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\gateways\queryService\CreateWineUseCaseQueryService;
+use App\gateways\queryService\GetAppellationsUseCaseQueryService;
 use App\gateways\queryService\GetAppellationTypesQueryService;
 use App\interfaceAdapter\queryService\CreateWineUseCaseQueryServiceInterface;
+use App\interfaceAdapter\queryService\GetAppellationsUseCaseQueryServiceInterface;
 use App\interfaceAdapter\queryService\GetAppellationTypesQueryServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +20,7 @@ class QueryServiceServiceProvider extends ServiceProvider
         $bindings = [
             CreateWineUseCaseQueryServiceInterface::class => CreateWineUseCaseQueryService::class,
             GetAppellationTypesQueryServiceInterface::class => GetAppellationTypesQueryService::class,
+            GetAppellationsUseCaseQueryServiceInterface::class => GetAppellationsUseCaseQueryService::class,
         ];
 
         foreach ($bindings as $interface => $concrete) {

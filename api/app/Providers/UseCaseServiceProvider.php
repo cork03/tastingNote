@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\gateways\queryService\CreateWineUseCaseQueryServiceCreateWineUseCaseQueryService;
 use App\usecase\appellation\AppellationCreateUseCase;
 use App\usecase\appellation\AppellationCreateUseCaseInterface;
+use App\usecase\appellation\GetAppellationsUseCase;
+use App\usecase\appellation\GetAppellationsUseCaseInterface;
 use App\usecase\appellation\GetAppellationTypesUseCase;
 use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
 use App\usecase\blindTasting\BlindTastingCreateUsecase;
@@ -88,6 +89,7 @@ class UseCaseServiceProvider extends ServiceProvider
             GetWineRankingsUseCaseInterface::class => GetWineRankingsUseCase::class,
             GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
             AppellationCreateUseCaseInterface::class => AppellationCreateUseCase::class,
+            GetAppellationsUseCaseInterface::class => GetAppellationsUseCase::class,
         ];
         foreach ($bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

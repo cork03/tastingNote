@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\presenter\AppellationPresenter;
 use App\usecase\appellation\AppellationCreateUseCaseInput;
 use App\usecase\appellation\AppellationCreateUseCaseInterface;
+use App\usecase\appellation\GetAppellationsUseCaseInterface;
 use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class AppellationController extends Controller
     public function __construct(
         private readonly AppellationCreateUseCaseInterface $appellationCreateUseCase,
         private readonly GetAppellationTypesUseCaseInterface $getAppellationTypesUseCase,
+        private readonly GetAppellationsUseCaseInterface $getAppellationsUseCase,
         private readonly AppellationPresenter $presenter,
     )
     {
@@ -38,6 +40,12 @@ class AppellationController extends Controller
             Log::info($e->getMessage());
             return response()->json(status: 404);
         }
+    }
+
+    public function getAll(): JsonResponse
+    {
+        $appellations = $this->getAppellationsUseCase->handle();
+        return $this->presenter->getAppellationsResponse($appellations);
     }
 
     public function getTypes(): JsonResponse

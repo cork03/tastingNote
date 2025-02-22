@@ -42,9 +42,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(UseCaseServiceProvider::class);
         $this->app->register(QueryServiceServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
+        $this->app->register(UseCaseServiceProvider::class);
         $bindings = [
             FileUploaderInterface::class => S3FIleUploader::class,
         ];

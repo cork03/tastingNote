@@ -2,8 +2,10 @@
 
 namespace App\presenter;
 
+use App\presenter\jsonClass\AppellationJson;
 use App\presenter\jsonClass\AppellationTypeJson;
 use App\presenter\jsonClass\CountryJson;
+use App\usecase\appellation\GetAppellationsUseCaseDTO;
 use App\usecase\appellation\GetAppellationTypesUseCaseDTO;
 use Illuminate\Http\JsonResponse;
 
@@ -26,5 +28,29 @@ class AppellationPresenter
             );
         }
         return response()->json($appellationTypesJson);
+    }
+
+    /**
+     * @param GetAppellationsUseCaseDTO[] $appellations
+     */
+    public function getAppellationsResponse(array $appellations): JsonResponse
+    {
+        $appellationsJson = [];
+        foreach ($appellations as $appellation) {
+            $appellationsJson[] = new AppellationJson(
+                id: $appellation->getId(),
+                name: $appellation->getName(),
+                regulation: $appellation->getRegulation(),
+                appellationType: new AppellationTypeJson(
+                    id: $appellation->getAppellationTypeId(),
+                    name: $appellation->getAppellationTypeName(),
+                    country: new CountryJson(
+                        id: $appellation->getCountryId(),
+                        name: $appellation->getCountryName()
+                    )
+                )
+            );
+        }
+        return response()->json($appellationsJson);
     }
 }
