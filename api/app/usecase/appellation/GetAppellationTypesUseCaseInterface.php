@@ -2,12 +2,10 @@
 
 namespace App\usecase\appellation;
 
-use App\domain\AppellationType;
-
 interface GetAppellationTypesUseCaseInterface
 {
     /**
-     * @return AppellationType[]
+     * @return GetAppellationTypesUseCaseDTO[]
      */
     public function handle(): array;
 }

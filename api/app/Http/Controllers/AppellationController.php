@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\domain\Appellation;
-use App\domain\AppellationType;
-use App\domain\Country;
 use App\presenter\AppellationPresenter;
+use App\usecase\appellation\AppellationCreateUseCaseInput;
 use App\usecase\appellation\AppellationCreateUseCaseInterface;
 use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AppellationController extends Controller
 {
@@ -26,22 +25,17 @@ class AppellationController extends Controller
         try {
             $appellationType = $request->input('appellationType');
             $this->appellationCreateUseCase->handle(
-                new Appellation(
-                    id: null,
+                new AppellationCreateUseCaseInput(
                     name: $request->input('name'),
                     regulation: $request->input('regulation'),
-                    appellationType: new AppellationType(
-                        id: $appellationType['id'],
-                        name: $appellationType['name'],
-                        country: new Country(
-                            id: $appellationType['countryId'],
-                            name: null
-                        )
-                    )
+                    appellationTypeId: $appellationType['id'],
+                    appellationTypeName: $appellationType['name'],
+                    countryId: $appellationType['countryId']
                 )
             );
             return response()->json(status: 201);
         } catch (\Exception $e) {
+            Log::info($e->getMessage());
             return response()->json(status: 404);
         }
     }

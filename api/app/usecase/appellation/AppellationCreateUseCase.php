@@ -2,23 +2,48 @@
 
 namespace App\usecase\appellation;
 
-use App\domain\Appellation;
-use App\gateways\repository\AppellationRepositoryInterface;
+use App\domain\Aggregate\Appellation;
+use App\domain\Aggregate\AppellationType;
+use App\interfaceAdapter\repository\AppellationRepositoryInterface;
+use App\interfaceAdapter\repository\AppellationTypeRepositoryInterface;
+use App\interfaceAdapter\repository\TransactionInterface;
 
 class AppellationCreateUseCase implements AppellationCreateUseCaseInterface
 {
-    public function __construct(private readonly AppellationRepositoryInterface $appellationRepository)
+    public function __construct(
+        private readonly AppellationRepositoryInterface $appellationRepository,
+        private readonly AppellationTypeRepositoryInterface $appellationTypeRepository,
+        private readonly TransactionInterface $transaction
+    )
     {
     }
 
-    public function handle(Appellation $appellation): void
+    public function handle(AppellationCreateUseCaseInput $input): void
     {
-        // appellationTypeのidがない場合はTypeの登録も行う。
-        if ($appellation->getAppellationType()->getId() === null) {
-            // AppellationTypeの登録処理
-            $this->appellationRepository->createWithAppellationType($appellation);
+        if ($input->getAppellationTypeId() === null) {
+            $this->transaction->transaction(function () use ($input) {
+                $appellationType = $this->appellationTypeRepository->create(
+                    new AppellationType(
+                        id: null,
+                        name: $input->getAppellationTypeName(),
+                        countryId: $input->getCountryId(),
+                    )
+                );
+                $this->appellationRepository->create(new Appellation(
+                    id: null,
+                    name: $input->getName(),
+                    regulation: $input->getRegulation(),
+                    appellationTypeId: $appellationType->getId()
+                ));
+            });
             return;
         }
-        $this->appellationRepository->create($appellation);
+
+        $this->appellationRepository->create(new Appellation(
+            id: null,
+            name: $input->getName(),
+            regulation: $input->getRegulation(),
+            appellationTypeId: $input->getAppellationTypeId()
+        ));
     }
 }

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\domain\Aggregate;
+namespace App\usecase\appellation;
 
-class AppellationType
+class GetAppellationTypesUseCaseDTO
 {
     public function __construct(
-        private readonly ?int $id,
+        private readonly int $id,
         private readonly string $name,
         private readonly int $countryId,
+        private readonly string $countryName,
     )
     {
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -25,5 +26,10 @@ class AppellationType
     public function getCountryId(): int
     {
         return $this->countryId;
+    }
+
+    public function getCountryName(): string
+    {
+        return $this->countryName;
     }
 }

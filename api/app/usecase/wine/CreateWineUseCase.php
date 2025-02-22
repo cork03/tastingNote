@@ -3,15 +3,15 @@
 namespace App\usecase\wine;
 
 use App\domain\Aggregate\Wine;
-use App\gateways\repository\AppellationRepositoryInterface;
 use App\gateways\repository\WineRepositoryInterface;
+use App\interfaceAdapter\queryService\CreateWineUseCaseQueryServiceInterface;
 use Illuminate\Support\Facades\Log;
 
 class CreateWineUseCase implements CreateWineUseCaseInterface
 {
     public function __construct(
-        private readonly WineRepositoryInterface        $wineRepository,
-        private readonly AppellationRepositoryInterface $appellationRepository
+        private readonly WineRepositoryInterface                 $wineRepository,
+        private readonly CreateWineUseCaseQueryServiceInterface $createWineUseCaseQueryService
     )
     {
     }
@@ -32,6 +32,10 @@ class CreateWineUseCase implements CreateWineUseCaseInterface
                     appellationId: null,
                 ));
             }
+            $appellationCountryId = $this->createWineUseCaseQueryService->getAppellationCountryId($input->getAppellationId());
+            if ($appellationCountryId === null) {
+                throw new \Exception('Appellation not found');
+            }
             $wine = new Wine(
                 id: null,
                 name: $input->getName(),
@@ -40,11 +44,7 @@ class CreateWineUseCase implements CreateWineUseCaseInterface
                 countryId: $input->getCountryId(),
                 appellationId: $input->getAppellationId(),
             );
-            $appellation = $this->appellationRepository->getById($input->getAppellationId());
-            if ($appellation === null) {
-                throw new \Exception('Appellation not found');
-            }
-            $wine->validateAppellation($appellation);
+            $wine->validateAppellation($appellationCountryId);
             return $this->wineRepository->create($wine);
         } catch (\Exception $e) {
             Log::info($e->getMessage());

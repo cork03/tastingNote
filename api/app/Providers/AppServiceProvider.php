@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\gateways\FileUploader\FileUploaderInterface;
 use App\gateways\FileUploader\S3FIleUploader;
+use App\gateways\queryService\CreateWineUseCaseQueryService;
+use App\gateways\queryService\GetAppellationTypesQueryService;
 use App\gateways\repository\AppellationRepository;
-use App\gateways\repository\AppellationRepositoryInterface;
+use App\gateways\repository\AppellationTypeRepository;
 use App\gateways\repository\blindTasting\BlindTastingRepository;
 use App\gateways\repository\blindTasting\BlindTastingRepositoryInterface;
 use App\gateways\repository\CountryRepository;
@@ -14,6 +16,7 @@ use App\gateways\repository\GrapeVarietyRepository;
 use App\gateways\repository\GrapeVarietyRepositoryInterface;
 use App\gateways\repository\ProducerRepository;
 use App\gateways\repository\ProducerRepositoryInterface;
+use App\gateways\repository\Transaction;
 use App\gateways\repository\wine\wineTypes\WineTypesRepository;
 use App\gateways\repository\wine\wineTypes\WineTypesRepositoryInterface;
 use App\gateways\repository\wineRanking\WineRankingRepository;
@@ -24,6 +27,11 @@ use App\gateways\repository\wineVintage\WineCommentRepository;
 use App\gateways\repository\wineVintage\WineCommentRepositoryInterface;
 use App\gateways\repository\WineVintageRepository;
 use App\gateways\repository\WineVintageRepositoryInterface;
+use App\interfaceAdapter\queryService\CreateWineUseCaseQueryServiceInterface;
+use App\interfaceAdapter\queryService\GetAppellationTypesQueryServiceInterface;
+use App\interfaceAdapter\repository\AppellationRepositoryInterface;
+use App\interfaceAdapter\repository\AppellationTypeRepositoryInterface;
+use App\interfaceAdapter\repository\TransactionInterface;
 use App\usecase\appellation\AppellationCreateUseCase;
 use App\usecase\appellation\AppellationCreateUseCaseInterface;
 use App\usecase\appellation\GetAppellationTypesUseCase;
@@ -122,7 +130,11 @@ class AppServiceProvider extends ServiceProvider
             GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
             AppellationCreateUseCaseInterface::class => AppellationCreateUseCase::class,
             AppellationRepositoryInterface::class => AppellationRepository::class,
+            AppellationTypeRepositoryInterface::class => AppellationTypeRepository::class,
             GetAppellationTypesUseCaseInterface::class => GetAppellationTypesUseCase::class,
+            TransactionInterface::class => Transaction::class,
+            GetAppellationTypesQueryServiceInterface::class => GetAppellationTypesQueryService::class,
+            CreateWineUseCaseQueryServiceInterface::class => CreateWineUseCaseQueryService::class,
         ];
 
         foreach ($bindings as $interface => $implementation) {

@@ -8,7 +8,7 @@ class Appellation
         private readonly ?int $id,
         private readonly string $name,
         private readonly string $regulation,
-        private readonly AppellationType $appellationType,
+        private readonly int $appellationTypeId,
     )
     {
     }
@@ -28,8 +28,8 @@ class Appellation
         return $this->regulation;
     }
 
-    public function getAppellationType(): AppellationType
+    public function getAppellationTypeId(): int
     {
-        return $this->appellationType;
+        return $this->appellationTypeId;
     }
 }

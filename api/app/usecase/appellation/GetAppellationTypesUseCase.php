@@ -2,22 +2,21 @@
 
 namespace App\usecase\appellation;
 
-use App\domain\AppellationType;
-use App\gateways\repository\AppellationRepositoryInterface;
+use App\interfaceAdapter\queryService\GetAppellationTypesQueryServiceInterface;
 
 class GetAppellationTypesUseCase implements GetAppellationTypesUseCaseInterface
 {
     public function __construct(
-        private readonly AppellationRepositoryInterface $appellationRepository
+        private readonly GetAppellationTypesQueryServiceInterface $appellationTypesQueryService
     )
     {
     }
 
     /**
-     * @return AppellationType[]
+     * @return GetAppellationTypesUseCaseDTO[]
      */
     public function handle(): array
     {
-        return $this->appellationRepository->getAppellationTypes();
+        return $this->appellationTypesQueryService->handle();
     }
 }

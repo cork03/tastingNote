@@ -2,9 +2,7 @@
 
 namespace App\usecase\appellation;
 
-use App\domain\Appellation;
-
 interface AppellationCreateUseCaseInterface
 {
-    public function handle(Appellation $appellation): void;
+    public function handle(AppellationCreateUseCaseInput $input): void;
 }

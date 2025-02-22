@@ -48,9 +48,9 @@ class Wine
     /**
      * @throws \Exception
      */
-    public function validateAppellation(Appellation $appellation): void
+    public function validateAppellation(int $countryId): void
     {
-        if ($appellation->getAppellationType()->getCountryId() !== $this->countryId) {
+        if ($countryId !== $this->countryId) {
             throw new \Exception('Invalid appellation');
         }
     }
