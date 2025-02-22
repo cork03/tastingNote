@@ -3,22 +3,20 @@ import {Wine} from "@/types/domain/wine";
 import {redirect} from "next/navigation";
 
 interface WineCreateBody {
-    "wine": {
-        "producerId": number,
-        "name": string,
-        "countryId": number,
-        "wineTypeId": number
-    }
+    "producerId": number,
+    "name": string,
+    "countryId": number,
+    "wineTypeId": number,
+    "appellationId": number | null
 }
 
 export const createWine = async (wine: Wine, prefix: string) => {
     const body: WineCreateBody = {
-        "wine": {
-            "producerId": wine.producerId,
-            "name": wine.name,
-            "countryId": wine.country.id,
-            "wineTypeId": wine.wineType.id
-        }
+        "producerId": wine.producerId,
+        "name": wine.name,
+        "countryId": wine.country.id,
+        "wineTypeId": wine.wineType.id,
+        "appellationId": null
     }
     const response = await fetch(`${process.env.API_URL}/wine`, {
         method: "POST",
@@ -30,7 +28,7 @@ export const createWine = async (wine: Wine, prefix: string) => {
     if (!response.ok) {
         throw new Error('Failed to create wine');
     }
-    const responseJson: {id: number} = await response.json();
+    const responseJson: { id: number } = await response.json();
 
     redirect(`${prefix}/wine/${responseJson.id}/vintage/create`);
 }

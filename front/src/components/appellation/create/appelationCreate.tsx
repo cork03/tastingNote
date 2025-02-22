@@ -92,7 +92,6 @@ const AppellationCreate = ({appellationTypes, countries}: Props) => {
                     <CountrySelectField label={"国"} name={'id'} value={appellation.appellationType.country.id}
                                         onChange={countrySelectHandleChange} countries={countries}/>
                     {appellationSelectType === 1 &&
-                        appellation.appellationType.id &&
                         <AppellationTypeSelectField
                             label={"アペラシオン種別"} name={"id"}
                             value={appellation.appellationType.id}
