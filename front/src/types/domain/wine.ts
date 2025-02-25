@@ -1,5 +1,6 @@
 import {Country} from "@/types/domain/country";
 import {Producer} from "@/types/producer";
+import {Appellation} from "@/types/domain/appellation";
 
 export interface WineVariety {
     id: number;
@@ -18,6 +19,7 @@ export interface Wine {
     producerId: number;
     country: Country;
     wineType: WineType;
+    appellation: Appellation | null;
 }
 
 export interface WineVintage {

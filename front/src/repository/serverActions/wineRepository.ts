@@ -16,7 +16,7 @@ export const createWine = async (wine: Wine, prefix: string) => {
         "name": wine.name,
         "countryId": wine.country.id,
         "wineTypeId": wine.wineType.id,
-        "appellationId": null
+        "appellationId": wine.appellation?.id ?? null
     }
     const response = await fetch(`${process.env.API_URL}/wine`, {
         method: "POST",
@@ -52,7 +52,8 @@ export const getWinesByProducerId = async (producerId: number): Promise<Wine[]> 
             country: {
                 id: wine.country.id,
                 name: wine.country.name,
-            }
+            },
+            appellation: null
         }
     });
 }
