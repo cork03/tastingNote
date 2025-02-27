@@ -6,13 +6,15 @@ use App\domain\Producer;
 use App\domain\Wine;
 use App\domain\WineFullInfo;
 use App\presenter\creator\ProducerJsonCreator;
+use App\presenter\jsonClass\AppellationJson;
+use App\presenter\jsonClass\AppellationTypeJson;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\WineFullInfoJson;
 use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageJson;
-use App\presenter\jsonClass\WineWithProducerJson;
+use App\presenter\jsonClass\ListWineJson;
 use App\usecase\wine\GetWineUseCase\wineDTOWithImagePath;
 use Illuminate\Http\JsonResponse;
 
@@ -29,7 +31,20 @@ class WinePresenter
                 id: $wineDTO->getCountryId(),
                 name: $wineDTO->getCountryName(),
             );
-            $winesWithProducerJson[] = new WineWithProducerJson(
+            $appellation = $wineDTO->getAppellation();
+            if ($appellation !== null) {
+                $appellation = new AppellationJson(
+                    id: $appellation->getId(),
+                    name: $appellation->getName(),
+                    regulation: $appellation->getRegulation(),
+                    appellationType: new AppellationTypeJson(
+                        id: $appellation->getAppellationType()->getId(),
+                        name: $appellation->getAppellationType()->getName(),
+                        country: $country,
+                    ),
+                );
+            }
+            $winesWithProducerJson[] = new ListWineJson(
                 id: $wineDTO->getId(),
                 name: $wineDTO->getName(),
                 producer: new ProducerJson(
@@ -44,6 +59,7 @@ class WinePresenter
                     label: $wineDTO->getWineTypeName(),
                 ),
                 country: $country,
+                appellation: $appellation,
                 imagePath: $wineDTO->getLatestVintageImagePath(),
             );
         }

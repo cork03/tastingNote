@@ -3,6 +3,8 @@
 namespace App\gateways\queryService;
 
 use App\interfaceAdapter\queryService\GetWinesUseCaseQueryServiceInterface;
+use App\usecase\wine\GetWineUseCase\AppellationDTO;
+use App\usecase\wine\GetWineUseCase\AppellationTypeDTO;
 use App\usecase\wine\GetWineUseCase\producerDTO;
 use App\usecase\wine\GetWineUseCase\wineDTO;
 use App\Models\Wine as WineModel;
@@ -19,7 +21,13 @@ class GetWinesUseCaseQueryService implements GetWinesUseCaseQueryServiceInterfac
      */
     public function getWines(): array
     {
-        $wineModels = $this->wineModel->with(['producer', 'wineType', 'country', 'wineVintages:id,wine_id,image_path,vintage'])->orderBy('country_id')->get();
+        $wineModels = $this->wineModel->with([
+            'producer',
+            'wineType',
+            'country',
+            'wineVintages:id,wine_id,image_path,vintage',
+            'appellation.appellationType'
+        ])->orderBy('country_id')->get();
         $wineDTOs = [];
         foreach ($wineModels as $wineModel) {
             /** @var Collection $winVintages */
@@ -30,6 +38,18 @@ class GetWinesUseCaseQueryService implements GetWinesUseCaseQueryServiceInterfac
                     $imagePath = $winVintage->image_path;
                     break;
                 }
+            }
+            $appellation = $wineModel->appellation;
+            if (isset($appellation)) {
+                $appellation = new appellationDTO(
+                    id: $appellation->id,
+                    name: $appellation->name,
+                    regulation: $appellation->regulation,
+                    appellationType: new AppellationTypeDTO(
+                        id: $appellation->appellationType->id,
+                        name: $appellation->appellationType->name
+                    )
+                );
             }
             $wineDTOs[] = new wineDTO(
                 id: $wineModel->id,
@@ -44,6 +64,7 @@ class GetWinesUseCaseQueryService implements GetWinesUseCaseQueryServiceInterfac
                     description: $wineModel->producer->description,
                     url: $wineModel->producer->url
                 ),
+                appellation: $appellation,
                 latestVintageImagePath: $imagePath
             );
         }

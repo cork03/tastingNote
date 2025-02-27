@@ -12,6 +12,7 @@ class wineDTOWithImagePath
         private readonly int $countryId,
         private readonly string $countryName,
         private readonly producerDTO $producer,
+        private readonly ?AppellationDTO $appellation,
         private readonly ?string $latestVintageImagePath,
     )
     {
@@ -50,6 +51,11 @@ class wineDTOWithImagePath
     public function getProducer(): producerDTO
     {
         return $this->producer;
+    }
+
+    public function getAppellation(): ?AppellationDTO
+    {
+        return $this->appellation;
     }
 
     public function getLatestVintageImagePath(): ?string

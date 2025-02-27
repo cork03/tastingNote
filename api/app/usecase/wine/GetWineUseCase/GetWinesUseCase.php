@@ -34,6 +34,7 @@ class GetWinesUseCase implements GetWinesUseCaseInterface
                 countryId: $wineDTO->getCountryId(),
                 countryName: $wineDTO->getCountryName(),
                 producer: $wineDTO->getProducer(),
+                appellation: $wineDTO->getAppellation(),
                 latestVintageImagePath: $imagePath
             );
         }
