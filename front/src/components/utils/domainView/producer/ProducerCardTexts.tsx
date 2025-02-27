@@ -16,9 +16,6 @@ const ProducerCardTexts = ({producer}: Props) => {
             <p className="text-sm text-gray-600">
                 {producer.description}
             </p>
-            <p className="text-sm text-gray-600">
-                {producer.url}
-            </p>
         </>
     )
 }

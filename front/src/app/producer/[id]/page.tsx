@@ -7,6 +7,7 @@ import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
 import Main from "@/components/utils/view/main";
+import Grid from "@/components/utils/view/grid";
 
 const WineDetailPage = async ({params}: { params: { id: number } }) => {
     const {id} = await params;
@@ -23,7 +24,9 @@ const WineDetailPage = async ({params}: { params: { id: number } }) => {
                         <Paragraph label={"説明"} text={producer.description}/>
                         <Paragraph label={"国"} text={producer.country.name}/>
                         {producer.url &&
-                            <Paragraph label={"URL"} text={producer.url}/>
+                            <a href={producer.url} target="_blank" className={"block"}>
+                                <Paragraph label={"URL"} text={producer.url}/>
+                            </a>
                         }
                     </div>
                 </GrayCard>
@@ -33,7 +36,7 @@ const WineDetailPage = async ({params}: { params: { id: number } }) => {
                             ワイン一覧
                         </h2>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+                    <Grid>
                         {wines.map((wine) => {
                             return (
                                 <Link href={`/wine/${wine.id}`} key={wine.id}>
@@ -51,7 +54,7 @@ const WineDetailPage = async ({params}: { params: { id: number } }) => {
                                 </Link>
                             );
                         })}
-                    </div>
+                    </Grid>
                 </div>
             </Section>
         </Main>
