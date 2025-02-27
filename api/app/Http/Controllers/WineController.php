@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\presenter\WinePresenter;
 use App\usecase\wine\CreateWineUseCaseInput;
 use App\usecase\wine\CreateWineUseCaseInterface;
-use App\usecase\wine\GetWinesUseCaseInterface;
+use App\usecase\wine\GetWineUseCase\GetWinesUseCaseInterface;
 use App\usecase\wine\GetWineWithVintagesUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -44,8 +44,8 @@ class WineController extends Controller
 
     public function getAll(): JsonResponse
     {
-        $winesWithProducer = $this->getWinesUseCase->handle();
-        return $this->presenter->getWinesResponse($winesWithProducer);
+        $wineDTOs = $this->getWinesUseCase->handle();
+        return $this->presenter->getWinesResponse($wineDTOs);
     }
 
     public function getWithVintages(int $id): JsonResponse

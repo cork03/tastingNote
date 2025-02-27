@@ -2,8 +2,6 @@
 
 namespace App\presenter\jsonClass;
 
-use App\domain\Producer;
-
 class WineWithProducerJson
 {
     public function __construct(
@@ -11,7 +9,8 @@ class WineWithProducerJson
         public readonly string $name,
         public readonly ProducerJson $producer,
         public readonly WineTypeJson $wineType,
-        public readonly CountryJson $country
+        public readonly CountryJson $country,
+        public readonly ?string $imagePath,
     )
     {
     }

@@ -13,31 +13,38 @@ use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageJson;
 use App\presenter\jsonClass\WineWithProducerJson;
+use App\usecase\wine\GetWineUseCase\wineDTOWithImagePath;
 use Illuminate\Http\JsonResponse;
 
 class WinePresenter
 {
     /**
-     * @param array<array{producer: Producer, wine: Wine}> $winesWithProducer
+     * @param wineDTOWithImagePath[] $wineDTOs
      */
-    public function getWinesResponse(array $winesWithProducer): JsonResponse
+    public function getWinesResponse(array $wineDTOs): JsonResponse
     {
         $winesWithProducerJson = [];
-        foreach ($winesWithProducer as $wineWithProducer) {
-            $wine = $wineWithProducer['wine'];
-            $producer = $wineWithProducer['producer'];
+        foreach ($wineDTOs as $wineDTO) {
+            $country = new CountryJson(
+                id: $wineDTO->getCountryId(),
+                name: $wineDTO->getCountryName(),
+            );
             $winesWithProducerJson[] = new WineWithProducerJson(
-                id: $wine->getId(),
-                name: $wine->getName(),
-                producer: (new ProducerJsonCreator())->create($producer),
-                wineType: new WineTypeJson(
-                    id: $wine->getWineType()->value,
-                    label: $wine->getWineType()->getLabel(),
+                id: $wineDTO->getId(),
+                name: $wineDTO->getName(),
+                producer: new ProducerJson(
+                    id: $wineDTO->getProducer()->getId(),
+                    name: $wineDTO->getProducer()->getName(),
+                    country: $country,
+                    description: $wineDTO->getProducer()->getDescription(),
+                    url: $wineDTO->getProducer()->getUrl(),
                 ),
-                country: new CountryJson(
-                    id: $wine->getCountry()->getId(),
-                    name: $wine->getCountry()->getName(),
-                )
+                wineType: new WineTypeJson(
+                    id: $wineDTO->getWineTypeId(),
+                    label: $wineDTO->getWineTypeName(),
+                ),
+                country: $country,
+                imagePath: $wineDTO->getLatestVintageImagePath(),
             );
         }
         return response()->json($winesWithProducerJson);

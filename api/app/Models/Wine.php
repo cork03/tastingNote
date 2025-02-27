@@ -50,7 +50,7 @@ class Wine extends Model
         return $this->belongsTo(Producer::class);
     }
 
-    public function vineVintages(): HasMany
+    public function wineVintages(): HasMany
     {
         return $this->hasMany(WineVintage::class);
     }
@@ -58,5 +58,10 @@ class Wine extends Model
     public function appellation(): BelongsTo
     {
         return $this->belongsTo(Appellation::class);
+    }
+
+    public function wineType(): BelongsTo
+    {
+        return $this->belongsTo(WineType::class);
     }
 }

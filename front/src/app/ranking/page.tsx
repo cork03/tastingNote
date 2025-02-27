@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import Grid from "@/components/utils/view/grid";
 import Section from "@/components/utils/view/section";
 import Main from "@/components/utils/view/main";

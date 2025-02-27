@@ -50,47 +50,15 @@ class WineRepository implements WineRepositoryInterface
     }
 
     /**
-     * @return array<array{producer: Producer, wine: WineDomain}>
-     * @throws Exception
-     */
-    public function getAll(): array
-    {
-        $wineEntities = $this->wineModel->with(['producer.country', 'country'])->orderBy('country_id')->get();
-        $wines = [];
-        foreach ($wineEntities as $wineEntity) {
-            $wines[] = [
-                'producer' => new Producer(
-                    id: $wineEntity->producer->id,
-                    name: $wineEntity->producer->name,
-                    country: new Country(
-                        $wineEntity->producer->country->id,
-                        $wineEntity->producer->country->name
-                    ),
-                    description: $wineEntity->producer->description,
-                    url: $wineEntity->producer->url
-                ),
-                'wine' => new WineDomain(
-                    id: $wineEntity->id,
-                    name: $wineEntity->name,
-                    producerId: $wineEntity->producer_id,
-                    wineType: WineType::fromId($wineEntity->wine_type_id),
-                    country: new Country($wineEntity->country_id, $wineEntity->country->name),
-                )
-            ];
-        }
-        return $wines;
-    }
-
-    /**
      * @throws Exception
      */
     public function getWineWithVintagesById(int $wineId): WineFullInfo
     {
-        $wineWithVintagesEntity = $this->wineModel->with(['vineVintages.grapeVarieties', 'country', 'producer.country'])->find($wineId);
+        $wineWithVintagesEntity = $this->wineModel->with(['wineVintages.grapeVarieties', 'country', 'producer.country'])->find($wineId);
         if (!isset($wineWithVintagesEntity)) {
             throw new Exception('Wine not found');
         }
-        $wineVintageEntities = $wineWithVintagesEntity->vineVintages;
+        $wineVintageEntities = $wineWithVintagesEntity->wineVintages;
         $wineVintages = [];
         foreach ($wineVintageEntities as $wineVintageEntity) {
             $grapeVarieties = [];
