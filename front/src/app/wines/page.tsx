@@ -1,5 +1,4 @@
 import React from "react";
-import {WineWithProducer} from "@/types/wine";
 import Link from "next/link";
 import {ListWine} from "@/api/types/wine";
 import {getWineList} from "@/api/queryService/wineQueryService";
@@ -27,7 +26,8 @@ const Wines = async () => {
                     {initialWines.map((wineWithProducer) => {
                         return (
                             <GrayCard key={wineWithProducer.id}>
-                                <Link href={`/wine/${wineWithProducer.id}`} key={wineWithProducer.id} className={"text-center space-y-2"}>
+                                <Link href={`/wine/${wineWithProducer.id}`} key={wineWithProducer.id}
+                                      className={"text-center space-y-2"}>
                                     <h3 className="text-lg font-semibold mb-2">{wineWithProducer.name}</h3>
                                     <img
                                         src={wineWithProducer.imagePath ?? "/images/wine.jpg"}
@@ -38,6 +38,12 @@ const Wines = async () => {
                                     <p className="text-sm text-gray-600">{wineWithProducer.producer.name}</p>
                                     <label className="block text-sm">国</label>
                                     <p className="text-sm text-gray-600">{wineWithProducer.country.name}</p>
+                                    {wineWithProducer.appellation && (
+                                        <>
+                                            <label className="block text-sm">アペラシオン</label>
+                                            <p className="text-sm text-gray-600">{wineWithProducer.appellation.appellationType.name} {wineWithProducer.appellation.name}</p>
+                                        </>
+                                    )}
                                 </Link>
                             </GrayCard>
                         );
