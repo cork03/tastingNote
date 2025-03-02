@@ -5,6 +5,8 @@ namespace App\presenter;
 use App\domain\Producer;
 use App\domain\Wine;
 use App\presenter\creator\ProducerJsonCreator;
+use App\presenter\jsonClass\AppellationJson;
+use App\presenter\jsonClass\AppellationTypeJson;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerWineJson;
 use App\presenter\jsonClass\TempWineJson;
@@ -38,6 +40,23 @@ class ProducerPresenter
     {
         $producerWinesJson = [];
         foreach ($producerWines as $producerWine) {
+            $country = new CountryJson(
+                id: $producerWine->getCountry()->getId(),
+                name: $producerWine->getCountry()->getName()
+            );
+            $appellation = null;
+            if ($producerWine->getAppellation() !== null) {
+                $appellation = new AppellationJson(
+                    id: $producerWine->getAppellation()->getId(),
+                    name: $producerWine->getAppellation()->getName(),
+                    regulation: $producerWine->getAppellation()->getRegulation(),
+                    appellationType: new AppellationTypeJson(
+                        id: $producerWine->getAppellation()->getAppellationType()->getId(),
+                        name: $producerWine->getAppellation()->getAppellationType()->getName(),
+                        country: $country
+                    )
+                );
+            }
             $producerWinesJson[] = new ProducerWineJson(
                 id: $producerWine->getId(),
                 name: $producerWine->getName(),
@@ -46,11 +65,8 @@ class ProducerPresenter
                     id: $producerWine->getWineType()->getId(),
                     label: $producerWine->getWineType()->getName()
                 ),
-                country: new CountryJson(
-                    id: $producerWine->getCountry()->getId(),
-                    name: $producerWine->getCountry()->getName()
-                ),
-                appellation: $producerWine->getAppellation(),
+                country: $country,
+                appellation: $appellation,
                 imagePath: $producerWine->getImagePath()
             );
         }
