@@ -14,7 +14,7 @@ use App\presenter\jsonClass\WineFullInfoJson;
 use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageJson;
-use App\presenter\jsonClass\ListWineJson;
+use App\presenter\jsonClass\WineJson;
 use App\usecase\wine\GetWineUseCase\wineDTOWithImagePath;
 use Illuminate\Http\JsonResponse;
 
@@ -44,7 +44,7 @@ class WinePresenter
                     ),
                 );
             }
-            $winesWithProducerJson[] = new ListWineJson(
+            $winesWithProducerJson[] = new WineJson(
                 id: $wineDTO->getId(),
                 name: $wineDTO->getName(),
                 producer: new ProducerJson(

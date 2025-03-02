@@ -1,15 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import {ListWine} from "@/api/types/wine";
+import {Wine} from "@/api/types/wine";
 import {getWineList} from "@/api/queryService/wineQueryService";
 import GrayCard from "@/components/utils/view/grayCard";
 import Main from "@/components/utils/view/main";
 import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import Grid from "@/components/utils/view/grid";
+import NormalImage from "@/components/utils/view/normalImage";
 
 const Wines = async () => {
-    const initialWines: ListWine[] = await getWineList();
+    const initialWines: Wine[] = await getWineList();
     console.log(initialWines);
     return (
         <Main>
@@ -29,11 +30,7 @@ const Wines = async () => {
                                 <Link href={`/wine/${wineWithProducer.id}`} key={wineWithProducer.id}
                                       className={"text-center space-y-2"}>
                                     <h3 className="text-lg font-semibold mb-2">{wineWithProducer.name}</h3>
-                                    <img
-                                        src={wineWithProducer.imagePath ?? "/images/wine.jpg"}
-                                        alt="ワイン画像"
-                                        className="w-128 object-cover rounded-lg border border-gray-300 shadow-md mx-auto"
-                                    />
+                                    <NormalImage src={wineWithProducer.imagePath}/>
                                     <label className="block text-sm">生産者</label>
                                     <p className="text-sm text-gray-600">{wineWithProducer.producer.name}</p>
                                     <label className="block text-sm">国</label>

@@ -13,7 +13,7 @@ use App\presenter\creator\WineJsonCreator;
 use App\presenter\creator\WineVintageJsonCreator;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\TastingCommentJson;
-use App\presenter\jsonClass\WineJson;
+use App\presenter\jsonClass\TempWineJson;
 use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageFullInfoJson;
@@ -33,7 +33,7 @@ class WineVintagePresenter
         $wineVintageFullInfoJson = new WineVintageFullInfoJson(
             id: $wineVintageFullInfo->getId(),
             producer: (new ProducerJsonCreator())->create($producer),
-            wine: new WineJson(
+            wine: new TempWineJson(
                 id: $wine->getId(),
                 name: $wine->getName(),
                 producerId: $wine->getProducerId(),

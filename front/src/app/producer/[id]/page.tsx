@@ -8,13 +8,15 @@ import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
 import Main from "@/components/utils/view/main";
 import Grid from "@/components/utils/view/grid";
+import NormalImage from "@/components/utils/view/normalImage";
+import {ProducerWine} from "@/api/types/producer";
+import {getWines} from "@/api/queryService/producerQueryService";
 
 const WineDetailPage = async ({params}: { params: { id: number } }) => {
     const {id} = await params;
     const producerData = await fetch(`${process.env.API_URL}/producer/${id}`);
     const producer: Producer = await producerData.json();
-    const winesData = await fetch(`${process.env.API_URL}/producer/${id}/wines`);
-    const wines: Wine[] = await winesData.json();
+    const producerWines: ProducerWine[] = await getWines(id);
     return (
         <Main>
             <Title title={producer.name}/>
@@ -37,21 +39,18 @@ const WineDetailPage = async ({params}: { params: { id: number } }) => {
                         </h2>
                     </div>
                     <Grid>
-                        {wines.map((wine) => {
+                        {producerWines.map((producerWine) => {
                             return (
-                                <Link href={`/wine/${wine.id}`} key={wine.id}>
-                                    <div
-                                        className="border rounded-lg shadow-lg p-6 flex items-center text-center bg-gray-100">
-                                        <div className="space-y-6">
-                                            <h3 className="text-lg font-semibold mb-2">{wine.name}</h3>
-                                            <img
-                                                src="/images/wine.jpg"
-                                                alt="ワイン画像"
-                                                className="mx-auto mb-4"
-                                            />
-                                        </div>
-                                    </div>
-                                </Link>
+                                <GrayCard key={producerWine.id}>
+                                    <Link href={`/wine/${producerWine.id}`} key={producerWine.id}
+                                          className={"text-center space-y-2"}>
+                                        <h3 className="text-lg font-semibold mb-2">{producerWine.name}</h3>
+                                        {producerWine.appellation &&
+                                            <p className="text-sm font-semibold mb-2">{producerWine.appellation.appellationType.name} {producerWine.appellation.name}</p>
+                                        }
+                                        <NormalImage src={producerWine.imagePath}/>
+                                    </Link>
+                                </GrayCard>
                             );
                         })}
                     </Grid>

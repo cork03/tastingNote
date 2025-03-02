@@ -2,7 +2,7 @@ import {Producer} from "@/api/types/producer";
 import {Country} from "@/api/types/country";
 import {Appellation} from "@/api/types/appellation";
 
-export interface ListWine {
+export interface Wine {
     id: number;
     name: string;
     producer: Producer;

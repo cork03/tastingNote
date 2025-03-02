@@ -9,8 +9,8 @@ use App\usecase\producer\CreateProducerUseCaseInput;
 use App\usecase\producer\CreateProducerUseCaseInterface;
 use App\usecase\producer\GetProducersUseCaseInterface;
 use App\usecase\producer\GetProducerUseCaseInterface;
-use App\usecase\producer\GetProducerWinesUseCase;
-use App\usecase\producer\GetProducerWinesUseCaseInput;
+use App\usecase\producer\GetProducerWinesUseCase\GetProducerWinesUseCase;
+use App\usecase\producer\GetProducerWinesUseCase\GetProducerWinesUseCaseInput;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

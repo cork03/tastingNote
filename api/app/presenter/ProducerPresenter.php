@@ -6,8 +6,10 @@ use App\domain\Producer;
 use App\domain\Wine;
 use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\jsonClass\CountryJson;
-use App\presenter\jsonClass\WineJson;
+use App\presenter\jsonClass\ProducerWineJson;
+use App\presenter\jsonClass\TempWineJson;
 use App\presenter\jsonClass\WineTypeJson;
+use App\usecase\producer\GetProducerWinesUseCase\ProducerWineWithImagePathDTO;
 use Illuminate\Http\JsonResponse;
 
 class ProducerPresenter
@@ -30,27 +32,28 @@ class ProducerPresenter
     }
 
     /**
-     * @param Wine[] $wines
-     * @return JsonResponse
+     * @param ProducerWineWithImagePathDTO[] $producerWines
      */
-    public function getWinesResponse(array $wines): JsonResponse
+    public function getWinesResponse(array $producerWines): JsonResponse
     {
-        $winesJson = [];
-        foreach ($wines as $wine) {
-            $winesJson[] = new WineJson(
-                $wine->getId(),
-                $wine->getName(),
-                $wine->getProducerId(),
-                new WineTypeJson(
-                    $wine->getWineType()->value,
-                    $wine->getWineType()->getLabel()
+        $producerWinesJson = [];
+        foreach ($producerWines as $producerWine) {
+            $producerWinesJson[] = new ProducerWineJson(
+                id: $producerWine->getId(),
+                name: $producerWine->getName(),
+                producerId: $producerWine->getProducerId(),
+                wineType: new WineTypeJson(
+                    id: $producerWine->getWineType()->getId(),
+                    label: $producerWine->getWineType()->getName()
                 ),
-                new CountryJson(
-                    $wine->getCountry()->getId(),
-                    $wine->getCountry()->getName()
-                )
+                country: new CountryJson(
+                    id: $producerWine->getCountry()->getId(),
+                    name: $producerWine->getCountry()->getName()
+                ),
+                appellation: $producerWine->getAppellation(),
+                imagePath: $producerWine->getImagePath()
             );
         }
-        return response()->json($winesJson);
+        return response()->json($producerWinesJson);
     }
 }

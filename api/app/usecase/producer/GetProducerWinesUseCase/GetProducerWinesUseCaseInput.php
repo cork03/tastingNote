@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\producer;
+namespace App\usecase\producer\GetProducerWinesUseCase;
 
 class GetProducerWinesUseCaseInput
 {

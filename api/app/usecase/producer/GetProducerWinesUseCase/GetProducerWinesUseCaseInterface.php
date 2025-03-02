@@ -1,13 +1,11 @@
 <?php
 
-namespace App\usecase\producer;
-
-use App\domain\Wine;
+namespace App\usecase\producer\GetProducerWinesUseCase;
 
 interface GetProducerWinesUseCaseInterface
 {
     /**
-     * @return Wine[]
+     * @return ProducerWineWithImagePathDTO[]
      */
     public function handle(GetProducerWinesUseCaseInput $input): array;
 }
