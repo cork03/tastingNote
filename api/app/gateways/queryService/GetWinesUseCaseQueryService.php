@@ -5,7 +5,7 @@ namespace App\gateways\queryService;
 use App\interfaceAdapter\queryService\GetWinesUseCaseQueryServiceInterface;
 use App\usecase\wine\GetWineUseCase\AppellationDTO;
 use App\usecase\wine\GetWineUseCase\AppellationTypeDTO;
-use App\usecase\wine\GetWineUseCase\producerDTO;
+use App\usecase\wine\GetWineUseCase\ProducerDTO;
 use App\usecase\wine\GetWineUseCase\wineDTO;
 use App\Models\Wine as WineModel;
 use Illuminate\Database\Eloquent\Collection;
@@ -58,7 +58,7 @@ class GetWinesUseCaseQueryService implements GetWinesUseCaseQueryServiceInterfac
                 wineTypeName: $wineModel->wineType->name,
                 countryId: $wineModel->country_id,
                 countryName: $wineModel->country->name,
-                producer: new producerDTO(
+                producer: new ProducerDTO(
                     id: $wineModel->producer->id,
                     name: $wineModel->producer->name,
                     description: $wineModel->producer->description,

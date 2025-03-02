@@ -1,8 +1,8 @@
 <?php
 
-namespace App\usecase\producer\GetProducerWinesUseCase;
+namespace App\usecase\commonDTO;
 
-class WineTypeDTO
+class CountryDTO
 {
     public function __construct(
         private readonly int $id,

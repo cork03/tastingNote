@@ -3,7 +3,7 @@
 namespace App\presenter;
 
 use App\domain\WineType;
-use App\presenter\jsonClass\WineTypeJson;
+use App\presenter\jsonClass\OldWineTypeJson;
 use Illuminate\Http\JsonResponse;
 
 class WineTypePresenter
@@ -15,7 +15,7 @@ class WineTypePresenter
     {
         $wineTypesJson = [];
         foreach ($wineTypes as $wineType) {
-            $wineTypesJson[] = new WineTypeJson(
+            $wineTypesJson[] = new OldWineTypeJson(
                 $wineType->value,
                 $wineType->getLabel()
             );

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\usecase\producer\GetProducerWinesUseCase;
+namespace App\usecase\commonDTO;
 
-class AppellationTypeDTO
+class GrapeVarietyDTO
 {
     public function __construct(
         private readonly int $id,
-        private readonly string $name,
+        private readonly string $name
     )
     {
     }

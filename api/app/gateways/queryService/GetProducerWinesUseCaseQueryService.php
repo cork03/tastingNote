@@ -4,11 +4,11 @@ namespace App\gateways\queryService;
 
 use App\interfaceAdapter\queryService\GetProducerWinesUseCaseQueryServiceInterface;
 use App\Models\Producer as ProducerModel;
-use App\usecase\producer\GetProducerWinesUseCase\AppellationDTO;
-use App\usecase\producer\GetProducerWinesUseCase\AppellationTypeDTO;
-use App\usecase\producer\GetProducerWinesUseCase\CountryDTO;
+use App\usecase\commonDTO\AppellationDTO;
+use App\usecase\commonDTO\AppellationTypeDTO;
+use App\usecase\commonDTO\CountryDTO;
+use App\usecase\commonDTO\WineTypeDTO;
 use App\usecase\producer\GetProducerWinesUseCase\ProducerWineDTO;
-use App\usecase\producer\GetProducerWinesUseCase\WineTypeDTO;
 use Illuminate\Database\Eloquent\Collection;
 
 class GetProducerWinesUseCaseQueryService implements GetProducerWinesUseCaseQueryServiceInterface

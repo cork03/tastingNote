@@ -5,7 +5,7 @@ namespace App\presenter\creator;
 use App\domain\Wine;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\TempWineJson;
-use App\presenter\jsonClass\WineTypeJson;
+use App\presenter\jsonClass\OldWineTypeJson;
 
 class WineJsonCreator
 {
@@ -15,7 +15,7 @@ class WineJsonCreator
             id: $wine->getId(),
             name: $wine->getName(),
             producerId: $wine->getProducerId(),
-            wineType: new WineTypeJson(
+            wineType: new OldWineTypeJson(
                 $wine->getWineType()->value,
                 $wine->getWineType()->getLabel(),
             ),

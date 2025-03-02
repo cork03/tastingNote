@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\producer\GetProducerWinesUseCase;
+namespace App\usecase\commonDTO;
 
 class AppellationDTO
 {

@@ -10,12 +10,16 @@ use App\presenter\jsonClass\AppellationJson;
 use App\presenter\jsonClass\AppellationTypeJson;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
+use App\presenter\jsonClass\WineDetailJson;
 use App\presenter\jsonClass\WineFullInfoJson;
+use App\presenter\jsonClass\OldWineTypeJson;
 use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageJson;
 use App\presenter\jsonClass\WineJson;
+use App\presenter\jsonClass\WineWithVintagesJson;
 use App\usecase\wine\GetWineUseCase\wineDTOWithImagePath;
+use App\usecase\wine\GetWineWithVintagesUseCase\WineInfoDTO;
 use Illuminate\Http\JsonResponse;
 
 class WinePresenter
@@ -54,7 +58,7 @@ class WinePresenter
                     description: $wineDTO->getProducer()->getDescription(),
                     url: $wineDTO->getProducer()->getUrl(),
                 ),
-                wineType: new WineTypeJson(
+                wineType: new OldWineTypeJson(
                     id: $wineDTO->getWineTypeId(),
                     label: $wineDTO->getWineTypeName(),
                 ),
@@ -66,46 +70,65 @@ class WinePresenter
         return response()->json($winesWithProducerJson);
     }
 
-    public function getWineWithVintagesResponse(WineFullInfo $wineFullInfo): JsonResponse
+    public function getWineWithVintagesResponse(WineInfoDTO $wineInfo): JsonResponse
     {
         $wineVintagesJson = [];
-        foreach ($wineFullInfo->getWineVintages() as $wineVintage) {
+        $wine = $wineInfo->getWine();
+        foreach ($wine->getVineVintages() as $vineVintage) {
             $wineVintagesJson[] = new WineVintageJson(
-                id: $wineVintage->getId(),
-                wineId: $wineVintage->getWineId(),
-                vintage: $wineVintage->getVintage(),
-                price: $wineVintage->getPrice(),
-                agingMethod: $wineVintage->getAgingMethod(),
-                alcoholContent: $wineVintage->getAlcoholContent(),
+                id: $vineVintage->getId(),
+                wineId: $vineVintage->getWineId(),
+                vintage: $vineVintage->getVintage(),
+                price: $vineVintage->getPrice(),
+                agingMethod: $vineVintage->getAgingMethod(),
+                alcoholContent: $vineVintage->getAlcoholContent(),
                 wineBlend: array_map(
                     fn($wineVariety) => new WineVarietyJson(
                         name: $wineVariety->getGrapeVariety()->getName(),
                         percentage: $wineVariety->getPercentage(),
                         id: $wineVariety->getGrapeVariety()->getId(),
                     ),
-                    $wineVintage->getWineBlend()->getWineVarieties()
+                    $vineVintage->getWineBlend()
                 ),
-                technicalComment: $wineVintage->getTechnicalComment()
+                technicalComment: $vineVintage->getTechnicalComment(),
+                imagePath: $vineVintage->getImagePath(),
             );
         }
-        $wine = $wineFullInfo->getWine();
-        $producer = $wineFullInfo->getProducer();
-        $wineType = $wine->getWineType();
-        $country = $wine->getCountry();
-        $wineFullInfoJson = new WineFullInfoJson(
-            id: $wine->getId(),
-            name: $wine->getName(),
-            producer: (new ProducerJsonCreator())->create($producer),
-            wineType: new WineTypeJson(
-                id: $wineType->value,
-                label: $wineType->getLabel(),
-            ),
-            country: new CountryJson(
-                id: $country->getId(),
-                name: $country->getName(),
-            ),
-            wineVintages: $wineVintagesJson
+        $country = new CountryJson(
+            id: $wineInfo->getWine()->getCountry()->getId(),
+            name: $wineInfo->getWine()->getCountry()->getName(),
         );
-        return response()->json($wineFullInfoJson);
+        $producer = $wineInfo->getProducer();
+        $wineDetailJson = new WineDetailJson(
+            producer: new ProducerJson(
+                id: $producer->getId(),
+                name: $producer->getName(),
+                country: $country,
+                description: $producer->getDescription(),
+                url: $producer->getUrl(),
+            ),
+            wine: new WineWithVintagesJson(
+                id: $wine->getId(),
+                name: $wine->getName(),
+                producerId: $wine->getProducerId(),
+                wineType: new WineTypeJson(
+                    id: $wine->getWineType()->getId(),
+                    name: $wine->getWineType()->getName(),
+                ),
+                country: $country,
+                wineVintages: $wineVintagesJson,
+                appellation: new AppellationJson(
+                    id: $wine->getAppellation()->getId(),
+                    name: $wine->getAppellation()->getName(),
+                    regulation: $wine->getAppellation()->getRegulation(),
+                    appellationType: new AppellationTypeJson(
+                        id: $wine->getAppellation()->getAppellationType()->getId(),
+                        name: $wine->getAppellation()->getAppellationType()->getName(),
+                        country: $country,
+                    ),
+                )
+            )
+        );
+        return response()->json($wineDetailJson);
     }
 }

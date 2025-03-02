@@ -1,21 +1,25 @@
 <?php
 
-namespace App\usecase\producer\GetProducerWinesUseCase;
+namespace App\usecase\wine\GetWineWithVintagesUseCase;
+
 
 use App\usecase\commonDTO\AppellationDTO;
 use App\usecase\commonDTO\CountryDTO;
 use App\usecase\commonDTO\WineTypeDTO;
 
-class ProducerWineWithImagePathDTO
+class WineDTO
 {
+    /**
+     * @param WineVintageDTO[] $vineVintages
+     */
     public function __construct(
         private readonly int $id,
         private readonly string $name,
         private readonly int $producerId,
         private readonly WineTypeDTO $wineType,
         private readonly CountryDTO $country,
+        private readonly array $vineVintages,
         private readonly ?AppellationDTO $appellation,
-        private readonly ?string $imagePath,
     )
     {
     }
@@ -45,13 +49,13 @@ class ProducerWineWithImagePathDTO
         return $this->country;
     }
 
+    public function getVineVintages(): array
+    {
+        return $this->vineVintages;
+    }
+
     public function getAppellation(): ?AppellationDTO
     {
         return $this->appellation;
-    }
-
-    public function getImagePath(): ?string
-    {
-        return $this->imagePath;
     }
 }

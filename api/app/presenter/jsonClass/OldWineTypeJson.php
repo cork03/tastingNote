@@ -2,11 +2,11 @@
 
 namespace App\presenter\jsonClass;
 
-class WineTypeJson
+class OldWineTypeJson
 {
     public function __construct(
         public readonly int $id,
-        public readonly string $name,
+        public readonly string $label
     )
     {
     }

@@ -6,7 +6,7 @@ use App\presenter\WinePresenter;
 use App\usecase\wine\CreateWineUseCaseInput;
 use App\usecase\wine\CreateWineUseCaseInterface;
 use App\usecase\wine\GetWineUseCase\GetWinesUseCaseInterface;
-use App\usecase\wine\GetWineWithVintagesUseCaseInterface;
+use App\usecase\wine\GetWineWithVintagesUseCase\GetWineWithVintagesUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

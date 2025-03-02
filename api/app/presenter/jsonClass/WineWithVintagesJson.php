@@ -2,16 +2,19 @@
 
 namespace App\presenter\jsonClass;
 
-class WineJson
+class WineWithVintagesJson
 {
+    /**
+     * @param WineVintageJson[] $wineVintages
+     */
     public function __construct(
         public readonly int              $id,
         public readonly string           $name,
-        public readonly ProducerJson     $producer,
-        public readonly OldWineTypeJson  $wineType,
+        public readonly int              $producerId,
+        public readonly WineTypeJson  $wineType,
         public readonly CountryJson      $country,
+        public readonly array            $wineVintages,
         public readonly ?AppellationJson $appellation,
-        public readonly ?string          $imagePath,
     )
     {
     }

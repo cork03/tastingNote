@@ -2,6 +2,10 @@
 
 namespace App\usecase\producer\GetProducerWinesUseCase;
 
+use App\usecase\commonDTO\AppellationDTO;
+use App\usecase\commonDTO\CountryDTO;
+use App\usecase\commonDTO\WineTypeDTO;
+
 class ProducerWineDTO
 {
     public function __construct(

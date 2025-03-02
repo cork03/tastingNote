@@ -14,7 +14,7 @@ use App\presenter\creator\WineVintageJsonCreator;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\TastingCommentJson;
 use App\presenter\jsonClass\TempWineJson;
-use App\presenter\jsonClass\WineTypeJson;
+use App\presenter\jsonClass\OldWineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
 use App\presenter\jsonClass\WineVintageFullInfoJson;
 use Illuminate\Http\JsonResponse;
@@ -37,7 +37,7 @@ class WineVintagePresenter
                 id: $wine->getId(),
                 name: $wine->getName(),
                 producerId: $wine->getProducerId(),
-                wineType: new WineTypeJson(
+                wineType: new OldWineTypeJson(
                     id: $wine->getWineType()->value,
                     label: $wine->getWineType()->getLabel(),
                 ),

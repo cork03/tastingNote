@@ -5,15 +5,15 @@ namespace App\usecase\wine\GetWineUseCase;
 class wineDTO
 {
     public function __construct(
-        private readonly int $id,
-        private readonly string $name,
-        private readonly int $wineTypeId,
-        private readonly string $wineTypeName,
-        private readonly int $countryId,
-        private readonly string $countryName,
-        private readonly producerDTO $producer,
+        private readonly int             $id,
+        private readonly string          $name,
+        private readonly int             $wineTypeId,
+        private readonly string          $wineTypeName,
+        private readonly int             $countryId,
+        private readonly string          $countryName,
+        private readonly ProducerDTO     $producer,
         private readonly ?AppellationDTO $appellation,
-        private readonly ?string $latestVintageImagePath,
+        private readonly ?string         $latestVintageImagePath,
     )
     {
     }
@@ -48,7 +48,7 @@ class wineDTO
         return $this->countryName;
     }
 
-    public function getProducer(): producerDTO
+    public function getProducer(): ProducerDTO
     {
         return $this->producer;
     }

@@ -4,7 +4,7 @@ namespace App\presenter\creator;
 
 use App\domain\WineRanking;
 use App\presenter\jsonClass\WineRankingJson;
-use App\presenter\jsonClass\WineTypeJson;
+use App\presenter\jsonClass\OldWineTypeJson;
 
 class WineRankingJsonCreator
 {
@@ -14,7 +14,7 @@ class WineRankingJsonCreator
             id: $wineRanking->getId(),
             rank: $wineRanking->getRank(),
             wineVintageId: $wineRanking->getWineVintageId(),
-            wineType: new WineTypeJson(
+            wineType: new OldWineTypeJson(
                 $wineRanking->getWineType()->value,
                 $wineRanking->getWineType()->getLabel(),
             ),
