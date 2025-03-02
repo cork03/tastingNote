@@ -4,7 +4,7 @@ import WineCommentPage from "@/components/wine/[id]/vintage/[vintage]/WineCommen
 import {TastingComment} from "@/types/domain/blindTasting";
 import Title from "@/components/utils/view/title";
 import Paragraph from "@/components/utils/view/side/paragraph";
-import {getWineVarietiesText} from "@/utils/utils";
+import {getWineVarietiesTextOld} from "@/utils/utils";
 import NormalButton from "@/components/utils/view/button/NormalButton";
 import Link from "next/link";
 
@@ -31,7 +31,7 @@ const WineVintageDetailPage = async ({params}: { params: { id: number, vintage: 
                                 <Paragraph label={"生産地"} text={initialWineVintage.wine.country.name}/>
                                 <Paragraph label={"生産者"} text={initialWineVintage.producer.name}/>
                                 <Paragraph label={"葡萄品種"}
-                                           text={getWineVarietiesText(initialWineVintage.wineBlend)}/>
+                                           text={getWineVarietiesTextOld(initialWineVintage.wineBlend)}/>
                                 <Paragraph label={"アルコール度数"} text={initialWineVintage.alcoholContent + '%'}/>
                                 <Paragraph label={"熟成方法"} text={initialWineVintage.agingMethod}/>
                                 <Paragraph label={"価格"} text={'¥' + String(initialWineVintage.price)}/>

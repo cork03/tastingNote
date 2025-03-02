@@ -1,18 +1,17 @@
 "use client"
 
 import React from "react";
-import Wines from "@/components/common/createWineVintageRoute/Wines";
 import Section from "@/components/utils/view/section";
 import Title from "@/components/utils/view/title";
 import {redirect} from "next/navigation";
 import NormalButton from "@/components/utils/view/button/NormalButton";
-import {Wine, WineVintage} from "@/types/domain/wine";
+import {WineVintage} from "@/types/domain/wine";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
 import Grid from "@/components/utils/view/grid";
-import WineVintageDetail from "@/components/utils/domainView/WineVintage/WineVintageDetail";
 import {linkToWineVintage} from "@/repository/serverActions/wineCommentRepository";
 import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
 import GrayButton from "@/components/utils/view/button/GrayButton";
+import OldWineVintageDetail from "@/components/utils/domainView/WineVintage/OldWineVintageDetail";
 
 interface Props {
     wineId: number
@@ -37,7 +36,7 @@ const ChoiceWineVintage = ({wineId, setViewType, commentId, wineVintages}: Props
                             redirect(`/wine/${wineId}/vintage/${wineVintage.vintage}`);
                         }
                         return (
-                            <WineVintageDetail key={wineVintage.id} wineVintage={wineVintage} onClick={onClick}/>
+                            <OldWineVintageDetail key={wineVintage.id} wineVintage={wineVintage} onClick={onClick}/>
                         );
                     })}
                 </Grid>

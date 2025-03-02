@@ -2,16 +2,11 @@
 
 namespace App\presenter;
 
-use App\domain\Producer;
-use App\domain\Wine;
-use App\domain\WineFullInfo;
-use App\presenter\creator\ProducerJsonCreator;
 use App\presenter\jsonClass\AppellationJson;
 use App\presenter\jsonClass\AppellationTypeJson;
 use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerJson;
 use App\presenter\jsonClass\WineDetailJson;
-use App\presenter\jsonClass\WineFullInfoJson;
 use App\presenter\jsonClass\OldWineTypeJson;
 use App\presenter\jsonClass\WineTypeJson;
 use App\presenter\jsonClass\WineVarietyJson;
@@ -99,6 +94,19 @@ class WinePresenter
             name: $wineInfo->getWine()->getCountry()->getName(),
         );
         $producer = $wineInfo->getProducer();
+        $appellation = null;
+        if ($wine->getAppellation() !== null) {
+            $appellation = new AppellationJson(
+                id: $wine->getAppellation()->getId(),
+                name: $wine->getAppellation()->getName(),
+                regulation: $wine->getAppellation()->getRegulation(),
+                appellationType: new AppellationTypeJson(
+                    id: $wine->getAppellation()->getAppellationType()->getId(),
+                    name: $wine->getAppellation()->getAppellationType()->getName(),
+                    country: $country,
+                ),
+            );
+        }
         $wineDetailJson = new WineDetailJson(
             producer: new ProducerJson(
                 id: $producer->getId(),
@@ -117,16 +125,7 @@ class WinePresenter
                 ),
                 country: $country,
                 wineVintages: $wineVintagesJson,
-                appellation: new AppellationJson(
-                    id: $wine->getAppellation()->getId(),
-                    name: $wine->getAppellation()->getName(),
-                    regulation: $wine->getAppellation()->getRegulation(),
-                    appellationType: new AppellationTypeJson(
-                        id: $wine->getAppellation()->getAppellationType()->getId(),
-                        name: $wine->getAppellation()->getAppellationType()->getName(),
-                        country: $country,
-                    ),
-                )
+                appellation: $appellation
             )
         );
         return response()->json($wineDetailJson);

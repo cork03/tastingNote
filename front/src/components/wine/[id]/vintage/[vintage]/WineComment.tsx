@@ -2,7 +2,7 @@ import React from "react";
 import {TastingComment} from "@/types/domain/blindTasting";
 import Link from "next/link";
 import Paragraph from "@/components/utils/view/side/paragraph";
-import {getWineVarietiesText, getWineVarietiesTextDomain} from "@/utils/utils";
+import {getWineVarietiesTextOld, getWineVarietiesTextDomain} from "@/utils/utils";
 import NormalButton from "@/components/utils/view/button/NormalButton";
 
 interface Props {
