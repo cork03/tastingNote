@@ -14,6 +14,7 @@ const WineDetail = ({wine, onClick}: Props) => {
             <GrayCard>
                 <h3 className="text-lg font-semibold mb-2">{wine.name}</h3>
                 <p className="text-sm text-gray-600">{wine.wineType.name}ワイン</p>
+                {wine.appellation && <p className="text-sm text-gray-600">{wine.appellation.appellationType.name} {wine.appellation.name}</p>}
                 <NormalImage src={wine.imagePath ?? "/images/wine.jpg"}/>
             </GrayCard>
         </div>
