@@ -3,12 +3,13 @@
 import ChoiceWine from "@/components/common/createWineVintageRoute/ChoiceWine";
 import {useState} from "react";
 import {Producer} from "@/types/domain/producer";
-import {Wine, WineVintage} from "@/types/domain/wine";
+import {WineVintage} from "@/types/domain/wine";
 import ChoiceProducer from "@/components/common/createWineVintageRoute/ChoiceProducer";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
 import {default as ChoiceWineVintageComponent} from "@/components/common/createWineVintageRoute/ChoiceWineVintage";
 import {redirect} from "next/navigation";
 import {getAllByWineId} from "@/repository/serverActions/wineVintageRepository";
+import {ProducerWine} from "@/api/types/producer";
 
 interface Props {
     prefix: string;
@@ -18,7 +19,7 @@ interface Props {
 
 
 const ChoiceWineVintage = ({prefix, producers, commentId}: Props) => {
-    const [wines, setWines] = useState<Wine[]>([]);
+    const [wines, setWines] = useState<ProducerWine[]>([]);
     const [wineVintages, setWineVintages] = useState<WineVintage[]>([]);
     const [selectedProducerId, setSelectedProducerId] = useState<number>(0);
     const [selectedWineId, setSelectedWineId] = useState<number>(0);

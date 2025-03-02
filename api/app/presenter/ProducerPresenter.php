@@ -11,6 +11,7 @@ use App\presenter\jsonClass\CountryJson;
 use App\presenter\jsonClass\ProducerWineJson;
 use App\presenter\jsonClass\TempWineJson;
 use App\presenter\jsonClass\OldWineTypeJson;
+use App\presenter\jsonClass\WineTypeJson;
 use App\usecase\producer\GetProducerWinesUseCase\ProducerWineWithImagePathDTO;
 use Illuminate\Http\JsonResponse;
 
@@ -61,9 +62,9 @@ class ProducerPresenter
                 id: $producerWine->getId(),
                 name: $producerWine->getName(),
                 producerId: $producerWine->getProducerId(),
-                wineType: new OldWineTypeJson(
+                wineType: new WineTypeJson(
                     id: $producerWine->getWineType()->getId(),
-                    label: $producerWine->getWineType()->getName()
+                    name: $producerWine->getWineType()->getName()
                 ),
                 country: $country,
                 appellation: $appellation,

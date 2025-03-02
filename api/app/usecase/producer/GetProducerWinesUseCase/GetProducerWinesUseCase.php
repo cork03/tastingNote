@@ -2,7 +2,6 @@
 
 namespace App\usecase\producer\GetProducerWinesUseCase;
 
-use App\domain\Wine;
 use App\gateways\FileUploader\FileUploaderInterface;
 use App\interfaceAdapter\queryService\GetProducerWinesUseCaseQueryServiceInterface;
 

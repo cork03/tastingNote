@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import {Producer} from "@/types/domain/producer";
 import Paragraph from "@/components/utils/view/side/paragraph";
-import {Wine} from "@/types/domain/wine";
+import {ProducerWine} from "@/types/domain/wine";
 import Title from "@/components/utils/view/title";
 import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";

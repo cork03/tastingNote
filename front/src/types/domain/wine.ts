@@ -13,7 +13,7 @@ export interface WineType {
     label: string;
 }
 
-export interface Wine {
+export interface ProducerWine {
     id: number | null;
     name: string;
     producerId: number;

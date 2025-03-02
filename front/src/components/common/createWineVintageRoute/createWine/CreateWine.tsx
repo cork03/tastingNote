@@ -4,7 +4,7 @@ import React from "react";
 import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
 import InputField from "@/components/utils/form/Vertical/inputField";
-import {Wine, WineType} from "@/types/domain/wine";
+import {ProducerWine, WineType} from "@/types/domain/wine";
 import CountrySelectField from "@/components/utils/form/Vertical/countrySelectField";
 import {Country} from "@/types/domain/country";
 import WineTypeSelectField from "@/components/utils/form/Vertical/wineTypeSelectField";
@@ -25,7 +25,7 @@ interface Props {
 }
 
 const CreateWine = ({prefix, producerId, countries, wineTypes, appellations}: Props) => {
-    const [wine, setWine] = React.useState<Wine>({
+    const [wine, setWine] = React.useState<ProducerWine>({
         id: null,
         name: "",
         producerId: producerId,

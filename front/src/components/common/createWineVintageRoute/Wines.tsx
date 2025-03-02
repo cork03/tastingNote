@@ -2,13 +2,12 @@ import React from "react";
 import WineDetail from "@/components/common/createWineVintageRoute/WineDetail";
 import GrayButton from "@/components/utils/view/button/GrayButton";
 import Grid from "@/components/utils/view/grid";
-import {Wine} from "@/types/domain/wine";
-import {redirect} from "next/navigation";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
+import {ProducerWine} from "@/api/types/producer";
 
 interface Props {
     onClickWineDetail: (windId: number) => void;
-    wines: Wine[];
+    wines: ProducerWine[];
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
 }
 

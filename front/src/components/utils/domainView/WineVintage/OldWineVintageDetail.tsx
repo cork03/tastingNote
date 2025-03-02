@@ -1,5 +1,5 @@
 import GrayCard from "@/components/utils/view/grayCard";
-import {Wine, WineVintage} from "@/types/domain/wine";
+import {ProducerWine, WineVintage} from "@/types/domain/wine";
 import React from "react";
 
 interface Props {

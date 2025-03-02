@@ -1,4 +1,4 @@
-import {Wine, WineVintage} from "@/types/domain/wine";
+import {ProducerWine, WineVintage} from "@/types/domain/wine";
 
 export interface WineRanking {
     id: number | null;
@@ -9,5 +9,5 @@ export interface WineRanking {
 export interface WineRankingFullInfo {
     wineRanking: WineRanking;
     wineVintage: WineVintage;
-    wine: Wine;
+    wine: ProducerWine;
 }

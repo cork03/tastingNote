@@ -2,13 +2,13 @@ import React from "react";
 import GrayCard from "@/components/utils/view/grayCard";
 import {Producer} from "@/types/domain/producer";
 import ProducerCardTexts from "@/components/utils/domainView/producer/ProducerCardTexts";
-import {Wine} from "@/types/domain/wine";
-import {getWinesByProducerId} from "@/repository/serverActions/wineRepository";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
+import {getWines} from "@/api/queryService/producerQueryService";
+import {ProducerWine} from "@/api/types/producer";
 
 interface Props {
     producer: Producer;
-    setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
+    setWines: React.Dispatch<React.SetStateAction<ProducerWine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setSelectedProducerId: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -19,7 +19,7 @@ const ProducerDetail = ({producer, setWines, setViewType, setSelectedProducerId}
         if (!producer.id) {
             throw new Error("Producer id is not defined");
         }
-        const wines = await getWinesByProducerId(producer.id);
+        const wines = await getWines(producer.id);
         setWines(wines);
         setSelectedProducerId(producer.id);
         setViewType(2);

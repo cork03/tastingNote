@@ -8,13 +8,13 @@ import NormalButton from "@/components/utils/view/button/NormalButton";
 import ProducerDetail from "@/components/common/createWineVintageRoute/ProducerDetail";
 import Grid from "@/components/utils/view/grid";
 import {Producer} from "@/types/domain/producer";
-import {Wine} from "@/types/domain/wine";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
+import {ProducerWine} from "@/api/types/producer";
 
 interface Props {
     prefix: string;
     producers: Producer[];
-    setWines: React.Dispatch<React.SetStateAction<Wine[]>>;
+    setWines: React.Dispatch<React.SetStateAction<ProducerWine[]>>;
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     setSelectedProducerId: React.Dispatch<React.SetStateAction<number>>;
 }

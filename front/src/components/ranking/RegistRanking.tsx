@@ -1,6 +1,6 @@
 'use client'
 import GrayCard from "@/components/utils/view/grayCard";
-import {Wine, WineVintage} from "@/types/domain/wine";
+import {ProducerWine, WineVintage} from "@/types/domain/wine";
 import React, {ChangeEvent} from "react";
 import InputField from "@/components/utils/form/Vertical/inputField";
 import NormalButton from "@/components/utils/view/button/NormalButton";
@@ -8,7 +8,7 @@ import {registerRanking} from "@/repository/serverActions/wineRankingRepository"
 import {redirect} from "next/navigation";
 
 interface Props {
-    wineVintagesInfo: { 'wineVintage': WineVintage, 'wine': Wine }[];
+    wineVintagesInfo: { 'wineVintage': WineVintage, 'wine': ProducerWine }[];
     registeredCount: number
 }
 

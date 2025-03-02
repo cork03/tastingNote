@@ -5,11 +5,11 @@ import Wines from "@/components/common/createWineVintageRoute/Wines";
 import Section from "@/components/utils/view/section";
 import Title from "@/components/utils/view/title";
 import NormalButton from "@/components/utils/view/button/NormalButton";
-import {Wine} from "@/types/domain/wine";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
+import {ProducerWine} from "@/api/types/producer";
 
 interface Props {
-    wines: Wine[]
+    wines: ProducerWine[]
     setViewType: React.Dispatch<React.SetStateAction<ViewType>>;
     toCreateWine: () => void
     onClickWineDetail: (wineId: number) => void

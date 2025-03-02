@@ -4,16 +4,16 @@ import ChoiceProducer from "@/components/common/createWineVintageRoute/ChoicePro
 import ChoiceWine from "@/components/common/createWineVintageRoute/ChoiceWine";
 import {useState} from "react";
 import {Producer} from "@/types/domain/producer";
-import {Wine} from "@/types/domain/wine";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
 import {redirect} from "next/navigation";
+import {ProducerWine} from "@/api/types/producer";
 
 interface Props {
     producers: Producer[];
 }
 
 const CreateNewTasting = ({producers}: Props) => {
-    const [wines, setWines] = useState<Wine[]>([]);
+    const [wines, setWines] = useState<ProducerWine[]>([]);
     const [selectedProducerId, setSelectedProducerId] = useState<number>(0);
     const [viewType, setViewType] = useState<ViewType>(1);
     const toCreateWine = () => {
