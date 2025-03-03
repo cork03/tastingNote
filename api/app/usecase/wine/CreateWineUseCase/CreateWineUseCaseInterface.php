@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\wine;
+namespace App\usecase\wine\CreateWineUseCase;
 
 
 use App\domain\Aggregate\Wine;

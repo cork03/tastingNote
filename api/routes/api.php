@@ -29,6 +29,7 @@ Route::get('/producer/{id}/wines', [ProducerController::class, 'getWines']);
 Route::get('/producers', [ProducerController::class, 'getAll']);
 Route::post('/wine', [WineController::class, 'create']);
 Route::get('/wine/{id}', [WineController::class, 'getWithVintages']);
+Route::put('/wine/{id}', [WineController::class, 'update']);
 Route::get('/wine/{id}/wine-vintages', [WineVintageController::class, 'getAllByWineId']);
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);

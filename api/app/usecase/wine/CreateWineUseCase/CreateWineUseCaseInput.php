@@ -1,8 +1,6 @@
 <?php
 
-namespace App\usecase\wine;
-
-use App\domain\Wine;
+namespace App\usecase\wine\CreateWineUseCase;
 
 class CreateWineUseCaseInput
 {

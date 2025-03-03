@@ -22,14 +22,16 @@ use App\usecase\producer\GetProducerUseCase;
 use App\usecase\producer\GetProducerUseCaseInterface;
 use App\usecase\producer\GetProducerWinesUseCase\GetProducerWinesUseCase;
 use App\usecase\producer\GetProducerWinesUseCase\GetProducerWinesUseCaseInterface;
-use App\usecase\wine\CreateWineUseCase;
-use App\usecase\wine\CreateWineUseCaseInterface;
+use App\usecase\wine\CreateWineUseCase\CreateWineUseCase;
+use App\usecase\wine\CreateWineUseCase\CreateWineUseCaseInterface;
 use App\usecase\wine\GetWineUseCase\GetWinesUseCase;
 use App\usecase\wine\GetWineUseCase\GetWinesUseCaseInterface;
 use App\usecase\wine\GetWineWithVintagesUseCase\GetWineWithVintagesUseCase;
 use App\usecase\wine\GetWineWithVintagesUseCase\GetWineWithVintagesUseCaseInterface;
 use App\usecase\wine\types\GetWineTypesUseCase;
 use App\usecase\wine\types\GetWineTypesUseCaseInterface;
+use App\usecase\wine\UpdateWineUseCase\UpdateWineUseCase;
+use App\usecase\wine\UpdateWineUseCase\UpdateWineUseCaseInterface;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCase;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
 use App\usecase\wineRanking\GetWineRankingsUseCase;
@@ -90,6 +92,7 @@ class UseCaseServiceProvider extends ServiceProvider
             GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
             AppellationCreateUseCaseInterface::class => AppellationCreateUseCase::class,
             GetAppellationsUseCaseInterface::class => GetAppellationsUseCase::class,
+            UpdateWineUseCaseInterface::class => UpdateWineUseCase::class,
         ];
         foreach ($bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

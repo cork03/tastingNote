@@ -6,7 +6,6 @@ use App\domain\Image;
 use App\domain\images\WineVintageImagePathCreator;
 use App\gateways\FileUploader\FileUploaderInterface;
 use App\gateways\repository\WineVintageRepositoryInterface;
-use App\usecase\wine\CreateWineVintageUseCaseInput;
 use App\utils\Base64ImageResolver;
 
 class CreateUseCase implements CreateUseCaseInterface

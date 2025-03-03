@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\wine;
+namespace App\usecase\wineVintage;
 
 use App\domain\WineVintage;
 
