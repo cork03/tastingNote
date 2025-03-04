@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import {Wine} from "@/api/types/wine";
+import {Wine} from "@/api/queryService/types/wine";
 import {getWineList} from "@/api/queryService/wineQueryService";
 import GrayCard from "@/components/utils/view/grayCard";
 import Main from "@/components/utils/view/main";

@@ -9,7 +9,7 @@ import {ViewType} from "@/components/common/createWineVintageRoute/type";
 import {default as ChoiceWineVintageComponent} from "@/components/common/createWineVintageRoute/ChoiceWineVintage";
 import {redirect} from "next/navigation";
 import {getAllByWineId} from "@/repository/serverActions/wineVintageRepository";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 
 interface Props {
     prefix: string;

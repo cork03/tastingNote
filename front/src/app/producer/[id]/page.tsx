@@ -9,7 +9,7 @@ import GrayCard from "@/components/utils/view/grayCard";
 import Main from "@/components/utils/view/main";
 import Grid from "@/components/utils/view/grid";
 import NormalImage from "@/components/utils/view/normalImage";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 import {getWines} from "@/api/queryService/producerQueryService";
 
 const WineDetailPage = async ({params}: { params: { id: number } }) => {

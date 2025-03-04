@@ -1,23 +1,24 @@
 "use client"
 
 import React from "react";
-import {Country} from "@/api/queryService/types/country";
+import {Country} from "@/types/domain/country";
+import {WineType} from "@/types/domain/wine";
 
 interface Props {
     label: string;
     name: string;
     value: number;
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    countries: Country[];
+    wineTypes: WineType[];
 }
 
-const CountrySelectFieldOld = (
+const WineTypeSelectFieldOld = (
     {
         label,
         name,
         value,
         onChange,
-        countries
+        wineTypes
     }: Props) => {
     return (
         <div className="flex flex-col mb-4">
@@ -31,12 +32,12 @@ const CountrySelectFieldOld = (
                 <option value={0}>
                     {`${label}を選択してください`}
                 </option>
-                {countries.map((country) => {
-                    return <option key={country.id} value={country.id}>{country.name}</option>
+                {wineTypes.map((wineType) => {
+                    return <option key={wineType.id} value={wineType.id}>{wineType.label}</option>
                 })}
             </select>
         </div>
     );
 }
 
-export default CountrySelectFieldOld;
+export default WineTypeSelectFieldOld;

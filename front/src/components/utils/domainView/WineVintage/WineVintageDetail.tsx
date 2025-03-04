@@ -1,6 +1,6 @@
 import GrayCard from "@/components/utils/view/grayCard";
 import React from "react";
-import {WineVintage} from "@/api/types/wine";
+import {WineVintage} from "@/api/queryService/types/wine";
 import NormalImage from "@/components/utils/view/normalImage";
 import {getWineVarietiesText} from "@/utils/utils";
 

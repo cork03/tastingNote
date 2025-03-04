@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import {Country} from "@/api/queryService/types/country";
+import {Country} from "@/types/domain/country";
 
 interface Props {
     label: string;

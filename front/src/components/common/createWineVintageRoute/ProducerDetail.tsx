@@ -4,7 +4,7 @@ import {Producer} from "@/types/domain/producer";
 import ProducerCardTexts from "@/components/utils/domainView/producer/ProducerCardTexts";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
 import {getWines} from "@/api/queryService/producerQueryService";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 
 interface Props {
     producer: Producer;

@@ -10,7 +10,7 @@ import NormalButton from "@/components/utils/view/button/NormalButton";
 interface Props {
     label: string;
     name: string;
-    value: number;
+    value: number | null;
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     appellations: Appellation[];
 }
@@ -29,7 +29,7 @@ const AppellationSelectField = (
             <div className="flex items-center gap-4">
                 <select
                     name={name}
-                    value={value}
+                    value={value ?? 0}
                     onChange={onChange}
                     className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-gray-400"
                 >

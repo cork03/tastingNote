@@ -9,7 +9,7 @@ import ProducerDetail from "@/components/common/createWineVintageRoute/ProducerD
 import Grid from "@/components/utils/view/grid";
 import {Producer} from "@/types/domain/producer";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 
 interface Props {
     prefix: string;

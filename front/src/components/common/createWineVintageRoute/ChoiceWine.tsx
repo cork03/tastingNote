@@ -6,7 +6,7 @@ import Section from "@/components/utils/view/section";
 import Title from "@/components/utils/view/title";
 import NormalButton from "@/components/utils/view/button/NormalButton";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 
 interface Props {
     wines: ProducerWine[]

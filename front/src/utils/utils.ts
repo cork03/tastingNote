@@ -1,6 +1,6 @@
 import {WineVariety as WineVarietyOld} from "@/types/wine";
 import {WineVariety as WineVarietyDomain} from "@/types/domain/wine";
-import {WineVariety} from "@/api/types/wine";
+import {WineVariety} from "@/api/queryService/types/wine";
 
 export const getVintageChoices = () => {
     let vintageChoices = [];

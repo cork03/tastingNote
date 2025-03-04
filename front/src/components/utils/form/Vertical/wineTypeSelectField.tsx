@@ -1,8 +1,7 @@
 "use client"
 
 import React from "react";
-import {Country} from "@/types/domain/country";
-import {WineType} from "@/types/domain/wine";
+import {WineType} from "@/api/queryService/types/wine";
 
 interface Props {
     label: string;
@@ -12,7 +11,7 @@ interface Props {
     wineTypes: WineType[];
 }
 
-const WineTypeSelectField = (
+const WineTypeSelectFieldOld = (
     {
         label,
         name,
@@ -33,11 +32,11 @@ const WineTypeSelectField = (
                     {`${label}を選択してください`}
                 </option>
                 {wineTypes.map((wineType) => {
-                    return <option key={wineType.id} value={wineType.id}>{wineType.label}</option>
+                    return <option key={wineType.id} value={wineType.id}>{wineType.name}</option>
                 })}
             </select>
         </div>
     );
 }
 
-export default WineTypeSelectField;
+export default WineTypeSelectFieldOld;

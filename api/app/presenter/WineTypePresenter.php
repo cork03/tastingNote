@@ -17,6 +17,7 @@ class WineTypePresenter
         foreach ($wineTypes as $wineType) {
             $wineTypesJson[] = new OldWineTypeJson(
                 $wineType->value,
+                $wineType->getLabel(),
                 $wineType->getLabel()
             );
         }

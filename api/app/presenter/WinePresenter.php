@@ -56,6 +56,7 @@ class WinePresenter
                 wineType: new OldWineTypeJson(
                     id: $wineDTO->getWineTypeId(),
                     label: $wineDTO->getWineTypeName(),
+                    name: $wineDTO->getWineTypeName(),
                 ),
                 country: $country,
                 appellation: $appellation,

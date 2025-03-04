@@ -40,6 +40,7 @@ class WineVintagePresenter
                 wineType: new OldWineTypeJson(
                     id: $wine->getWineType()->value,
                     label: $wine->getWineType()->getLabel(),
+                    name: $wine->getWineType()->getLabel()
                 ),
                 country: new CountryJson(
                     id: $wine->getCountry()->getId(),

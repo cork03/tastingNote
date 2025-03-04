@@ -1,4 +1,4 @@
-import {Country} from "@/api/types/country";
+import {Country} from "@/api/queryService/types/country";
 
 export interface Appellation {
     id: number;

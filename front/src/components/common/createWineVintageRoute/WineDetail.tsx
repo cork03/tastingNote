@@ -1,5 +1,5 @@
 import GrayCard from "@/components/utils/view/grayCard";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 import NormalImage from "@/components/utils/view/normalImage";
 
 interface Props {

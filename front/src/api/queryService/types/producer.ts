@@ -1,6 +1,6 @@
-import {Country} from "@/api/types/country";
-import {Appellation} from "@/api/types/appellation";
-import {WineType} from "@/api/types/wine";
+import {Country} from "@/api/queryService/types/country";
+import {Appellation} from "@/api/queryService/types/appellation";
+import {WineType} from "@/api/queryService/types/wine";
 
 export interface Producer {
     id: number;

@@ -5,7 +5,7 @@ import {Country} from "@/types/domain/country";
 import {Producer} from "@/types/domain/producer";
 import InputField from "@/components/utils/form/Vertical/inputField";
 import TextField from "@/components/utils/form/Vertical/textField";
-import CountrySelectField from "@/components/utils/form/Vertical/countrySelectField";
+import CountrySelectFieldOld from "@/components/utils/form/Vertical/countrySelectFieldOld";
 import {postProducer} from "@/repository/producerRepository";
 import {redirect} from "next/navigation";
 import ButtonsDiv from "@/components/utils/view/button/ButtonsDiv";
@@ -52,8 +52,8 @@ const ProducerCreate = ({redirectPath, countries}: Props) => {
                         className="border rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 bg-gray-100">
                         <InputField label={"生産者名"} name={"name"} value={producer.name} onChange={inputHandleChange}
                                     placeholder={"シャトー・オー・ブリオン"}/>
-                        <CountrySelectField label={"国"} name={"countryId"} value={producer.country.id}
-                                            onChange={selectHandleChange} countries={countries}/>
+                        <CountrySelectFieldOld label={"国"} name={"countryId"} value={producer.country.id}
+                                               onChange={selectHandleChange} countries={countries}/>
                         <TextField label={"説明"} name={"description"} value={producer.description}
                                    onChange={textHandleChange} placeholder={"メドック格付け1級のシャトー"}/>
                         <InputField label={"url"} name={"url"} value={producer.url ?? ""} onChange={inputHandleChange}

@@ -5,9 +5,9 @@ import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
 import InputField from "@/components/utils/form/Vertical/inputField";
 import {ProducerWine, WineType} from "@/types/domain/wine";
-import CountrySelectField from "@/components/utils/form/Vertical/countrySelectField";
+import CountrySelectFieldOld from "@/components/utils/form/Vertical/countrySelectFieldOld";
 import {Country} from "@/types/domain/country";
-import WineTypeSelectField from "@/components/utils/form/Vertical/wineTypeSelectField";
+import WineTypeSelectFieldOld from "@/components/utils/form/Vertical/wineTypeSelectFieldOld";
 import NormalButton from "@/components/utils/view/button/NormalButton";
 import {createWine} from "@/repository/serverActions/wineRepository";
 import {redirect} from "next/navigation";
@@ -75,10 +75,10 @@ const CreateWine = ({prefix, producerId, countries, wineTypes, appellations}: Pr
                     <div className="space-y-6">
                         <InputField label={"ワイン名"} name={"name"} value={wine.name} onChange={handleInputChange}
                                     placeholder={"CH.HAUT BRION"}/>
-                        <CountrySelectField label={"生産国"} name={"id"} value={wine.country.id}
-                                            onChange={selectCountryHandleChange} countries={countries}/>
-                        <WineTypeSelectField label={"ワイン種別"} name={"id"} value={wine.wineType.id}
-                                             onChange={selectWineTypeHandleChange} wineTypes={wineTypes}/>
+                        <CountrySelectFieldOld label={"生産国"} name={"id"} value={wine.country.id}
+                                               onChange={selectCountryHandleChange} countries={countries}/>
+                        <WineTypeSelectFieldOld label={"ワイン種別"} name={"id"} value={wine.wineType.id}
+                                                onChange={selectWineTypeHandleChange} wineTypes={wineTypes}/>
                         <AppellationSelectField label={"アペラシオン"} name={'id'} value={wine.appellation?.id}
                                                 onChange={selectAppellationHandleChange} appellations={appellationsState}/>
                     </div>

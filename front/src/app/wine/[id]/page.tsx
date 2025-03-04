@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "@/components/utils/view/main";
 import {getWineDetail} from "@/api/queryService/wineQueryService";
-import {WineDetail} from "@/api/types/wine";
+import {WineDetail} from "@/api/queryService/types/wine";
 import Section from "@/components/utils/view/section";
 import WineVintages from "@/components/wine/[id]/WineVintages";
 

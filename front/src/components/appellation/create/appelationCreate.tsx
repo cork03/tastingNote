@@ -3,7 +3,7 @@
 import {Appellation, AppellationType} from "@/types/domain/appellation";
 import Section from "@/components/utils/view/section";
 import GrayCard from "@/components/utils/view/grayCard";
-import CountrySelectField from "@/components/utils/form/Vertical/countrySelectField";
+import CountrySelectFieldOld from "@/components/utils/form/Vertical/countrySelectFieldOld";
 import {Country} from "@/types/domain/country";
 import React, {useState} from "react";
 import AppellationTypeSelectField from "@/components/utils/form/Vertical/appellationTypeSelectField";
@@ -89,8 +89,8 @@ const AppellationCreate = ({appellationTypes, countries}: Props) => {
         <Section>
             <form onSubmit={onSubmit} className={"space-y-6"}>
                 <GrayCard>
-                    <CountrySelectField label={"国"} name={'id'} value={appellation.appellationType.country.id}
-                                        onChange={countrySelectHandleChange} countries={countries}/>
+                    <CountrySelectFieldOld label={"国"} name={'id'} value={appellation.appellationType.country.id}
+                                           onChange={countrySelectHandleChange} countries={countries}/>
                     {appellationSelectType === 1 &&
                         <AppellationTypeSelectField
                             label={"アペラシオン種別"} name={"id"}

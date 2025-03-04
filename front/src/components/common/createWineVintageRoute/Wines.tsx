@@ -3,7 +3,7 @@ import WineDetail from "@/components/common/createWineVintageRoute/WineDetail";
 import GrayButton from "@/components/utils/view/button/GrayButton";
 import Grid from "@/components/utils/view/grid";
 import {ViewType} from "@/components/common/createWineVintageRoute/type";
-import {ProducerWine} from "@/api/types/producer";
+import {ProducerWine} from "@/api/queryService/types/producer";
 
 interface Props {
     onClickWineDetail: (windId: number) => void;

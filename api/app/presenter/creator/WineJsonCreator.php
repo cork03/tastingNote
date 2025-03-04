@@ -18,6 +18,7 @@ class WineJsonCreator
             wineType: new OldWineTypeJson(
                 $wine->getWineType()->value,
                 $wine->getWineType()->getLabel(),
+                $wine->getWineType()->getLabel()
             ),
             country: new CountryJson(
                 $wine->getCountry()->getId(),

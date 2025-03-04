@@ -17,6 +17,7 @@ class WineRankingJsonCreator
             wineType: new OldWineTypeJson(
                 $wineRanking->getWineType()->value,
                 $wineRanking->getWineType()->getLabel(),
+                $wineRanking->getWineType()->getLabel()
             ),
         );
     }
