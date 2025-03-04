@@ -4,7 +4,6 @@ namespace App\gateways\repository;
 
 use App\domain\TastingComment;
 use App\domain\Wine;
-use App\domain\WineComment;
 use App\domain\WineVintage;
 use App\domain\WineVintageFullInfo;
 

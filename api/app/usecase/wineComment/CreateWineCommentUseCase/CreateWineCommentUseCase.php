@@ -1,9 +1,8 @@
 <?php
 
-namespace App\usecase\wineVintage;
+namespace App\usecase\wineComment\CreateWineCommentUseCase;
 
 use App\domain\Aggregate\WineComment;
-use App\domain\WineComment as WineCommentDomain;
 use App\interfaceAdapter\repository\WineCommentRepositoryInterface;
 
 class CreateWineCommentUseCase implements CreateWineCommentUseCaseInterface
@@ -12,16 +11,16 @@ class CreateWineCommentUseCase implements CreateWineCommentUseCaseInterface
     {
     }
 
-    public function handle(WineCommentDomain $wineComment): void
+    public function handle(CreateWineCommentUseCaseInput $input): void
     {
         $this->wineCommentRepository->create(
             new WineComment(
                 id: null,
-                wineVintageId: $wineComment->getWineVintageId(),
-                appearance: $wineComment->getAppearance(),
-                aroma: $wineComment->getAroma(),
-                taste: $wineComment->getTaste(),
-                anotherComment: $wineComment->getAnotherComment()
+                wineVintageId: $input->getWineVintageId(),
+                appearance: $input->getAppearance(),
+                aroma: $input->getAroma(),
+                taste: $input->getTaste(),
+                anotherComment: $input->getAnotherComment()
             )
         );
     }

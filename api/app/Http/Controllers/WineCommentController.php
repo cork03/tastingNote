@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\domain\WineComment;
+use App\usecase\wineComment\CreateWineCommentUseCase\CreateWineCommentUseCaseInput;
+use App\usecase\wineComment\CreateWineCommentUseCase\CreateWineCommentUseCaseInterface;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
 use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCaseInput;
 use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCaseInterface;
-use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,13 +27,14 @@ class WineCommentController extends Controller
     {
         try {
             $wineComment = $request->input('wineComment');
-            $this->createWineCommentUseCase->handle(new WineComment(
-                    id: null,
+            $this->createWineCommentUseCase->handle(
+                new CreateWineCommentUseCaseInput(
                     wineVintageId: $wineComment['wineVintageId'],
                     appearance: $wineComment['appearance'],
                     aroma: $wineComment['aroma'],
                     taste: $wineComment['taste'],
-                    anotherComment: $wineComment['anotherComment'])
+                    anotherComment: $wineComment['anotherComment']
+                )
             );
             return response()->json(status: 201);
         } catch (Exception $e) {
