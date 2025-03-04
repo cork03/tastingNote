@@ -111,7 +111,7 @@ class WineVintageController extends Controller
         }
     }
 
-    public function edit(Request $request, int $id): JsonResponse
+    public function update(Request $request, int $id): JsonResponse
     {
         try {
             $wineVintage = $request->input('wineVintage');

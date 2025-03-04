@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\domain\WineComment;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
+use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCaseInput;
+use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCaseInterface;
 use App\usecase\wineVintage\CreateWineCommentUseCaseInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +16,7 @@ class WineCommentController extends Controller
 {
     public function __construct(
         private readonly CreateWineCommentUseCaseInterface            $createWineCommentUseCase,
+        private readonly UpdateWineCommentUseCaseInterface            $updateWineCommentUseCase,
         private readonly LinkWineCommentToWineVintageUseCaseInterface $linkWineCommentToWineVintageUsecase,
     )
     {
@@ -31,6 +34,26 @@ class WineCommentController extends Controller
                     aroma: $wineComment['aroma'],
                     taste: $wineComment['taste'],
                     anotherComment: $wineComment['anotherComment'])
+            );
+            return response()->json(status: 201);
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
+            return response()->json(status: 400);
+        }
+    }
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        try {
+            $this->updateWineCommentUseCase->handle(
+                new UpdateWineCommentUseCaseInput(
+                    id: $id,
+                    wineVintageId: $request->input('wineVintageId'),
+                    appearance: $request->input('appearance'),
+                    aroma: $request->input('aroma'),
+                    taste: $request->input('taste'),
+                    anotherComment: $request->input('anotherComment')
+                )
             );
             return response()->json(status: 201);
         } catch (Exception $e) {

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\domain\BlindTastingAnswer;
-use App\domain\Country;
 use App\domain\GrapeVariety;
 use App\domain\WineBlend;
 use App\domain\WineVariety;

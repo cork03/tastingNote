@@ -34,6 +34,8 @@ use App\usecase\wine\UpdateWineUseCase\UpdateWineUseCase;
 use App\usecase\wine\UpdateWineUseCase\UpdateWineUseCaseInterface;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCase;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
+use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCase;
+use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCaseInterface;
 use App\usecase\wineRanking\GetWineRankingsUseCase;
 use App\usecase\wineRanking\GetWineRankingsUseCaseInterface;
 use App\usecase\wineRanking\WineRankingCreateUseCase;
@@ -93,6 +95,7 @@ class UseCaseServiceProvider extends ServiceProvider
             AppellationCreateUseCaseInterface::class => AppellationCreateUseCase::class,
             GetAppellationsUseCaseInterface::class => GetAppellationsUseCase::class,
             UpdateWineUseCaseInterface::class => UpdateWineUseCase::class,
+            UpdateWineCommentUseCaseInterface::class => UpdateWineCommentUseCase::class,
         ];
         foreach ($bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

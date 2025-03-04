@@ -54,4 +54,19 @@ class WineCommentRepository implements WineCommentRepositoryInterface
         $wineCommentModel->wine_vintage_id = $wineVintageId;
         $wineCommentModel->save();
     }
+
+    public function update(WineComment $wineComment): void
+    {
+        $wineCommentModel = $this->wineCommentModel->find($wineComment->getId());
+        if (!isset($wineCommentModel)) {
+            throw new Exception('WineComment not found');
+        }
+        $wineCommentModel->update([
+            'wine_vintage_id' => $wineComment->getWineVintageId(),
+            'appearance' => $wineComment->getAppearance(),
+            'aroma' => $wineComment->getAroma(),
+            'taste' => $wineComment->getTaste(),
+            'another_comment' => $wineComment->getAnotherComment(),
+        ]);
+    }
 }
