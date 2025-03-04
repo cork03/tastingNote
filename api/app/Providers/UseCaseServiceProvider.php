@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\usecase\appellation\AppellationCreateUseCase;
-use App\usecase\appellation\AppellationCreateUseCaseInterface;
-use App\usecase\appellation\GetAppellationsUseCase;
-use App\usecase\appellation\GetAppellationsUseCaseInterface;
-use App\usecase\appellation\GetAppellationTypesUseCase;
-use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
+use App\usecase\appellation\AppellationCreateUseCase\AppellationCreateUseCase;
+use App\usecase\appellation\AppellationCreateUseCase\AppellationCreateUseCaseInterface;
+use App\usecase\appellation\GetAppellationsUsecase\GetAppellationsUseCase;
+use App\usecase\appellation\GetAppellationsUsecase\GetAppellationsUseCaseInterface;
+use App\usecase\appellation\GetAppellationTypesUseCase\GetAppellationTypesUseCase;
+use App\usecase\appellation\GetAppellationTypesUseCase\GetAppellationTypesUseCaseInterface;
 use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingCreateUseCase;
 use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingCreateUseCaseInterface;
 use App\usecase\country\GetCountriesUseCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\appellation;
+namespace App\usecase\appellation\GetAppellationsUsecase;
 
 use App\interfaceAdapter\queryService\GetAppellationsUseCaseQueryServiceInterface;
 

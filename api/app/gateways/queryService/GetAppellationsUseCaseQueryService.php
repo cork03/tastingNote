@@ -4,7 +4,7 @@ namespace App\gateways\queryService;
 
 use App\interfaceAdapter\queryService\GetAppellationsUseCaseQueryServiceInterface;
 use App\Models\Appellation as AppellationModel;
-use App\usecase\appellation\GetAppellationsUseCaseDTO;
+use App\usecase\appellation\GetAppellationsUsecase\GetAppellationsUseCaseDTO;
 use Illuminate\Database\Eloquent\Collection;
 
 class GetAppellationsUseCaseQueryService implements GetAppellationsUseCaseQueryServiceInterface

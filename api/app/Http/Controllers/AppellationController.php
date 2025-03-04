@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\presenter\AppellationPresenter;
-use App\usecase\appellation\AppellationCreateUseCaseInput;
-use App\usecase\appellation\AppellationCreateUseCaseInterface;
-use App\usecase\appellation\GetAppellationsUseCaseInterface;
-use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
+use App\usecase\appellation\AppellationCreateUseCase\AppellationCreateUseCaseInput;
+use App\usecase\appellation\AppellationCreateUseCase\AppellationCreateUseCaseInterface;
+use App\usecase\appellation\GetAppellationsUsecase\GetAppellationsUseCaseInterface;
+use App\usecase\appellation\GetAppellationTypesUseCase\GetAppellationTypesUseCaseInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\usecase\appellation;
+namespace App\usecase\appellation\AppellationCreateUseCase;
 
 use App\domain\Aggregate\Appellation;
 use App\domain\Aggregate\AppellationType;

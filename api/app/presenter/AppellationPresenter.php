@@ -5,8 +5,8 @@ namespace App\presenter;
 use App\presenter\jsonClass\AppellationJson;
 use App\presenter\jsonClass\AppellationTypeJson;
 use App\presenter\jsonClass\CountryJson;
-use App\usecase\appellation\GetAppellationsUseCaseDTO;
-use App\usecase\appellation\GetAppellationTypesUseCaseDTO;
+use App\usecase\appellation\GetAppellationsUsecase\GetAppellationsUseCaseDTO;
+use App\usecase\appellation\GetAppellationTypesUseCase\GetAppellationTypesUseCaseDTO;
 use Illuminate\Http\JsonResponse;
 
 class AppellationPresenter

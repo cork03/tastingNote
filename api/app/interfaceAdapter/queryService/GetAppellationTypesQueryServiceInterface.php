@@ -2,7 +2,7 @@
 
 namespace App\interfaceAdapter\queryService;
 
-use App\usecase\appellation\GetAppellationTypesUseCaseDTO;
+use App\usecase\appellation\GetAppellationTypesUseCase\GetAppellationTypesUseCaseDTO;
 
 interface GetAppellationTypesQueryServiceInterface
 {
