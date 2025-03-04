@@ -3,8 +3,8 @@
 namespace App\usecase\wine\UpdateWineUseCase;
 
 use App\domain\Aggregate\Wine;
-use App\gateways\repository\WineRepositoryInterface;
 use App\interfaceAdapter\queryService\UpdateWineUseCaseQueryServiceInterface;
+use App\interfaceAdapter\repository\WineRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 
 class UpdateWineUseCase implements UpdateWineUseCaseInterface

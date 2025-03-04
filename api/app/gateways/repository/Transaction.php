@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class Transaction implements TransactionInterface
 {
-    public function transaction(callable $callable): void
+    public function transaction(callable $callable): mixed
     {
-        DB::transaction($callable);
+        return DB::transaction($callable);
     }
 }

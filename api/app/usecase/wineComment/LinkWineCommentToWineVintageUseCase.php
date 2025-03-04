@@ -2,7 +2,7 @@
 
 namespace App\usecase\wineComment;
 
-use App\gateways\repository\wineVintage\WineCommentRepositoryInterface;
+use App\interfaceAdapter\repository\WineCommentRepositoryInterface;
 
 class LinkWineCommentToWineVintageUseCase implements LinkWineCommentToWineVintageUseCaseInterface
 {

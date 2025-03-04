@@ -4,5 +4,5 @@ namespace App\interfaceAdapter\repository;
 
 interface TransactionInterface
 {
-    public function transaction(callable $callable): void;
+    public function transaction(callable $callable): mixed;
 }

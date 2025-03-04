@@ -3,6 +3,7 @@
 namespace App\gateways\repository;
 
 use App\domain\Aggregate\Wine;
+use App\interfaceAdapter\repository\WineRepositoryInterface;
 use App\Models\Wine as WineModel;
 use Exception;
 use Illuminate\Support\Facades\Log;

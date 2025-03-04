@@ -8,8 +8,8 @@ use App\usecase\appellation\GetAppellationsUseCase;
 use App\usecase\appellation\GetAppellationsUseCaseInterface;
 use App\usecase\appellation\GetAppellationTypesUseCase;
 use App\usecase\appellation\GetAppellationTypesUseCaseInterface;
-use App\usecase\blindTasting\BlindTastingCreateUsecase;
-use App\usecase\blindTasting\BlindTastingCreateUsecaseInterface;
+use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingCreateUseCase;
+use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingCreateUseCaseInterface;
 use App\usecase\country\GetCountriesUseCase;
 use App\usecase\country\GetCountriesUseCaseInterface;
 use App\usecase\grapeVariety\GetGrapeVarietiesUseCase;
@@ -78,7 +78,7 @@ class UseCaseServiceProvider extends ServiceProvider
             GetWinesUseCaseInterface::class => GetWinesUseCase::class,
             GetWineWithVintagesUseCaseInterface::class => GetWineWithVintagesUseCase::class,
             GetFullInfoUseCaseInterface::class => GetFullInfoUseCase::class,
-            BlindTastingCreateUsecaseInterface::class => BlindTastingCreateUsecase::class,
+            BlindTastingCreateUseCaseInterface::class => BlindTastingCreateUseCase::class,
             CreateWineCommentUseCaseInterface::class => CreateWineCommentUseCase::class,
             GetProducerUseCaseInterface::class => GetProducerUseCase::class,
             GetWineCommentsUseCaseInterface::class => GetWineCommentsUseCase::class,

@@ -3,8 +3,8 @@
 namespace App\usecase\wine\CreateWineUseCase;
 
 use App\domain\Aggregate\Wine;
-use App\gateways\repository\WineRepositoryInterface;
 use App\interfaceAdapter\queryService\CreateWineUseCaseQueryServiceInterface;
+use App\interfaceAdapter\repository\WineRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 
 class CreateWineUseCase implements CreateWineUseCaseInterface

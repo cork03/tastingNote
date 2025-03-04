@@ -6,10 +6,11 @@ use App\domain\BlindTastingAnswer;
 use App\domain\Country;
 use App\domain\GrapeVariety;
 use App\domain\WineBlend;
-use App\domain\WineComment;
 use App\domain\WineVariety;
-use App\usecase\blindTasting\BlindTastingCreateUsecaseInput;
-use App\usecase\blindTasting\BlindTastingCreateUsecaseInterface;
+use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingAnswerInputDTO;
+use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingCreateUseCaseInput;
+use App\usecase\blindTasting\BlindTastingCreateUseCase\BlindTastingCreateUseCaseInterface;
+use App\usecase\blindTasting\BlindTastingCreateUseCase\WineCommentInputDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Log;
 class BlindTastingController extends Controller
 {
     public function __construct(
-        private readonly BlindTastingCreateUsecaseInterface $blindTastingCreateUsecase
+        private readonly BlindTastingCreateUseCaseInterface $blindTastingCreateUsecase
     )
     {
     }
@@ -28,8 +29,7 @@ class BlindTastingController extends Controller
             $wineCommentInput = $request->input('wineComment');
             $blindTastingAnswerInput = $request->input('blindTastingAnswer');
 
-            $wineComment = new WineComment(
-                id: null,
+            $wineComment = new WineCommentInputDTO(
                 wineVintageId: null,
                 appearance: $wineCommentInput['appearance'],
                 aroma: $wineCommentInput['aroma'],
@@ -49,10 +49,8 @@ class BlindTastingController extends Controller
                 );
             }
 
-            $blindTastingAnswer = new BlindTastingAnswer(
-                id: null,
-                wineCommentId: null,
-                country: new Country(id: $blindTastingAnswerInput['countryId'], name: null),
+            $blindTastingAnswer = new BlindTastingAnswerInputDTO(
+                countryId: $blindTastingAnswerInput['countryId'],
                 vintage: $blindTastingAnswerInput['vintage'],
                 price: $blindTastingAnswerInput['price'],
                 alcoholContent: $blindTastingAnswerInput['alcoholContent'],
@@ -60,7 +58,7 @@ class BlindTastingController extends Controller
                 anotherComment: $blindTastingAnswerInput['anotherComment'],
             );
 
-            $commentId = $this->blindTastingCreateUsecase->handle(new BlindTastingCreateUsecaseInput(
+            $commentId = $this->blindTastingCreateUsecase->handle(new BlindTastingCreateUseCaseInput(
                 wineComment: $wineComment,
                 blindTastingAnswer: $blindTastingAnswer,
             ));

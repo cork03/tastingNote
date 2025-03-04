@@ -1,8 +1,9 @@
 <?php
 
-namespace App\gateways\repository\wineVintage;
+namespace App\gateways\repository;
 
-use App\domain\WineComment;
+use App\domain\Aggregate\WineComment;
+use App\interfaceAdapter\repository\WineCommentRepositoryInterface;
 use App\Models\WineComment as WineCommentModel;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -16,16 +17,25 @@ class WineCommentRepository implements WineCommentRepositoryInterface
     /**
      * @throws Exception
      */
-    public function create(WineComment $wineComment): void
+    public function create(WineComment $wineComment): WineComment
     {
         try {
-            $this->wineCommentModel->create([
+            $wineCommentModel = $this->wineCommentModel->create([
                 'wine_vintage_id' => $wineComment->getWineVintageId(),
                 'appearance' => $wineComment->getAppearance(),
                 'aroma' => $wineComment->getAroma(),
                 'taste' => $wineComment->getTaste(),
                 'another_comment' => $wineComment->getAnotherComment(),
             ]);
+
+            return new WineComment(
+                id: $wineCommentModel->id,
+                wineVintageId: $wineCommentModel->wine_vintage_id,
+                appearance: $wineCommentModel->appearance,
+                aroma: $wineCommentModel->aroma,
+                taste: $wineCommentModel->taste,
+                anotherComment: $wineCommentModel->another_comment
+            );
         } catch (Exception $e) {
             Log::info($e->getMessage());
             throw $e;

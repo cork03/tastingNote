@@ -1,6 +1,6 @@
 <?php
 
-namespace App\gateways\repository;
+namespace App\interfaceAdapter\repository;
 
 use App\domain\Aggregate\Wine;
 
