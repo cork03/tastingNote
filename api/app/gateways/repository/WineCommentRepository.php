@@ -69,4 +69,20 @@ class WineCommentRepository implements WineCommentRepositoryInterface
             'another_comment' => $wineComment->getAnotherComment(),
         ]);
     }
+
+    public function getById(int $id): ?WineComment
+    {
+        $wineCommentModel = $this->wineCommentModel->find($id);
+        if (!isset($wineCommentModel)) {
+            return null;
+        }
+        return new WineComment(
+            id: $wineCommentModel->id,
+            wineVintageId: $wineCommentModel->wine_vintage_id,
+            appearance: $wineCommentModel->appearance,
+            aroma: $wineCommentModel->aroma,
+            taste: $wineCommentModel->taste,
+            anotherComment: $wineCommentModel->another_comment
+        );
+    }
 }

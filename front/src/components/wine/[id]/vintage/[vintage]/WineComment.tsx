@@ -1,9 +1,10 @@
 import React from "react";
 import {TastingComment} from "@/types/domain/blindTasting";
 import Link from "next/link";
-import Paragraph from "@/components/utils/view/side/paragraph";
-import {getWineVarietiesTextOld, getWineVarietiesTextDomain} from "@/utils/utils";
+import {default as ParagraphSide} from "@/components/utils/view/side/paragraph";
+import {getWineVarietiesTextDomain} from "@/utils/utils";
 import NormalButton from "@/components/utils/view/button/NormalButton";
+import Paragraph from "@/components/utils/view/vertical/paragraph";
 
 interface Props {
     id: number
@@ -22,27 +23,18 @@ const WineCommentPage = ({id, vintage, tastingComments}: Props) => {
             {tastingComments.map((tastingComment) => {
                 return (
                     <div className="space-y-6" key={tastingComment.wineComment.id}>
-                        <div
-                            className="border rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 bg-gray-100">
-                            <div className="flex flex-col mb-4">
-                                <label className="text-lg font-medium text-gray-800 mb-2">色調・外観</label>
-                                <p className="text-lg text-gray-700 font-semibold">{tastingComment.wineComment.appearance}</p>
+                        <Link href={`/wine-comment/${tastingComment.wineComment.id}/edit`}>
+                            <div
+                                className="border rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 bg-gray-100 space-y-6">
+                                <Paragraph label={"色調・外観"} text={tastingComment.wineComment.appearance}/>
+                                <Paragraph label={"香り"} text={tastingComment.wineComment.aroma}/>
+                                <Paragraph label={"味わい"} text={tastingComment.wineComment.taste}/>
+                                {tastingComment.wineComment.anotherComment && (
+                                    <Paragraph label={"その他コメント"}
+                                               text={tastingComment.wineComment.anotherComment}/>
+                                )}
                             </div>
-                            <div className="flex flex-col mb-4">
-                                <label className="text-lg font-medium text-gray-800 mb-2">香り</label>
-                                <p className="text-lg text-gray-700 font-semibold">{tastingComment.wineComment.aroma}</p>
-                            </div>
-                            <div className="flex flex-col mb-4">
-                                <label className="text-lg font-medium text-gray-800 mb-2">味わい</label>
-                                <p className="text-lg text-gray-700 font-semibold">{tastingComment.wineComment.taste}</p>
-                            </div>
-                            {tastingComment.wineComment.anotherComment && (
-                                <div className="flex flex-col">
-                                    <label className="text-lg font-medium text-gray-800 mb-2">その他コメント</label>
-                                    <p className="text-lg text-gray-700 font-semibold">{tastingComment.wineComment.anotherComment}</p>
-                                </div>
-                            )}
-                        </div>
+                        </Link>
                         {tastingComment.blindTastingAnswer && (
                             <div
                                 className="border rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 bg-gray-100">
@@ -51,18 +43,19 @@ const WineCommentPage = ({id, vintage, tastingComments}: Props) => {
                                         <h3 className="text-2xl font-extrabold text-gray-800 mb-4">ブラインドテイスティングの回答</h3>
                                     </div>
                                     <div className="space-y-6">
-                                        <Paragraph label={"生産地"}
-                                                   text={tastingComment.blindTastingAnswer.country.name}/>
-                                        <Paragraph label={"葡萄品種"}
-                                                   text={getWineVarietiesTextDomain(tastingComment.blindTastingAnswer.wineBlend)}/>
-                                        <Paragraph label={"ヴィンテージ"}
-                                                   text={tastingComment.blindTastingAnswer.vintage + '年'}/>
-                                        <Paragraph label={"価格"} text={'¥' + tastingComment.blindTastingAnswer.price}/>
-                                        <Paragraph label={"アルコール度数"}
-                                                   text={tastingComment.blindTastingAnswer.alcoholContent + '%'}/>
+                                        <ParagraphSide label={"生産地"}
+                                                       text={tastingComment.blindTastingAnswer.country.name}/>
+                                        <ParagraphSide label={"葡萄品種"}
+                                                       text={getWineVarietiesTextDomain(tastingComment.blindTastingAnswer.wineBlend)}/>
+                                        <ParagraphSide label={"ヴィンテージ"}
+                                                       text={tastingComment.blindTastingAnswer.vintage + '年'}/>
+                                        <ParagraphSide label={"価格"}
+                                                       text={'¥' + tastingComment.blindTastingAnswer.price}/>
+                                        <ParagraphSide label={"アルコール度数"}
+                                                       text={tastingComment.blindTastingAnswer.alcoholContent + '%'}/>
                                         {tastingComment.blindTastingAnswer.anotherComment && (
-                                            <Paragraph label={"その他コメント"}
-                                                       text={tastingComment.blindTastingAnswer.anotherComment}/>
+                                            <ParagraphSide label={"その他コメント"}
+                                                           text={tastingComment.blindTastingAnswer.anotherComment}/>
                                         )}
                                     </div>
                                 </div>

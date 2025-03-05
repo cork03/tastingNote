@@ -7,6 +7,7 @@ use App\domain\Aggregate\WineComment;
 interface WineCommentRepositoryInterface
 {
     public function create(WineComment $wineComment): WineComment;
+    public function getById(int $id): ?WineComment;
     public function update(WineComment $wineComment): void;
     public function linkToWineVintage(int $wineCommentId, int $wineVintageId): void;
 }

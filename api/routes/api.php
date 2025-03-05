@@ -34,6 +34,7 @@ Route::get('/wine/{id}/wine-vintages', [WineVintageController::class, 'getAllByW
 Route::get('/wine/{id}/vintage/{vintage}', [WineVintageController::class, 'getOne']);
 Route::get('/wines', [WineController::class, 'getAll']);
 Route::post('/wine-comment', [WineCommentController::class, 'create']);
+Route::get('/wine-comment/{id}', [WineCommentController::class, 'getById']);
 Route::put('/wine-comment/{id}', [WineCommentController::class, 'update']);
 Route::post('/wine-comment/{id}/wine-vintage', [WineVintageController::class, 'createAndLinkComment']);
 Route::put('/wine-comment/{id}/link-wine-vintage', [WineCommentController::class, 'linkWineVintage']);

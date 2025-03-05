@@ -49,3 +49,12 @@ export interface WineDetail {
     producer: Producer;
     wine: WineWithVintages;
 }
+
+export interface WineComment {
+    id: number;
+    wineVintageId: number;
+    appearance: string;
+    aroma: string;
+    taste: string;
+    anotherComment: string | null;
+}

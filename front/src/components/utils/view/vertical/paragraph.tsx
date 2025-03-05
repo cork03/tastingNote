@@ -6,7 +6,7 @@ interface Props {
 
 const Paragraph = ({label, text}: Props) => {
     return (
-        <div className="flex items-center">
+        <div className="flex flex-col">
             <label className="text-lg font-medium text-gray-800 w-40">{label}</label>
             <p className="text-lg text-gray-700 font-semibold">{text}</p>
         </div>

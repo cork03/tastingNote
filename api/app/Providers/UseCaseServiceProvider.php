@@ -34,6 +34,8 @@ use App\usecase\wine\UpdateWineUseCase\UpdateWineUseCase;
 use App\usecase\wine\UpdateWineUseCase\UpdateWineUseCaseInterface;
 use App\usecase\wineComment\CreateWineCommentUseCase\CreateWineCommentUseCase;
 use App\usecase\wineComment\CreateWineCommentUseCase\CreateWineCommentUseCaseInterface;
+use App\usecase\wineComment\GetWineCommentUseCase\GetWineCommentUseCase;
+use App\usecase\wineComment\GetWineCommentUseCase\GetWineCommentUseCaseInterface;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCase;
 use App\usecase\wineComment\LinkWineCommentToWineVintageUseCaseInterface;
 use App\usecase\wineComment\UpdateWineCommentUseCase\UpdateWineCommentUseCase;
@@ -68,34 +70,35 @@ class UseCaseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $bindings = [
-            GetAppellationTypesUseCaseInterface::class => GetAppellationTypesUseCase::class,
-            CreateProducerUseCaseInterface::class => CreateProducerUseCase::class,
-            GetProducersUseCaseInterface::class => GetProducersUseCase::class,
-            GetGrapeVarietiesUseCaseInterface::class => GetGrapeVarietiesUseCase::class,
-            GetProducerWinesUseCaseInterface::class => GetProducerWinesUseCase::class,
-            CreateWineUseCaseInterface::class => CreateWineUseCase::class,
-            GetCountriesUseCaseInterface::class => GetCountriesUseCase::class,
-            CreateUseCaseInterface::class => CreateUseCase::class,
-            GetWineTypesUseCaseInterface::class => GetWineTypesUseCase::class,
-            GetWinesUseCaseInterface::class => GetWinesUseCase::class,
-            GetWineWithVintagesUseCaseInterface::class => GetWineWithVintagesUseCase::class,
-            GetFullInfoUseCaseInterface::class => GetFullInfoUseCase::class,
-            BlindTastingCreateUseCaseInterface::class => BlindTastingCreateUseCase::class,
-            CreateWineCommentUseCaseInterface::class => CreateWineCommentUseCase::class,
-            GetProducerUseCaseInterface::class => GetProducerUseCase::class,
-            GetWineCommentsUseCaseInterface::class => GetWineCommentsUseCase::class,
-            CreateWineVintageAndLinkCommentUseCaseInterface::class => CreateWineVintageAndLinkCommentUseCase::class,
-            GetWineVintageByIdUseCaseInterface::class => GetWineVintageByIdUseCase::class,
-            EditWineVintageUseCaseInterface::class => EditWineVintageUseCase::class,
-            GetWineVintagesByIdUseCaseInterface::class => GetWineVintagesByIdUseCase::class,
-            LinkWineCommentToWineVintageUseCaseInterface::class => LinkWineCommentToWineVintageUseCase::class,
-            WineRankingCreateUseCaseInterface::class => WineRankingCreateUseCase::class,
-            GetWineRankingsUseCaseInterface::class => GetWineRankingsUseCase::class,
-            GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
             AppellationCreateUseCaseInterface::class => AppellationCreateUseCase::class,
+            BlindTastingCreateUseCaseInterface::class => BlindTastingCreateUseCase::class,
+            CreateProducerUseCaseInterface::class => CreateProducerUseCase::class,
+            CreateWineUseCaseInterface::class => CreateWineUseCase::class,
+            CreateUseCaseInterface::class => CreateUseCase::class,
+            CreateWineCommentUseCaseInterface::class => CreateWineCommentUseCase::class,
+            CreateWineVintageAndLinkCommentUseCaseInterface::class => CreateWineVintageAndLinkCommentUseCase::class,
+            EditWineVintageUseCaseInterface::class => EditWineVintageUseCase::class,
+            GetAppellationTypesUseCaseInterface::class => GetAppellationTypesUseCase::class,
             GetAppellationsUseCaseInterface::class => GetAppellationsUseCase::class,
-            UpdateWineUseCaseInterface::class => UpdateWineUseCase::class,
+            GetCountriesUseCaseInterface::class => GetCountriesUseCase::class,
+            GetFullInfoUseCaseInterface::class => GetFullInfoUseCase::class,
+            GetGrapeVarietiesUseCaseInterface::class => GetGrapeVarietiesUseCase::class,
+            GetNotRegisteredRankingWineVintagesUseCaseInterface::class => GetNotRegisteredRankingWineVintagesUseCase::class,
+            GetProducersUseCaseInterface::class => GetProducersUseCase::class,
+            GetProducerWinesUseCaseInterface::class => GetProducerWinesUseCase::class,
+            GetProducerUseCaseInterface::class => GetProducerUseCase::class,
+            GetWineCommentUseCaseInterface::class => GetWineCommentUseCase::class,
+            GetWineCommentsUseCaseInterface::class => GetWineCommentsUseCase::class,
+            GetWineTypesUseCaseInterface::class => GetWineTypesUseCase::class,
+            GetWineVintageByIdUseCaseInterface::class => GetWineVintageByIdUseCase::class,
+            GetWineWithVintagesUseCaseInterface::class => GetWineWithVintagesUseCase::class,
+            GetWineRankingsUseCaseInterface::class => GetWineRankingsUseCase::class,
+            GetWineVintagesByIdUseCaseInterface::class => GetWineVintagesByIdUseCase::class,
+            GetWinesUseCaseInterface::class => GetWinesUseCase::class,
+            LinkWineCommentToWineVintageUseCaseInterface::class => LinkWineCommentToWineVintageUseCase::class,
             UpdateWineCommentUseCaseInterface::class => UpdateWineCommentUseCase::class,
+            UpdateWineUseCaseInterface::class => UpdateWineUseCase::class,
+            WineRankingCreateUseCaseInterface::class => WineRankingCreateUseCase::class,
         ];
         foreach ($bindings as $interface => $implementation) {
             $this->app->bind($interface, $implementation);

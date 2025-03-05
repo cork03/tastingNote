@@ -1,13 +1,13 @@
 "use client"
 
 import React from "react";
-import {WineComment} from "@/types/domain/blindTasting";
 import GrayCard from "@/components/utils/view/grayCard";
 import TextField from "@/components/utils/form/Vertical/textField";
+import {WineCommentState} from "@/components/wine-comment/[id]/edit/EditComment";
 
 interface Props {
-    wineComment: WineComment
-    setWineComment: React.Dispatch<React.SetStateAction<WineComment>>
+    wineComment: WineCommentState
+    setWineComment: React.Dispatch<React.SetStateAction<WineCommentState>>
 }
 
 const WineCommentPage = ({wineComment, setWineComment}: Props) => {
