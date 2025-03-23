@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Nav from "@/components/nav/Nav";
+import 'leaflet/dist/leaflet.css';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
