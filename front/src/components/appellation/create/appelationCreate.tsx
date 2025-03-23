@@ -84,7 +84,6 @@ const AppellationCreate = ({appellationTypes, countries}: Props) => {
         }
         setAppellation({...appellation, appellationType: appellationType});
     }
-    console.log(appellation);
     return (
         <Section>
             <form onSubmit={onSubmit} className={"space-y-6"}>
@@ -94,6 +93,7 @@ const AppellationCreate = ({appellationTypes, countries}: Props) => {
                     {appellationSelectType === 1 &&
                         <AppellationTypeSelectField
                             label={"アペラシオン種別"} name={"id"}
+                            // @ts-ignore
                             value={appellation.appellationType.id}
                             onChange={appellationTypeSelectHandleChange}
                             appellationTypes={appellationTypeState}
